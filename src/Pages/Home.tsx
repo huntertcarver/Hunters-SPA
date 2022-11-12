@@ -1,5 +1,3 @@
-import { Paper } from "@mantine/core";
-import Cards from "../Components/Cards";
 import { Badge, createStyles, Title, useMantineColorScheme, useMantineTheme } from '@mantine/core';
 import { Parallax, ParallaxLayer } from '@react-spring/parallax';
 import Typewriter from 'typewriter-effect';
