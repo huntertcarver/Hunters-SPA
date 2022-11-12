@@ -12,9 +12,6 @@ const useStyles = createStyles((theme) => ({
     alignItems: 'center',
     height: 56,
 
-    [theme.fn.smallerThan('sm')]: {
-      justifyContent: 'flex-start',
-    },
   },
 
   links: {
@@ -29,8 +26,7 @@ const useStyles = createStyles((theme) => ({
     width: 260,
 
     [theme.fn.smallerThan('sm')]: {
-      width: 'auto',
-      marginLeft: 'auto',
+      display: 'none',
     },
   },
 

@@ -90,9 +90,9 @@ function getRandomNumber(min: number, max: number) {
     
   var pos = Math.floor(Math.random() * (max - min + 1)) + min;
   //To make sure the skills are not too close to the edge of the screen
-  if(pos > max - 100)
+  if(pos > max)
     getRandomNumber(min, max);
-  else if(pos < min + 100)
+  else if(pos < min)
     getRandomNumber(min, max);
   //To make sure the skills are not too close to the the typewriter text
   else if(pos < (max/2) + 50 && pos > (max/2) - 50)
