@@ -103,7 +103,7 @@ export default function HeaderMiddle({ links }: HeaderMiddleProps) {
 
         {/*Logo goes here
         <MantineLogo size={28} />*/}
-        <Title className={classes.title} size={18}>Hunter Carver</Title>
+        <Title className={classes.title} size={16}>Hunter Carver</Title>
 
         <Group>
           <Group spacing={0} className={classes.social} position="right" noWrap>
