@@ -4,6 +4,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { IconBrandLinkedin, IconBrandGithub, IconBrandGmail, IconBrandDiscord } from '@tabler/icons';
 import LightDarkButton from './LightDarkButton';
 import { Link } from 'react-router-dom';
+import NavbarSimple from './SideNav';
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -90,43 +91,48 @@ export default function HeaderMiddle({ links }: HeaderMiddleProps) {
   ));
 
   return (
-    <Header height={56} mb={0}>
-      <Container className={classes.inner}>
-        <Burger opened={opened} onClick={toggle} size="sm" className={classes.burger} />
-        <Group className={classes.links} spacing={5}>
-          {items}
-        </Group>
-
-        {/*Logo goes here
-        <MantineLogo size={28} />*/}
-        <Title className={classes.title} size={16}>Hunter Carver</Title>
-
-        <Group>
-          <Group spacing={0} className={classes.social} position="right" noWrap>
-            <a href="https://www.linkedin.com/in/hunter-carver/" target="_blank" rel="noopener noreferrer">
-              <ActionIcon size="lg">
-                <IconBrandLinkedin size={18} stroke={1.5} />
-              </ActionIcon>
-            </a>
-            <a href="https://github.com/huntertcarver" target="_blank" rel="noopener noreferrer">
-              <ActionIcon size="lg">
-                <IconBrandGithub size={18} stroke={1.5} />
-              </ActionIcon>
-            </a>
-            <a href="mailto:hunter@1968bird.com">
-              <ActionIcon size="lg">
-                <IconBrandGmail size={18} stroke={1.5} />
-              </ActionIcon>
-            </a>
-            <ActionIcon size="lg">
-              <IconBrandDiscord size={18} stroke={1.5} />
-            </ActionIcon>
+    <div>
+      <Header height={56} mb={0}>
+        <Container className={classes.inner}>
+          <Burger opened={opened} onClick={() => {toggle(); document.body.style.overflow = opened ? 'scroll' : 'hidden';}} size="sm" className={classes.burger} />
+          <Group className={classes.links} spacing={5}>
+            {items}
           </Group>
-          <Group spacing={0} position="right">
-            <LightDarkButton />
+
+          {/*Logo goes here
+          <MantineLogo size={28} />*/}
+          <Title className={classes.title} size={16}>Hunter Carver</Title>
+
+          <Group>
+            <Group spacing={0} className={classes.social} position="right" noWrap>
+              <a href="https://www.linkedin.com/in/hunter-carver/" target="_blank" rel="noopener noreferrer">
+                <ActionIcon size="lg">
+                  <IconBrandLinkedin size={18} stroke={1.5} />
+                </ActionIcon>
+              </a>
+              <a href="https://github.com/huntertcarver" target="_blank" rel="noopener noreferrer">
+                <ActionIcon size="lg">
+                  <IconBrandGithub size={18} stroke={1.5} />
+                </ActionIcon>
+              </a>
+              <a href="mailto:hunter@1968bird.com">
+                <ActionIcon size="lg">
+                  <IconBrandGmail size={18} stroke={1.5} />
+                </ActionIcon>
+              </a>
+              <ActionIcon size="lg">
+                <IconBrandDiscord size={18} stroke={1.5} />
+              </ActionIcon>
+            </Group>
+            <Group spacing={0} position="right">
+              <LightDarkButton />
+            </Group>
           </Group>
-        </Group>
-      </Container>
-    </Header>
+        </Container>
+      </Header>
+      <Group style={{display: opened ? 'block' : 'none'}}>
+        <NavbarSimple />
+      </Group>
+    </div>
   );
 }

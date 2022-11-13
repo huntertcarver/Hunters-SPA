@@ -24,7 +24,7 @@ function Home () {
   "MUI", "MATLAB", "Version Control", "Java", "JQuery", "AJAX", "REST", "Entity Framework", "Entity Framework Core", "Stored Procedures",
   "Package Managers", "NPM", "Yarn", "NuGet", "Datatables", "CLI", "NodeJS", "Mantine", "TypeScript", "Postman", "APIS", "Web APIs"];
   var badges: JSX.Element[] = [];
-  let text = 'Full-Stack Software Engineer';
+  let text = [`Hey I'm Hunter!`, `I'm a Full Stack Software Engineer.`];
 
   skills.forEach((skill) => {
     let randomTop = getRandomNumber(0, winHeight);
@@ -52,10 +52,13 @@ function Home () {
           offset={0}
           speed={2.5}
           style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-            <Title className={classes.title}>
+            <Title className={classes.title}
+            variant="gradient"
+            gradient={{ from: colorScheme === 'dark' ? 'lightblue' : 'blue', to: colorScheme === 'dark' ? 'white' : 'black' }}>
               <Typewriter
                 options={{
-                  strings: [text],
+                  strings: [text[0], text[1]],
+                  deleteSpeed: 50,
                   autoStart: true,
                   loop: true,
                 }}
