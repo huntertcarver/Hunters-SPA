@@ -1,11 +1,17 @@
-import { Badge, createStyles, Title, useMantineColorScheme, useMantineTheme } from '@mantine/core';
+import { Badge, Button, createStyles, Title, useMantineColorScheme, useMantineTheme } from '@mantine/core';
 import { Parallax, ParallaxLayer } from '@react-spring/parallax';
 import Typewriter from 'typewriter-effect';
+import { openContextModal } from '@mantine/modals';
 
 const useStyles = createStyles((theme) => ({
   title: {
     [theme.fn.smallerThan('md')]: {
       fontSize: 18,
+    },
+  },
+  skill: {
+    [theme.fn.smallerThan('md')]: {
+      widows: 10,
     },
   }
 }));
@@ -35,13 +41,24 @@ function Home () {
 
     badges.push(
       <ParallaxLayer
-        offset={offset}
-        speed={speed}
-        style={{
-        color: theme.fn.variant({ variant: 'light', color: theme.primaryColor }).color,
-        top: randomTop + "px", left: randomLeft + "px"}}>
-        <Badge>{skill}</Badge>
-     </ParallaxLayer>
+      offset={offset}
+      speed={speed}
+      style={{
+      color: theme.fn.variant({ variant: 'light', color: theme.primaryColor }).color,
+      top: randomTop + "px", left: randomLeft + "px", width: 1, height: 1, zIndex: speed*100}}>
+        <Button compact size='xs' onClick={() =>
+          openContextModal({
+            modal: 'demonstration',
+            title: skill,
+            innerProps: {
+              modalBody:
+                'This modal was defined in ModalsProvider, you can open it anywhere in you app with useModals hook',
+            },
+          })
+        } variant="outline">
+          <Badge>{skill}</Badge>
+        </Button>
+      </ParallaxLayer>
     )
   });
 
@@ -99,7 +116,7 @@ function getRandomNumber(min: number, max: number) {
     getRandomNumber(min, max);
   //To make sure the skills are not too close to the the typewriter text
   else if(pos < (max/2) + 50 && pos > (max/2) - 50)
-      getRandomNumber(min, max);
+    getRandomNumber(min, max);
   else
     return pos;
 

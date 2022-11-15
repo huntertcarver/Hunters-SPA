@@ -1,5 +1,6 @@
-import { ColorScheme, ColorSchemeProvider, MantineProvider } from "@mantine/core";
+import { Button, ColorScheme, ColorSchemeProvider, MantineProvider, Text } from "@mantine/core";
 import { useHotkeys, useLocalStorage } from "@mantine/hooks";
+import { ContextModalProps, ModalsProvider } from '@mantine/modals';
 import RoutingContainer from "./RoutingContainer";
 
 function App() {
@@ -14,6 +15,16 @@ function App() {
 
   useHotkeys([['mod+J', () => toggleColorScheme()]]);
 
+  const SkillModal = ({ context, id, innerProps }: ContextModalProps<{ modalBody: string }>) => (
+    <>
+      <Text size="sm">{innerProps.modalBody}</Text>
+      <Button fullWidth mt="md" onClick={() => context.closeModal(id)}>
+        Cool!
+      </Button>
+    </>
+  );
+  
+
   return (
     <div className="App">
       <ColorSchemeProvider
@@ -21,7 +32,9 @@ function App() {
         toggleColorScheme={toggleColorScheme}
       >
         <MantineProvider theme={{colorScheme}}>
-          <RoutingContainer />
+          <ModalsProvider modals={{ demonstration: SkillModal /* ...other modals */ }}>
+            <RoutingContainer />
+          </ModalsProvider>
         </MantineProvider>
       </ColorSchemeProvider>
     </div>
