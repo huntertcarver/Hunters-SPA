@@ -2,7 +2,9 @@ import {
   Badge,
   Button,
   createStyles,
+  Paper,
   Title,
+  Text,
   useMantineColorScheme,
   useMantineTheme,
 } from "@mantine/core";
@@ -21,6 +23,60 @@ const useStyles = createStyles((theme) => ({
   skill: {
     [theme.fn.smallerThan("md")]: {
       widows: 10,
+    },
+  },
+  centerItem: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  button: {
+    backgroundColor: theme.colorScheme === "dark" ? '#000000' : '#ffffff',
+
+    '&:hover': {
+      boxShadow: theme.shadows.md,
+      transform: 'scale(1.02)',
+    },
+  },
+  link: {
+    [theme.fn.largerThan("md")]: {
+      width: '50%',
+    },
+    [theme.fn.smallerThan("md")]: {
+      width: "90%",
+    },
+  },
+  card: {
+    position: 'relative',
+    cursor: 'pointer',
+    overflow: 'hidden',
+    transition: 'transform 150ms ease, box-shadow 100ms ease',
+    padding: theme.spacing.xl,
+    paddingLeft: theme.spacing.xl * 2,
+
+    '&:hover': {
+      boxShadow: theme.shadows.md,
+      transform: 'scale(1.02)',
+    },
+
+    '&::before': {
+      content: '""',
+      position: 'absolute',
+      top: 0,
+      bottom: 0,
+      left: 0,
+      width: 6,
+      backgroundImage: theme.colorScheme === 'dark' ? theme.fn.linearGradient(0, theme.colors.red[6], theme.colors.orange[6]) : theme.fn.linearGradient(0, theme.colors.blue[5], theme.colors.green[5]),
+    },
+
+    '&::after': {
+      content: '""',
+      position: 'absolute',
+      top: 0,
+      bottom: 0,
+      right: 0,
+      width: 6,
+      backgroundImage: theme.colorScheme === 'dark' ? theme.fn.linearGradient(0, theme.colors.red[6], theme.colors.orange[6]) : theme.fn.linearGradient(0, theme.colors.blue[5], theme.colors.green[5]),
     },
   },
 }));
@@ -70,13 +126,7 @@ function Home() {
         }}
       >
         <Button
-          // To make buttons octogons in the future
-          sx={(theme) => ({
-            '&:before': {
-            },
-            '&:after': {
-            },
-          })}
+          className={cx(classes.button)}
           compact
           size="xs"
           variant="outline"
@@ -106,11 +156,7 @@ function Home() {
         <ParallaxLayer
           offset={0}
           speed={2.5}
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
+          className={cx(classes.centerItem)}
         >
           <Title
             className={classes.title}
@@ -141,25 +187,50 @@ function Home() {
               color: theme.primaryColor,
             }).background,
           }}
-        />
+        >
+          <ParticlesComponent />
+        </ParallaxLayer>
 
         {badges}
 
         <ParallaxLayer
           offset={1}
           speed={0.5}
+          className={cx(classes.centerItem)}
           style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
             color: theme.fn.variant({
               variant: "light",
               color: theme.primaryColor,
             }).color,
           }}
         >
-          <ParticlesComponent />
-          <p>Scroll up</p>
+        <Link
+          to={'/about'}
+          key={'about'}
+          className={cx(classes.centerItem, classes.link)}
+          style={{textDecoration: 'none'}}>
+          <Paper withBorder radius="md" className={classes.card}>
+            <div className={cx(classes.centerItem)} style={{justifyContent: 'space-between'}}>
+              <Title className={cx(classes.title)} variant="gradient" gradient={{
+                from: colorScheme === "dark" ? "lightblue" : "blue",
+                to: colorScheme === "dark" ? "white" : "black",
+              }}>
+                Hello!
+              </Title>
+            <Button
+          className={cx(classes.button)}
+          compact
+          size="xs"
+          variant="outline"
+        >
+              <Badge>About me</Badge>
+            </Button>
+              </div>
+              <Text size="sm" mt="sm" color="dimmed" className={cx(classes.centerItem)}>
+              Hey, welcome to my website! The purpose of this is to display my front end and back end Software Engineering skills not only from the information provided on this website but also from the code that makes it up. This website was made on React, Typescript, Mantine, and many TS/React libraries. I hope you enjoy your stay!
+              </Text>
+            </Paper>
+          </Link>
         </ParallaxLayer>
       </Parallax>
     </div>
