@@ -3,7 +3,7 @@ import { createStyles, Header, Group, ActionIcon, Container, Burger, Title } fro
 import { useDisclosure } from '@mantine/hooks';
 import { IconBrandLinkedin, IconBrandGithub, IconBrandGmail, IconBrandDiscord } from '@tabler/icons';
 import LightDarkButton from './LightDarkButton';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import NavbarSimple from './SideNav';
 
 const useStyles = createStyles((theme) => ({
@@ -12,7 +12,6 @@ const useStyles = createStyles((theme) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
     height: 56,
-
   },
 
   links: {
@@ -76,6 +75,7 @@ export default function HeaderMiddle({ links }: HeaderMiddleProps) {
   const [opened, { toggle }] = useDisclosure(false);
   const [active, setActive] = useState(links[0].link);
   const { classes, cx } = useStyles();
+  const location = useLocation();
 
   const items = links.map((link) => (
     <Link
@@ -84,6 +84,9 @@ export default function HeaderMiddle({ links }: HeaderMiddleProps) {
       className={cx(classes.link, { [classes.linkActive]: active === link.link })}
       onClick={() => {
         setActive(link.link);
+      }}
+      onLoad={() => {
+        alert('loaded');
       }}
     >
       {link.label}

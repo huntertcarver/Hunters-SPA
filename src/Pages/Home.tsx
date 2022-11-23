@@ -7,10 +7,10 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
+import { Link } from "react-router-dom";
 import Typewriter from "typewriter-effect";
-import { openContextModal } from "@mantine/modals";
-import { stringify } from "querystring";
 import json from "../Data/skills.json";
+import ParticlesComponent from "../Components/ParticlesComponent";
 
 const useStyles = createStyles((theme) => ({
   title: {
@@ -33,66 +33,18 @@ function Home() {
   var winWidth = window.innerWidth;
   var winHeight = window.innerHeight;
 
-  var skills = [
-    "React",
-    ".NET",
-    "MAUI",
-    "ASP.NET MVC",
-    "C",
-    "C++",
-    "C#",
-    "Python",
-    "JavaScript",
-    "CSS",
-    "HTML",
-    "JSX",
-    "Razor",
-    "SQL",
-    "Git",
-    "GitHub",
-    "GitLabs",
-    "Azure",
-    "Docker",
-    "Linux",
-    "Visual Studio",
-    "Visual Studio Code",
-    "Xamarin",
-    "JSON",
-    "XML",
-    "Winforms",
-    "Jest",
-    "Unit Testing",
-    "Bootstrap",
-    "Material UI",
-    "Mantine",
-    "React Spring",
-    "MUI",
-    "MATLAB",
-    "Version Control",
-    "Java",
-    "JQuery",
-    "AJAX",
-    "REST",
-    "Entity Framework Core",
-    "Stored Procedures",
-    "Package Managers",
-    "NPM",
-    "Yarn",
-    "NuGet",
-    "Datatables",
-    "CLI",
-    "NodeJS",
-    "Mantine",
-    "TypeScript",
-    "Postman",
-    "APIS",
-    "CRUD"
-  ];
-  var badges: JSX.Element[] = [];
-  let text = [`Hey I'm Hunter!`, `I'm a Full Stack Software Engineer.`];
+  interface SkillMapObj{
+    skillLevel: number;
+    definition: string;
+  }
 
   let skillMapString = JSON.stringify(json);
-  let skillMap = new Map<string,string>(Object.entries(JSON.parse(skillMapString)));
+  let skillMap = new Map<string,SkillMapObj>(Object.entries(JSON.parse(skillMapString)));
+
+  var skills = Array.from(skillMap.keys());
+
+  var badges: JSX.Element[] = [];
+  let text = [`Hey I'm Hunter!`, `I'm a Full Stack Software Engineer.`, `Navigate,`, `Scroll down,`, `or click a skill to learn more!`];
 
   skills.forEach((skill) => {
     let randomTop = getRandomNumber(0, winHeight);
@@ -112,27 +64,29 @@ function Home() {
           }).color,
           top: randomTop + "px",
           left: randomLeft + "px",
-          width: 1,
-          height: 1,
+          width: 5,
+          height: 5,
           zIndex: speed * 100,
         }}
       >
         <Button
+          // To make buttons octogons in the future
+          sx={(theme) => ({
+            '&:before': {
+            },
+            '&:after': {
+            },
+          })}
           compact
           size="xs"
-          onClick={() =>
-            openContextModal({
-              modal: "demonstration",
-              title: skill,
-              innerProps: {
-                modalBody:
-                  skillMap.get(skill)
-              },
-            })
-          }
           variant="outline"
         >
-          <Badge>{skill}</Badge>
+        <Link
+          to={'/skills/'+skill}
+          key={skill}
+          style={{textDecoration: 'none'}}>
+            <Badge>{skill}</Badge>
+          </Link>
         </Button>
       </ParallaxLayer>
     );
@@ -168,8 +122,9 @@ function Home() {
           >
             <Typewriter
               options={{
-                strings: [text[0], text[1]],
-                deleteSpeed: 50,
+                strings: text,
+                delay: 100,
+                deleteSpeed: 25,
                 autoStart: true,
                 loop: true,
               }}
@@ -203,6 +158,7 @@ function Home() {
             }).color,
           }}
         >
+          <ParticlesComponent />
           <p>Scroll up</p>
         </ParallaxLayer>
       </Parallax>
@@ -215,9 +171,9 @@ export default Home;
 function getRandomNumber(min: number, max: number) {
   var pos = Math.floor(Math.random() * (max - min + 1)) + min;
   //To make sure the skills are not too close to the edge of the screen
-  if (pos > max) getRandomNumber(min, max);
-  else if (pos < min) getRandomNumber(min, max);
+  if (pos > max) {getRandomNumber(min, max);}
+  else if (pos < min) {getRandomNumber(min, max);}
   //To make sure the skills are not too close to the the typewriter text
-  else if (pos < max / 2 + 50 && pos > max / 2 - 50) getRandomNumber(min, max);
+  else if (pos < max / 2 + 50 && pos > max / 2 - 50) {getRandomNumber(min, max);}
   else return pos;
 }

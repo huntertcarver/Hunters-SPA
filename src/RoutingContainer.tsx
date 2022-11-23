@@ -1,6 +1,7 @@
 import { Paper } from "@mantine/core";
 import { Route, Routes } from "react-router-dom";
 import HeaderMiddle from "./Components/HeaderMiddle";
+import SkillArticle from "./DynamicPages/SkillArticle";
 import About from "./Pages/About";
 import Home from "./Pages/Home";
 
@@ -14,6 +15,8 @@ function RoutingContainer () {
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
+            <Route path="/cv" element={<About />} />
+            <Route path="/skills/:skill" element={<SkillArticle />} />
         </Routes>
     </Paper>
   );
