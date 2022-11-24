@@ -31,52 +31,74 @@ const useStyles = createStyles((theme) => ({
     alignItems: "center",
   },
   button: {
-    backgroundColor: theme.colorScheme === "dark" ? '#000000' : '#ffffff',
+    backgroundColor: theme.colorScheme === "dark" ? "#000000" : "#ffffff",
 
-    '&:hover': {
+    "&:hover": {
       boxShadow: theme.shadows.md,
-      transform: 'scale(1.02)',
+      transform: "scale(1.02)",
     },
   },
   link: {
     [theme.fn.largerThan("md")]: {
-      width: '50%',
+      width: "50%",
     },
     [theme.fn.smallerThan("md")]: {
       width: "90%",
     },
   },
   card: {
-    position: 'relative',
-    cursor: 'pointer',
-    overflow: 'hidden',
-    transition: 'transform 150ms ease, box-shadow 100ms ease',
+    position: "relative",
+    cursor: "pointer",
+    overflow: "hidden",
+    transition: "transform 150ms ease, box-shadow 100ms ease",
     padding: theme.spacing.xl,
     paddingLeft: theme.spacing.xl * 2,
 
-    '&:hover': {
+    "&:hover": {
       boxShadow: theme.shadows.md,
-      transform: 'scale(1.02)',
+      transform: "scale(1.02)",
     },
 
-    '&::before': {
+    "&::before": {
       content: '""',
-      position: 'absolute',
+      position: "absolute",
       top: 0,
       bottom: 0,
       left: 0,
       width: 6,
-      backgroundImage: theme.colorScheme === 'dark' ? theme.fn.linearGradient(0, theme.colors.red[6], theme.colors.orange[6]) : theme.fn.linearGradient(0, theme.colors.blue[5], theme.colors.green[5]),
+      backgroundImage:
+        theme.colorScheme === "dark"
+          ? theme.fn.linearGradient(
+              0,
+              theme.colors.red[6],
+              theme.colors.orange[6]
+            )
+          : theme.fn.linearGradient(
+              0,
+              theme.colors.blue[5],
+              theme.colors.green[5]
+            ),
     },
 
-    '&::after': {
+    "&::after": {
       content: '""',
-      position: 'absolute',
+      position: "absolute",
       top: 0,
       bottom: 0,
       right: 0,
       width: 6,
-      backgroundImage: theme.colorScheme === 'dark' ? theme.fn.linearGradient(0, theme.colors.red[6], theme.colors.orange[6]) : theme.fn.linearGradient(0, theme.colors.blue[5], theme.colors.green[5]),
+      backgroundImage:
+        theme.colorScheme === "dark"
+          ? theme.fn.linearGradient(
+              0,
+              theme.colors.red[6],
+              theme.colors.orange[6]
+            )
+          : theme.fn.linearGradient(
+              0,
+              theme.colors.blue[5],
+              theme.colors.green[5]
+            ),
     },
   },
 }));
@@ -89,18 +111,26 @@ function Home() {
   var winWidth = window.innerWidth;
   var winHeight = window.innerHeight;
 
-  interface SkillMapObj{
+  interface SkillMapObj {
     skillLevel: number;
     definition: string;
   }
 
   let skillMapString = JSON.stringify(json);
-  let skillMap = new Map<string,SkillMapObj>(Object.entries(JSON.parse(skillMapString)));
+  let skillMap = new Map<string, SkillMapObj>(
+    Object.entries(JSON.parse(skillMapString))
+  );
 
   var skills = Array.from(skillMap.keys());
 
   var badges: JSX.Element[] = [];
-  let text = [`Hey I'm Hunter!`, `I'm a Full Stack Software Engineer.`, `Navigate,`, `Scroll down,`, `or click a skill to learn more!`];
+  let text = [
+    `Hey I'm Hunter!`,
+    `I'm a Full Stack Software Engineer.`,
+    `Navigate,`,
+    `Scroll down,`,
+    `or click a skill to learn more!`,
+  ];
 
   skills.forEach((skill) => {
     let randomTop = getRandomNumber(0, winHeight);
@@ -131,10 +161,11 @@ function Home() {
           size="xs"
           variant="outline"
         >
-        <Link
-          to={'/skills/'+skill}
-          key={skill}
-          style={{textDecoration: 'none'}}>
+          <Link
+            to={"/skills/" + skill}
+            key={skill}
+            style={{ textDecoration: "none" }}
+          >
             <Badge>{skill}</Badge>
           </Link>
         </Button>
@@ -204,30 +235,48 @@ function Home() {
             }).color,
           }}
         >
-        <Link
-          to={'/about'}
-          key={'about'}
-          className={cx(classes.centerItem, classes.link)}
-          style={{textDecoration: 'none'}}>
-          <Paper withBorder radius="md" className={classes.card}>
-            <div className={cx(classes.centerItem)} style={{justifyContent: 'space-between'}}>
-              <Title className={cx(classes.title)} variant="gradient" gradient={{
-                from: colorScheme === "dark" ? "lightblue" : "blue",
-                to: colorScheme === "dark" ? "white" : "black",
-              }}>
-                Hello!
-              </Title>
-            <Button
-          className={cx(classes.button)}
-          compact
-          size="xs"
-          variant="outline"
-        >
-              <Badge>About me</Badge>
-            </Button>
+          <Link
+            to={"/about"}
+            key={"about"}
+            className={cx(classes.centerItem, classes.link)}
+            style={{ textDecoration: "none" }}
+          >
+            <Paper withBorder radius="md" className={classes.card}>
+              <div
+                className={cx(classes.centerItem)}
+                style={{ justifyContent: "space-between" }}
+              >
+                <Title
+                  className={cx(classes.title)}
+                  variant="gradient"
+                  gradient={{
+                    from: colorScheme === "dark" ? "lightblue" : "blue",
+                    to: colorScheme === "dark" ? "white" : "black",
+                  }}
+                >
+                  Hello!
+                </Title>
+                <Button
+                  className={cx(classes.button)}
+                  compact
+                  size="xs"
+                  variant="outline"
+                >
+                  <Badge>About me</Badge>
+                </Button>
               </div>
-              <Text size="sm" mt="sm" color="dimmed" className={cx(classes.centerItem)}>
-              Hey, welcome to my website! The purpose of this is to display my front end and back end Software Engineering skills not only from the information provided on this website but also from the code that makes it up. This website was made on React, Typescript, Mantine, and many TS/React libraries. I hope you enjoy your stay!
+              <Text
+                size="sm"
+                mt="sm"
+                color="dimmed"
+                className={cx(classes.centerItem)}
+              >
+                Hey, welcome to my website! The purpose of this is to display my
+                front end and back end Software Engineering skills not only from
+                the information provided on this website but also from the code
+                that makes it up. This website was made on React, Typescript,
+                Mantine, and many TS/React libraries. I hope you enjoy your
+                stay!
               </Text>
             </Paper>
           </Link>
@@ -242,9 +291,13 @@ export default Home;
 function getRandomNumber(min: number, max: number) {
   var pos = Math.floor(Math.random() * (max - min + 1)) + min;
   //To make sure the skills are not too close to the edge of the screen
-  if (pos > max) {getRandomNumber(min, max);}
-  else if (pos < min) {getRandomNumber(min, max);}
+  if (pos > max) {
+    getRandomNumber(min, max);
+  } else if (pos < min) {
+    getRandomNumber(min, max);
+  }
   //To make sure the skills are not too close to the the typewriter text
-  else if (pos < max / 2 + 50 && pos > max / 2 - 50) {getRandomNumber(min, max);}
-  else return pos;
+  else if (pos < max / 2 + 50 && pos > max / 2 - 50) {
+    getRandomNumber(min, max);
+  } else return pos;
 }

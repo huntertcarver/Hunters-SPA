@@ -1,37 +1,50 @@
-import { useState } from 'react';
-import { createStyles, Header, Group, ActionIcon, Container, Burger, Title } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import { IconBrandLinkedin, IconBrandGithub, IconBrandGmail, IconBrandDiscord } from '@tabler/icons';
-import LightDarkButton from './LightDarkButton';
-import { Link, useLocation } from 'react-router-dom';
-import NavbarSimple from './SideNav';
+import { useState } from "react";
+import {
+  createStyles,
+  Header,
+  Group,
+  ActionIcon,
+  Container,
+  Burger,
+  Title,
+} from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import {
+  IconBrandLinkedin,
+  IconBrandGithub,
+  IconBrandGmail,
+  IconBrandDiscord,
+} from "@tabler/icons";
+import LightDarkButton from "./LightDarkButton";
+import { Link, useLocation } from "react-router-dom";
+import NavbarSimple from "./SideNav";
 
 const useStyles = createStyles((theme) => ({
   inner: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
     height: 56,
   },
 
   links: {
     width: 260,
 
-    [theme.fn.smallerThan('sm')]: {
-      display: 'none',
+    [theme.fn.smallerThan("sm")]: {
+      display: "none",
     },
   },
 
   social: {
     width: 260,
 
-    [theme.fn.smallerThan('sm')]: {
-      display: 'none',
+    [theme.fn.smallerThan("sm")]: {
+      display: "none",
     },
   },
 
   title: {
-    [theme.fn.largerThan('md')]: {
+    [theme.fn.largerThan("md")]: {
       fontSize: 28,
     },
   },
@@ -39,30 +52,40 @@ const useStyles = createStyles((theme) => ({
   burger: {
     marginRight: theme.spacing.md,
 
-    [theme.fn.largerThan('sm')]: {
-      display: 'none',
+    [theme.fn.largerThan("sm")]: {
+      display: "none",
     },
   },
 
   link: {
-    display: 'block',
+    display: "block",
     lineHeight: 1,
-    padding: '8px 12px',
+    padding: "8px 12px",
     borderRadius: theme.radius.sm,
-    textDecoration: 'none',
-    color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[7],
+    textDecoration: "none",
+    color:
+      theme.colorScheme === "dark"
+        ? theme.colors.dark[0]
+        : theme.colors.gray[7],
     fontSize: theme.fontSizes.sm,
     fontWeight: 500,
 
-    '&:hover': {
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
+    "&:hover": {
+      backgroundColor:
+        theme.colorScheme === "dark"
+          ? theme.colors.dark[6]
+          : theme.colors.gray[0],
     },
   },
 
   linkActive: {
-    '&, &:hover': {
-      backgroundColor: theme.fn.variant({ variant: 'light', color: theme.primaryColor }).background,
-      color: theme.fn.variant({ variant: 'light', color: theme.primaryColor }).color,
+    "&, &:hover": {
+      backgroundColor: theme.fn.variant({
+        variant: "light",
+        color: theme.primaryColor,
+      }).background,
+      color: theme.fn.variant({ variant: "light", color: theme.primaryColor })
+        .color,
     },
   },
 }));
@@ -81,12 +104,14 @@ export default function HeaderMiddle({ links }: HeaderMiddleProps) {
     <Link
       to={link.link}
       key={link.label}
-      className={cx(classes.link, { [classes.linkActive]: active === link.link })}
+      className={cx(classes.link, {
+        [classes.linkActive]: active === link.link,
+      })}
       onClick={() => {
         setActive(link.link);
       }}
       onLoad={() => {
-        alert('loaded');
+        alert("loaded");
       }}
     >
       {link.label}
@@ -96,24 +121,47 @@ export default function HeaderMiddle({ links }: HeaderMiddleProps) {
   return (
     <div>
       <Header height={56} mb={0}>
-        <Container className={classes.inner}>
-          <Burger opened={opened} onClick={() => {toggle(); document.body.style.overflow = opened ? 'scroll' : 'hidden';}} size="sm" className={classes.burger} />
+        <Container className={classes.inner} size='xl'>
+          <Burger
+            opened={opened}
+            onClick={() => {
+              toggle();
+              document.body.style.overflow = opened ? "scroll" : "hidden";
+            }}
+            size="sm"
+            className={classes.burger}
+          />
           <Group className={classes.links} spacing={5}>
             {items}
           </Group>
 
           {/*Logo goes here
           <MantineLogo size={28} />*/}
-          <Title className={classes.title} size={16}>Hunter Carver</Title>
+          <Title className={classes.title} size={16}>
+            Hunter Carver
+          </Title>
 
           <Group>
-            <Group spacing={0} className={classes.social} position="right" noWrap>
-              <a href="https://www.linkedin.com/in/hunter-carver/" target="_blank" rel="noopener noreferrer">
+            <Group
+              spacing={0}
+              className={classes.social}
+              position="right"
+              noWrap
+            >
+              <a
+                href="https://www.linkedin.com/in/hunter-carver/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <ActionIcon size="lg">
                   <IconBrandLinkedin size={18} stroke={1.5} />
                 </ActionIcon>
               </a>
-              <a href="https://github.com/huntertcarver" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://github.com/huntertcarver"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <ActionIcon size="lg">
                   <IconBrandGithub size={18} stroke={1.5} />
                 </ActionIcon>
@@ -133,7 +181,7 @@ export default function HeaderMiddle({ links }: HeaderMiddleProps) {
           </Group>
         </Container>
       </Header>
-      <Group style={{display: opened ? 'block' : 'none'}}>
+      <Group style={{ display: opened ? "block" : "none" }}>
         <NavbarSimple />
       </Group>
     </div>
