@@ -11,7 +11,9 @@ import {
   Skeleton,
   Title,
   Divider,
+  Image,
 } from "@mantine/core";
+import { Carousel } from "@mantine/carousel";
 import {
   IconArrowBigRight,
   IconPrompt,
@@ -23,8 +25,11 @@ import {
 } from "@tabler/icons";
 import UserInfoIcons from "../Components/UserInfo";
 import pfp from "../Images/pfp.jpg";
+import hof from "../Images/hof.jpg";
+import hofclose from "../Images/hofclose.jpg";
+import mall from "../Images/mall.jpg";
 
-const useStyles = createStyles((theme) => ({
+const useStyles = createStyles((theme, _params, getRef) => ({
   title: {
     [theme.fn.smallerThan("md")]: {
       fontSize: 18,
@@ -48,6 +53,7 @@ const useStyles = createStyles((theme) => ({
     cursor: "pointer",
     overflow: "hidden",
     transition: "transform 150ms ease, box-shadow 100ms ease",
+    marginBottom: theme.spacing.xl,
     padding: theme.spacing.xl,
     paddingLeft: theme.spacing.xl * 2,
 
@@ -82,6 +88,30 @@ const useStyles = createStyles((theme) => ({
     [theme.fn.smallerThan("xs")]: {
       width: "250px",
       height: "167px",
+    },
+  },
+
+  carousel: {
+    "&:hover": {
+      [`& .${getRef("carouselControls")}`]: {
+        opacity: 1,
+      },
+    },
+  },
+
+  carouselControls: {
+    ref: getRef("carouselControls"),
+    transition: "opacity 150ms ease",
+    opacity: 0,
+  },
+
+  carouselIndicator: {
+    width: 4,
+    height: 4,
+    transition: "width 250ms ease",
+
+    "&[data-active]": {
+      width: 16,
     },
   },
 }));
@@ -129,15 +159,6 @@ function About() {
               nulla pariatur. Excepteur sint occaecat cupidatat non proident,
               sunt in culpa qui officia deserunt mollit anim id est laborum.
             </Text>
-            <Container my="md" className={cx(classes.iframeContainer)}>
-              <iframe
-                src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Fdelmarcollegefoundation%2Fvideos%2F365027391973315%2F&show_text=false&width=560&t=0"
-                className={cx(classes.iframe)}
-                scrolling="no"
-                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                allowFullScreen={true}
-              ></iframe>
-            </Container>
           </Paper>
         </div>
         <div>
@@ -206,7 +227,7 @@ function About() {
                 bullet={<IconMusic size={12} />}
               >
                 <Text color="dimmed" size="sm">
-                  Phi Mu Alpha was a music fraternity that I joined in my second
+                  Phi Mu Alpha is a music fraternity that I joined in my second
                   year at Del Mar College. I became the Vice President then
                   President of the chapter. I presided over the chapter until
                   graduation.
@@ -239,16 +260,67 @@ function About() {
                 </Text>
               </Timeline.Item>
 
-              <Timeline.Item bullet={<IconDeviceTvOld size={12} />} title="Ad campaign">
+              <Timeline.Item
+                bullet={<IconDeviceTvOld size={12} />}
+                title="Ad campaign"
+              >
                 <Text color="dimmed" size="sm">
-                  After graduation I was approached by Del Mar College staff to star in a new ad campaign for the college. 
-                  This ad campaign had a $1 million budget and was featured on TV, radio, social media, billboards, and the mall.
+                  After graduation I was approached by Del Mar College staff to
+                  star in a new ad campaign for the college. This ad campaign
+                  had a $1 million budget and was featured on TV, radio, social
+                  media, billboards, and the mall.
                 </Text>
                 <Text size="xs" mt={4}>
                   Fall 2021
                 </Text>
               </Timeline.Item>
             </Timeline>
+          </Paper>
+          <Paper
+            withBorder
+            p="md"
+            radius="md"
+            className={cx(classes.card)}
+            style={{ boxShadow: theme.shadows.xl }}
+          >
+            <Carousel
+              withIndicators
+              loop
+              classNames={{
+                root: classes.carousel,
+                controls: classes.carouselControls,
+                indicator: classes.carouselIndicator,
+              }}
+            >
+              <Carousel.Slide>
+                <Container my="md" className={cx(classes.iframeContainer)}>
+                  <iframe
+                    src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Fdelmarcollegefoundation%2Fvideos%2F365027391973315%2F&show_text=false&width=560&t=0"
+                    className={cx(classes.iframe)}
+                    scrolling="no"
+                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                    allowFullScreen={true}
+                  ></iframe>
+                </Container>
+              </Carousel.Slide>
+              <Carousel.Slide>
+                <Container my="md" className={cx(classes.iframeContainer)}>
+                  <Image className={cx(classes.iframe)} src={hof} />
+                </Container>
+              </Carousel.Slide>
+
+              <Carousel.Slide>
+                <Container my="md" className={cx(classes.iframeContainer)}>
+                  <Image className={cx(classes.iframe)} src={hofclose} />
+                </Container>
+              </Carousel.Slide>
+
+              <Carousel.Slide>
+                <Container my="md" className={cx(classes.iframeContainer)}>
+                  <Image className={cx(classes.iframe)} src={mall} />
+                </Container>
+              </Carousel.Slide>
+            </Carousel>
           </Paper>
         </div>
       </SimpleGrid>
