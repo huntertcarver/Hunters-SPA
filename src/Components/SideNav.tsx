@@ -106,7 +106,7 @@ export default function NavbarSimple() {
   ));
 
   return (
-    <Navbar height={700} width={{ sm: 300 }} p="md">
+    <Navbar height={window.screen.availHeight} width={{ sm: window.screen.availWidth }} p="md">
       <Navbar.Section grow>
         <Group className={classes.header} position="apart">
           <Title>Hunter Carver</Title>

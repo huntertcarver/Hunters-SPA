@@ -78,6 +78,7 @@ export default function ParticlesComponent() {
                         straight: false,
                     },
                     number: {
+                        max: 200,
                         density: {
                             enable: true,
                             area: 800,

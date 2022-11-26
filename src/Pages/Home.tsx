@@ -210,6 +210,8 @@ function Home() {
           </Title>
         </ParallaxLayer>
 
+        {badges}
+
         <ParallaxLayer
           offset={1}
           speed={2}
@@ -224,8 +226,6 @@ function Home() {
           <Ripple />
         </div>
         </ParallaxLayer>
-
-        {badges}
 
         <ParallaxLayer
           offset={1}
