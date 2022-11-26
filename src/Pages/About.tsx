@@ -29,6 +29,8 @@ import hof from "../Images/hof.jpg";
 import hofclose from "../Images/hofclose.jpg";
 import mall from "../Images/mall.jpg";
 import { QuoteCard } from "../Components/QuoteCard";
+import Ripple from "../Components/Ripple";
+import ParticlesComponent from "../Components/ParticlesComponent";
 
 const useStyles = createStyles((theme, _params, getRef) => ({
   title: {
@@ -127,6 +129,7 @@ function About() {
 
   return (
     <Container my="md" size="lg">
+      <ParticlesComponent />
       <SimpleGrid
         cols={2}
         spacing="md"

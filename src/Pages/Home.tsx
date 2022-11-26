@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import Typewriter from "typewriter-effect";
 import json from "../Data/skills.json";
 import ParticlesComponent from "../Components/ParticlesComponent";
+import Ripple from "../Components/Ripple";
 
 const useStyles = createStyles((theme) => ({
   title: {
@@ -219,7 +220,9 @@ function Home() {
             }).background,
           }}
         >
-          <ParticlesComponent />
+        <div style={{position: 'absolute', top: 0, left: 0, zIndex: 0, height: '100%', width: '100%'}}>
+          <Ripple />
+        </div>
         </ParallaxLayer>
 
         {badges}
