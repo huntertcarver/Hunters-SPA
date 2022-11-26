@@ -12,6 +12,8 @@ import {
   Title,
   Divider,
   Image,
+  Button,
+  Badge,
 } from "@mantine/core";
 import { Carousel } from "@mantine/carousel";
 import {
@@ -31,6 +33,7 @@ import mall from "../Images/mall.jpg";
 import { QuoteCard } from "../Components/QuoteCard";
 import Ripple from "../Components/Ripple";
 import ParticlesComponent from "../Components/ParticlesComponent";
+import Resume from "../Files/Resume.pdf";
 
 const useStyles = createStyles((theme, _params, getRef) => ({
   title: {
@@ -117,6 +120,14 @@ const useStyles = createStyles((theme, _params, getRef) => ({
       width: 16,
     },
   },
+  button: {
+    backgroundColor: theme.colorScheme === "dark" ? "#000000" : "#ffffff",
+
+    "&:hover": {
+      boxShadow: theme.shadows.md,
+      transform: "scale(1.02)",
+    },
+  },
 }));
 
 const PRIMARY_COL_HEIGHT = 300;
@@ -164,11 +175,31 @@ function About() {
               sunt in culpa qui officia deserunt mollit anim id est laborum.
             </Text>
           </Paper>
-          
+
           <QuoteCard quote="Testing my quote card" citation="quoteman" />
           <QuoteCard quote="Testing my quote card" citation="quoteman" />
           <QuoteCard quote="Testing my quote card" citation="quoteman" />
+
+          <Paper
+            withBorder
+            p="md"
+            radius="md"
+            className={cx(classes.card, classes.centerItem)}
+            style={{ boxShadow: theme.shadows.xl }}
+          >
+            <a href={Resume} download="Resume" target="_blank">
+              <Button
+                compact
+                size="xs"
+                variant="outline"
+                className={cx(classes.button)}
+              >
+                <Badge>Download my resume!</Badge>
+              </Button>
+            </a>
+          </Paper>
         </div>
+
         <div>
           <Paper
             withBorder
@@ -221,7 +252,7 @@ function About() {
               >
                 <Text color="dimmed" size="sm">
                   The Del Mar College Student Government Association was a
-                  another student organization that I was apart of. I was the
+                  another student organization that I was a part of. I was the
                   communications officer then secretary of the organization
                   until graduation.
                 </Text>
@@ -330,7 +361,7 @@ function About() {
               </Carousel.Slide>
             </Carousel>
           </Paper>
-          
+
           <Paper
             withBorder
             p="md"
@@ -354,7 +385,9 @@ function About() {
                 title="Start"
               >
                 <Text color="dimmed" size="sm">
-                  I transferred from Del Mar College to Texas A&M University - Corpus Christi in the spring of 2021 to get an early start on my upper level computer science courses.
+                  I transferred from Del Mar College to Texas A&M University -
+                  Corpus Christi in the spring of 2021 to get an early start on
+                  my upper level computer science courses.
                 </Text>
                 <Text size="xs" mt={4}>
                   Spring 2021
@@ -366,21 +399,24 @@ function About() {
                 title="Upper level courses"
               >
                 <Text color="dimmed" size="sm">
-                  The upper level computer science courses I've taken at A&M Corpus Christi include: 
-                  Software Engineering, Numerical Methods, Image Processing, Theory of Programming Languages, Intro to Database Systems, Operating Systems, Computer Networks, 
-                  Software Project Management, Survey of Programming Languages, Cyber Security, Cryptography, and Skills for Computing Professionals.
+                  The upper level computer science courses I've taken at A&M
+                  Corpus Christi include: Software Engineering, Numerical
+                  Methods, Image Processing, Theory of Programming Languages,
+                  Intro to Database Systems, Operating Systems, Computer
+                  Networks, Software Project Management, Survey of Programming
+                  Languages, Cyber Security, Cryptography, and Skills for
+                  Computing Professionals.
                 </Text>
                 <Text size="xs" mt={4}>
                   2022-2023
                 </Text>
               </Timeline.Item>
 
-              <Timeline.Item
-                title="Graduation"
-                bullet={<IconCode size={12} />}
-              >
+              <Timeline.Item title="Graduation" bullet={<IconCode size={12} />}>
                 <Text color="dimmed" size="sm">
-                  I am on course to graduate from Texas A&M University - Corpus Christi in the spring of 2023 with a Bachelor of Science in Computer Science with a concentration in Systems Programming.
+                  I am on course to graduate from Texas A&M University - Corpus
+                  Christi in the spring of 2023 with a Bachelor of Science in
+                  Computer Science with a concentration in Systems Programming.
                 </Text>
                 <Text size="xs" mt={4}>
                   Spring, 2023
@@ -486,7 +522,7 @@ function About() {
               >
                 <Text color="dimmed" size="sm">
                   The Del Mar College Student Government Association was a
-                  another student organization that I was apart of. I was the
+                  another student organization that I was a part of. I was the
                   communications officer then secretary of the organization
                   until graduation.
                 </Text>
