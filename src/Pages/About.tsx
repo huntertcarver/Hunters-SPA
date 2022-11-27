@@ -24,6 +24,7 @@ import {
   IconTrophy,
   IconCode,
   IconDeviceTvOld,
+  IconListCheck,
 } from "@tabler/icons";
 import UserInfoIcons from "../Components/UserInfo";
 import pfp from "../Images/pfp.jpg";
@@ -34,6 +35,8 @@ import { QuoteCard } from "../Components/QuoteCard";
 import Ripple from "../Components/Ripple";
 import ParticlesComponent from "../Components/ParticlesComponent";
 import Resume from "../Files/Resume.pdf";
+import { Document, Page } from "react-pdf/dist/esm/entry.webpack";
+import { useElementSize } from "@mantine/hooks";
 
 const useStyles = createStyles((theme, _params, getRef) => ({
   title: {
@@ -72,29 +75,18 @@ const useStyles = createStyles((theme, _params, getRef) => ({
       theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white
     }`,
   },
-  iframe: {
+  item: {
     border: "none",
     overflow: "hidden",
     frameBorder: "0",
     width: "100%",
     height: "100%",
   },
-  iframeContainer: {
-    width: "450px",
-    height: "300px",
-    resize: "both",
-    [theme.fn.smallerThan("lg")]: {
-      width: "400px",
-      height: "267px",
-    },
-    [theme.fn.smallerThan("md")]: {
-      width: "300px",
-      height: "200px",
-    },
-    [theme.fn.smallerThan("xs")]: {
-      width: "250px",
-      height: "167px",
-    },
+  resume: {
+
+    border: `solid 1px ${
+      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.colors.gray[5]
+    }`,
   },
 
   carousel: {
@@ -122,6 +114,8 @@ const useStyles = createStyles((theme, _params, getRef) => ({
   },
   button: {
     backgroundColor: theme.colorScheme === "dark" ? "#000000" : "#ffffff",
+    margin: theme.spacing.xl,
+
 
     "&:hover": {
       boxShadow: theme.shadows.md,
@@ -134,7 +128,8 @@ const PRIMARY_COL_HEIGHT = 300;
 
 function About() {
   const { colorScheme } = useMantineColorScheme();
-  const { classes, cx } = useStyles();
+  const { classes, cx } = useStyles();  
+  const { ref, width } = useElementSize();
   const theme = useMantineTheme();
   const SECONDARY_COL_HEIGHT = PRIMARY_COL_HEIGHT / 2 - theme.spacing.md / 2;
 
@@ -181,18 +176,24 @@ function About() {
           <QuoteCard quote="Testing my quote card" citation="quoteman" />
 
           <Paper
+            ref={ref}
             withBorder
             p="md"
             radius="md"
-            className={cx(classes.card, classes.centerItem)}
+            className={cx(classes.card)}
             style={{ boxShadow: theme.shadows.xl }}
           >
-            <a href={Resume} download="Resume" target="_blank">
+            <div style={{ height: 1.25 * width }} className={cx(classes.resume)}>
+              <Document file={Resume} className={cx(classes.item)}>
+                <Page pageNumber={1} renderMode="svg" width={width} />
+              </Document>
+            </div>
+            <a href={Resume} download="Resume" target="_blank" style={{textDecoration: 'none'}}>
               <Button
-                compact
-                size="xs"
+                size="xl"
                 variant="outline"
                 className={cx(classes.button)}
+                leftIcon={<IconListCheck size={14} />}
               >
                 <Badge>Download my resume!</Badge>
               </Button>
@@ -332,32 +333,25 @@ function About() {
               }}
             >
               <Carousel.Slide>
-                <Container my="md" className={cx(classes.iframeContainer)}>
-                  <iframe
-                    src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Fdelmarcollegefoundation%2Fvideos%2F365027391973315%2F&show_text=false&width=560&t=0"
-                    className={cx(classes.iframe)}
-                    scrolling="no"
-                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                    allowFullScreen={true}
-                  ></iframe>
-                </Container>
+                <iframe
+                  src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Fdelmarcollegefoundation%2Fvideos%2F365027391973315%2F&show_text=false&width=560&t=0"
+                  className={cx(classes.item)}
+                  scrolling="no"
+                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                  title="Del Mar College Ad"
+                  allowFullScreen={true}
+                ></iframe>
               </Carousel.Slide>
               <Carousel.Slide>
-                <Container my="md" className={cx(classes.iframeContainer)}>
-                  <Image className={cx(classes.iframe)} src={hof} />
-                </Container>
+                <Image className={cx(classes.item)} src={hof} />
               </Carousel.Slide>
 
               <Carousel.Slide>
-                <Container my="md" className={cx(classes.iframeContainer)}>
-                  <Image className={cx(classes.iframe)} src={hofclose} />
-                </Container>
+                <Image className={cx(classes.item)} src={hofclose} />
               </Carousel.Slide>
 
               <Carousel.Slide>
-                <Container my="md" className={cx(classes.iframeContainer)}>
-                  <Image className={cx(classes.iframe)} src={mall} />
-                </Container>
+                <Image className={cx(classes.item)} src={mall} />
               </Carousel.Slide>
             </Carousel>
           </Paper>
@@ -441,32 +435,24 @@ function About() {
               }}
             >
               <Carousel.Slide>
-                <Container my="md" className={cx(classes.iframeContainer)}>
-                  <iframe
-                    src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Fdelmarcollegefoundation%2Fvideos%2F365027391973315%2F&show_text=false&width=560&t=0"
-                    className={cx(classes.iframe)}
-                    scrolling="no"
-                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                    allowFullScreen={true}
-                  ></iframe>
-                </Container>
+                <iframe
+                  src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Fdelmarcollegefoundation%2Fvideos%2F365027391973315%2F&show_text=false&width=560&t=0"
+                  className={cx(classes.item)}
+                  scrolling="no"
+                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                  allowFullScreen={true}
+                ></iframe>
               </Carousel.Slide>
               <Carousel.Slide>
-                <Container my="md" className={cx(classes.iframeContainer)}>
-                  <Image className={cx(classes.iframe)} src={hof} />
-                </Container>
+               <Image className={cx(classes.item)} src={hof} />
               </Carousel.Slide>
 
               <Carousel.Slide>
-                <Container my="md" className={cx(classes.iframeContainer)}>
-                  <Image className={cx(classes.iframe)} src={hofclose} />
-                </Container>
+                <Image className={cx(classes.item)} src={hofclose} />
               </Carousel.Slide>
 
               <Carousel.Slide>
-                <Container my="md" className={cx(classes.iframeContainer)}>
-                  <Image className={cx(classes.iframe)} src={mall} />
-                </Container>
+                <Image className={cx(classes.item)} src={mall} />
               </Carousel.Slide>
             </Carousel>
           </Paper>
@@ -602,32 +588,24 @@ function About() {
               }}
             >
               <Carousel.Slide>
-                <Container my="md" className={cx(classes.iframeContainer)}>
-                  <iframe
-                    src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Fdelmarcollegefoundation%2Fvideos%2F365027391973315%2F&show_text=false&width=560&t=0"
-                    className={cx(classes.iframe)}
-                    scrolling="no"
-                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                    allowFullScreen={true}
-                  ></iframe>
-                </Container>
+                <iframe
+                  src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Fdelmarcollegefoundation%2Fvideos%2F365027391973315%2F&show_text=false&width=560&t=0"
+                  className={cx(classes.item)}
+                  scrolling="no"
+                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                  allowFullScreen={true}
+                ></iframe>
               </Carousel.Slide>
               <Carousel.Slide>
-                <Container my="md" className={cx(classes.iframeContainer)}>
-                  <Image className={cx(classes.iframe)} src={hof} />
-                </Container>
+                <Image className={cx(classes.item)} src={hof} />
               </Carousel.Slide>
 
               <Carousel.Slide>
-                <Container my="md" className={cx(classes.iframeContainer)}>
-                  <Image className={cx(classes.iframe)} src={hofclose} />
-                </Container>
+                <Image className={cx(classes.item)} src={hofclose} />
               </Carousel.Slide>
 
               <Carousel.Slide>
-                <Container my="md" className={cx(classes.iframeContainer)}>
-                  <Image className={cx(classes.iframe)} src={mall} />
-                </Container>
+                <Image className={cx(classes.item)} src={mall} />
               </Carousel.Slide>
             </Carousel>
           </Paper>
