@@ -35,7 +35,7 @@ import { QuoteCard } from "../Components/QuoteCard";
 import Ripple from "../Components/Ripple";
 import ParticlesComponent from "../Components/ParticlesComponent";
 import Resume from "../Files/Resume.pdf";
-import { Document, Page } from "react-pdf/dist/esm/entry.webpack";
+import { Document, Page } from "react-pdf/dist/esm/entry.webpack5";
 import { useElementSize } from "@mantine/hooks";
 
 const useStyles = createStyles((theme, _params, getRef) => ({
