@@ -25,12 +25,15 @@ import {
   IconCode,
   IconDeviceTvOld,
   IconListCheck,
+  IconCertificate
 } from "@tabler/icons";
 import UserInfoIcons from "../Components/UserInfo";
 import pfp from "../Images/pfp.jpg";
 import hof from "../Images/hof.jpg";
 import hofclose from "../Images/hofclose.jpg";
 import mall from "../Images/mall.jpg";
+import LSUAS from "../Images/LSUAS.jpg";
+import TAMUCC from "../Images/TAMUCC.jpg";
 import { QuoteCard } from "../Components/QuoteCard";
 import Ripple from "../Components/Ripple";
 import ParticlesComponent from "../Components/ParticlesComponent";
@@ -39,6 +42,7 @@ import { pdfjs } from 'react-pdf';
 import { Document, Page } from "react-pdf/dist/esm/entry.webpack5";
 import { useElementSize } from "@mantine/hooks";
 
+//Required for react-pdf to work in production
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 const useStyles = createStyles((theme, _params, getRef) => ({
@@ -174,7 +178,10 @@ function About() {
             </Text>
           </Paper>
 
-          <QuoteCard quote="Testing my quote card" citation="quoteman" />
+          <QuoteCard quote="He has the initiative to read technical books, watch training videos, create sample projects, and make probing inquiries for tasks assigned to him. 
+          Such qualities are rare for entry level engineers that I have met." citation="Angelo Diamante,
+          Software Development Engineer 3,
+          Core10" />
           <QuoteCard quote="Testing my quote card" citation="quoteman" />
           <QuoteCard quote="Testing my quote card" citation="quoteman" />
 
@@ -220,163 +227,9 @@ function About() {
                 to: theme.colorScheme === "dark" ? "white" : "black",
               }}
             >
-              Lone Star UAS
-            </Title>
-            <Timeline active={6} bulletSize={24} lineWidth={2}>
-              <Timeline.Item
-                bullet={<IconArrowBigRight size={12} />}
-                title="Start"
-              >
-                <Text color="dimmed" size="sm">
-                  Fresh out of high school, I took my first college course that
-                  summer.
-                </Text>
-                <Text size="xs" mt={4}>
-                  Summer 2018
-                </Text>
-              </Timeline.Item>
-
-              <Timeline.Item
-                bullet={<IconPrompt size={12} />}
-                title="Computer Science Club"
-              >
-                <Text color="dimmed" size="sm">
-                  In the latter half of my time at Del Mar College, I founded
-                  Del Mar's Computer Science Club with a few colleagues from
-                  class. I presided over the club until graduation.
-                </Text>
-                <Text size="xs" mt={4}>
-                  Spring, 2020
-                </Text>
-              </Timeline.Item>
-
-              <Timeline.Item
-                title="Student Government"
-                bullet={<IconBooks size={12} />}
-              >
-                <Text color="dimmed" size="sm">
-                  The Del Mar College Student Government Association was a
-                  another student organization that I was a part of. I was the
-                  communications officer then secretary of the organization
-                  until graduation.
-                </Text>
-                <Text size="xs" mt={4}>
-                  Spring, 2020
-                </Text>
-              </Timeline.Item>
-
-              <Timeline.Item
-                title="Phi Mu Alpha"
-                bullet={<IconMusic size={12} />}
-              >
-                <Text color="dimmed" size="sm">
-                  Phi Mu Alpha is a music fraternity that I joined in my second
-                  year at Del Mar College. I became the Vice President then
-                  President of the chapter. I presided over the chapter until
-                  graduation.
-                </Text>
-                <Text size="xs" mt={4}>
-                  Fall, 2021
-                </Text>
-              </Timeline.Item>
-
-              <Timeline.Item
-                bullet={<IconTrophy size={12} />}
-                title="Hall of Fame"
-              >
-                <Text color="dimmed" size="sm">
-                  I was inducted into the Del Mar College Hall of Fame in spring
-                  of 2021 for my leadership and contributions to the college.
-                </Text>
-                <Text size="xs" mt={4}>
-                  Spring 2021
-                </Text>
-              </Timeline.Item>
-
-              <Timeline.Item bullet={<IconCode size={12} />} title="Graduation">
-                <Text color="dimmed" size="sm">
-                  In the summer 2021 semester I graduated with my Associate of
-                  Science degree in Computer Programming.
-                </Text>
-                <Text size="xs" mt={4}>
-                  Summer 2021
-                </Text>
-              </Timeline.Item>
-
-              <Timeline.Item
-                bullet={<IconDeviceTvOld size={12} />}
-                title="Ad campaign"
-              >
-                <Text color="dimmed" size="sm">
-                  After graduation I was approached by Del Mar College staff to
-                  star in a new ad campaign for the college. This ad campaign
-                  had a $1 million budget and was featured on TV, radio, social
-                  media, billboards, and the mall.
-                </Text>
-                <Text size="xs" mt={4}>
-                  Fall 2021
-                </Text>
-              </Timeline.Item>
-            </Timeline>
-          </Paper>
-          <Paper
-            withBorder
-            p="md"
-            radius="md"
-            className={cx(classes.card)}
-            style={{ boxShadow: theme.shadows.xl }}
-          >
-            <Carousel
-              withIndicators
-              loop
-              classNames={{
-                root: classes.carousel,
-                controls: classes.carouselControls,
-                indicator: classes.carouselIndicator,
-              }}
-            >
-              <Carousel.Slide>
-                <iframe
-                  src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Fdelmarcollegefoundation%2Fvideos%2F365027391973315%2F&show_text=false&width=560&t=0"
-                  className={cx(classes.item)}
-                  scrolling="no"
-                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                  title="Del Mar College Ad"
-                  allowFullScreen={true}
-                ></iframe>
-              </Carousel.Slide>
-              <Carousel.Slide>
-                <Image className={cx(classes.item)} src={hof} />
-              </Carousel.Slide>
-
-              <Carousel.Slide>
-                <Image className={cx(classes.item)} src={hofclose} />
-              </Carousel.Slide>
-
-              <Carousel.Slide>
-                <Image className={cx(classes.item)} src={mall} />
-              </Carousel.Slide>
-            </Carousel>
-          </Paper>
-
-          <Paper
-            withBorder
-            p="md"
-            radius="md"
-            className={cx(classes.card)}
-            style={{ boxShadow: theme.shadows.xl }}
-          >
-            <Title
-              className={cx(classes.title)}
-              variant="gradient"
-              gradient={{
-                from: theme.colorScheme === "dark" ? "lightblue" : "blue",
-                to: theme.colorScheme === "dark" ? "white" : "black",
-              }}
-            >
               Texas A&M University - Corpus Christi
             </Title>
-            <Timeline active={1} bulletSize={24} lineWidth={2}>
+            <Timeline active={5} bulletSize={24} lineWidth={2}>
               <Timeline.Item
                 bullet={<IconArrowBigRight size={12} />}
                 title="Start"
@@ -388,6 +241,58 @@ function About() {
                 </Text>
                 <Text size="xs" mt={4}>
                   Spring 2021
+                </Text>
+              </Timeline.Item>
+
+              <Timeline.Item
+                bullet={<IconArrowBigRight size={12} />}
+                title="Lone Star UAS"
+              >
+                <Text color="dimmed" size="sm">
+                  Just freshly transferred to Texas A&M University - Corpus Christi, I landed a job as a
+                  Software Engineering Intern at Lone Star UAS.
+                </Text>
+                <Text size="xs" mt={4}>
+                  Fall 2021
+                </Text>
+              </Timeline.Item>
+              
+              <Timeline.Item
+                bullet={<IconCode size={12} />}
+                title="MOM Logger Sharp & MOM Log Replayer Sharp"
+              >
+                <Text color="dimmed" size="sm">
+                  The logger was C# project that I created for Lone Star UAS. In this program, it subscribed to all topics published to the Message Oriented Middleware MQTT broker.
+                  It then stored the messages in files on the local machine. The log replayer was a C# program that parsed the files created by the logger and published them to the Message Oriented Middleware MQTT broker.
+                </Text>
+                <Text size="xs" mt={4}>
+                  Fall 2021
+                </Text>
+              </Timeline.Item>
+
+              <Timeline.Item
+                bullet={<IconCode size={12} />}
+                title="Lone Star Web & API"
+              >
+                <Text color="dimmed" size="sm">
+                  Throughout my time at Lone Star I have made many additions to the organizations internal web application, API, and database. I have added new features, fixed bugs, and improved the overall performance of the application.
+                  These include database calls, internal API calls, upgrades to the internal RESTful API, stored procedures, data visualization, authentication and authorization, and UI changes.
+                </Text>
+                <Text size="xs" mt={4}>
+                  Spring 2021
+                </Text>
+              </Timeline.Item>
+              
+              <Timeline.Item
+                bullet={<IconCode size={12} />}
+                title="Force Follower"
+              >
+                <Text color="dimmed" size="sm">
+                  Force Follower is a .NET MAUI project that I created and led for Lone Star UAS. The upper management of the organization wanted a way to track the location of their employees on a mission in real time and I was tasked with creating a solution.
+                  Even though I have never used .NET MAUI before I chose MAUI so that the project could be easily cross platform and I was able to create a working prototype in a matter of days. After the MVP was created and approved, I refactored the project to be more maintainable, added new features, and fixed bugs and created a production ready application.
+                </Text>
+                <Text size="xs" mt={4}>
+                  Fall 2022
                 </Text>
               </Timeline.Item>
 
@@ -405,18 +310,18 @@ function About() {
                   Computing Professionals.
                 </Text>
                 <Text size="xs" mt={4}>
-                  2022-2023
+                  2021-2023
                 </Text>
               </Timeline.Item>
 
-              <Timeline.Item title="Graduation" bullet={<IconCode size={12} />}>
+              <Timeline.Item title="Graduation" bullet={<IconCertificate size={12} />}>
                 <Text color="dimmed" size="sm">
                   I am on course to graduate from Texas A&M University - Corpus
                   Christi in the spring of 2023 with a Bachelor of Science in
                   Computer Science with a concentration in Systems Programming.
                 </Text>
                 <Text size="xs" mt={4}>
-                  Spring, 2023
+                  Spring 2023
                 </Text>
               </Timeline.Item>
             </Timeline>
@@ -438,24 +343,11 @@ function About() {
               }}
             >
               <Carousel.Slide>
-                <iframe
-                  src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Fdelmarcollegefoundation%2Fvideos%2F365027391973315%2F&show_text=false&width=560&t=0"
-                  className={cx(classes.item)}
-                  scrolling="no"
-                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                  allowFullScreen={true}
-                ></iframe>
-              </Carousel.Slide>
-              <Carousel.Slide>
-               <Image className={cx(classes.item)} src={hof} />
+                <Image className={cx(classes.item)} src={LSUAS} />
               </Carousel.Slide>
 
               <Carousel.Slide>
-                <Image className={cx(classes.item)} src={hofclose} />
-              </Carousel.Slide>
-
-              <Carousel.Slide>
-                <Image className={cx(classes.item)} src={mall} />
+                <Image className={cx(classes.item)} src={TAMUCC} />
               </Carousel.Slide>
             </Carousel>
           </Paper>
@@ -548,7 +440,7 @@ function About() {
                 </Text>
               </Timeline.Item>
 
-              <Timeline.Item bullet={<IconCode size={12} />} title="Graduation">
+              <Timeline.Item bullet={<IconCertificate size={12} />} title="Graduation">
                 <Text color="dimmed" size="sm">
                   In the summer 2021 semester I graduated with my Associate of
                   Science degree in Computer Programming.
