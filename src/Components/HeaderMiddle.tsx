@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   createStyles,
   Header,
@@ -13,7 +13,7 @@ import {
   IconBrandLinkedin,
   IconBrandGithub,
   IconBrandGmail,
-  IconBrandDiscord,
+  IconBrandTwitter,
 } from "@tabler/icons";
 import LightDarkButton from "./LightDarkButton";
 import FullscreenButtonm from "./FullscreenButton";
@@ -100,6 +100,10 @@ export default function HeaderMiddle({ links }: HeaderMiddleProps) {
   const [active, setActive] = useState(links[0].link);
   const { classes, cx } = useStyles();
   const location = useLocation();
+  useEffect(() => {
+    setActive(location.pathname);
+    if (opened) toggle();
+  }, [location]);
 
   const items = links.map((link) => (
     <Link
@@ -122,7 +126,7 @@ export default function HeaderMiddle({ links }: HeaderMiddleProps) {
   return (
     <div>
       <Header height={56} mb={0}>
-        <Container className={classes.inner} size='xl'>
+        <Container className={classes.inner} size="xl">
           <Burger
             opened={opened}
             onClick={() => {
@@ -167,17 +171,23 @@ export default function HeaderMiddle({ links }: HeaderMiddleProps) {
                   <IconBrandGithub size={18} stroke={1.5} />
                 </ActionIcon>
               </a>
+              <a
+                href="https://twitter.com/huntertcarver"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <ActionIcon size="lg">
+                  <IconBrandTwitter size={18} stroke={1.5} />
+                </ActionIcon>
+              </a>
               <a href="mailto:hunter@1968bird.com">
                 <ActionIcon size="lg">
                   <IconBrandGmail size={18} stroke={1.5} />
                 </ActionIcon>
               </a>
-              <ActionIcon size="lg">
-                <IconBrandDiscord size={18} stroke={1.5} />
-              </ActionIcon>
             </Group>
             <Group spacing={0} position="right">
-              <FullscreenButtonm /> 
+              <FullscreenButtonm />
             </Group>
             <Group spacing={0} position="right">
               <LightDarkButton />

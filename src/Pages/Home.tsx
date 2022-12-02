@@ -137,7 +137,6 @@ function Home() {
     let posOffest = 100;
     let randomTop = getRandomNumber(0, winHeight);
     let randomLeft = getRandomNumber(0, winWidth);
-    console.log(randomLeft);
     let speed = Math.random() + 1;
     let offset;
     speed > 1.5 ? (offset = 0.75) : (offset = 0);
@@ -224,9 +223,18 @@ function Home() {
             }).background,
           }}
         >
-        <div style={{position: 'absolute', top: 0, left: 0, zIndex: 0, height: '100%', width: '100%'}}>
-          <Ripple />
-        </div>
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              zIndex: 0,
+              height: "100%",
+              width: "100%",
+            }}
+          >
+            <Ripple />
+          </div>
         </ParallaxLayer>
 
         <ParallaxLayer
@@ -293,10 +301,10 @@ function Home() {
 
 export default Home;
 
-function getRandomNumber(min: number, max: number):number {
+function getRandomNumber(min: number, max: number): number {
   var pos = Math.floor(Math.random() * (max - min + 1)) + min;
   //To make sure the skills are not too close to the edge of the screen
-  if (pos > max-100) {
+  if (pos > max - 100) {
     return getRandomNumber(min, max);
   } else if (pos < min) {
     return getRandomNumber(min, max);

@@ -210,8 +210,10 @@ function About() {
           Software Development Engineer 3,
           Core10"
           />
-          <QuoteCard quote="Testing my quote card" citation="quoteman" />
-          <QuoteCard quote="Testing my quote card" citation="quoteman" />
+          <QuoteCard
+            quote="Hunter would be an asset to any employer and I recommend him for any endeavor he chooses to pursue."
+            citation="Ryan Kelley, Software Engineer 2, Lone Star UAS"
+          />
 
           <Paper
             ref={ref}
