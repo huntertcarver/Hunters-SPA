@@ -102,7 +102,10 @@ export default function HeaderMiddle({ links }: HeaderMiddleProps) {
   const location = useLocation();
   useEffect(() => {
     setActive(location.pathname);
-    if (opened) toggle();
+    if (opened) {
+      toggle();
+      document.body.style.overflow = opened ? "scroll" : "hidden";
+    }
   }, [location]);
 
   const items = links.map((link) => (
