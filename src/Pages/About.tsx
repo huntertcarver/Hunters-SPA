@@ -14,6 +14,7 @@ import {
   Image,
   Button,
   Badge,
+  Spoiler,
 } from "@mantine/core";
 import { Carousel } from "@mantine/carousel";
 import {
@@ -166,36 +167,39 @@ function About() {
             </div>
             <Divider my="sm" />
             <Text>
-              Hey! Thank you for taking the time to look at my website! I am a
-              highly ambitious computer science student attending Texas A&M
-              University Corpus Christi. I have humble beginnings as I started
-              at my local community college, Del Mar College, where I received
-              my Associate in Science for Computer Programming. During my tenure
-              at Del Mar, I was a part of their student government, presided
-              over the local chapter of Phi Mu Alpha, and founded a new computer
-              science club called the Del Mar Computer Science club. In Spring
-              of 2021 I was inducted into the Del Mar College Hall of Fame.
-              After graduation I was contacted by Del Mar Staff to participate
-              in their newest ad campaign, I had no idea how big of a role I was
-              going to play. This led to my face and voice being associated with
-              Del Mar all over the city of Corpus Christi whether it be on TV,
-              the radio, billboards, and even at our local mall. Fall of 2021 I
-              started attending Texas A&M University Corpus Christi as a
-              full-time student. That semester I also started my internship at
-              Lone Star UAS, as a Software Engineer. This internship has
-              massively bootstrapped my career as I have learned an ample amount
-              of industry experience with current software engineering tools
-              such as .Net, ASP.Net Core MVC, APIs, .Net MAUI, and much more.
-              Not only has this internship allowed me to develop better
-              technical skills but also soft skills as I am constantly
-              pair-programming, cooperating with other software engineers,
-              participating in team meetings, and recently, leading our latest
-              project, “ForceFollower”, a cross-platform mobile application that
-              tracks a user’s location as a foreground process and sends it to
-              any API via configuration in settings. Currently, I am set to
-              graduate Spring of 2023 with my Bachelors of Science in Computer
-              Science with the concentration of Systems Programming from the
-              Texas A&M University Corpus Christi College of Engineering.
+              <Spoiler maxHeight={250} showLabel="Show more" hideLabel="Hide">
+                Hey! Thank you for taking the time to look at my website! I am a
+                highly ambitious computer science student attending Texas A&M
+                University Corpus Christi. I have humble beginnings as I started
+                at my local community college, Del Mar College, where I received
+                my Associate in Science for Computer Programming. During my
+                tenure at Del Mar, I was a part of their student government,
+                presided over the local chapter of Phi Mu Alpha, and founded a
+                new computer science club called the Del Mar Computer Science
+                club. In Spring of 2021 I was inducted into the Del Mar College
+                Hall of Fame. After graduation I was contacted by Del Mar Staff
+                to participate in their newest ad campaign, I had no idea how
+                big of a role I was going to play. This led to my face and voice
+                being associated with Del Mar all over the city of Corpus
+                Christi whether it be on TV, the radio, billboards, and even at
+                our local mall. Fall of 2021 I started attending Texas A&M
+                University Corpus Christi as a full-time student. That semester
+                I also started my internship at Lone Star UAS, as a Software
+                Engineer. This internship has massively bootstrapped my career
+                as I have learned an ample amount of industry experience with
+                current software engineering tools such as .Net, ASP.Net Core
+                MVC, APIs, .Net MAUI, and much more. Not only has this
+                internship allowed me to develop better technical skills but
+                also soft skills as I am constantly pair-programming,
+                cooperating with other software engineers, participating in team
+                meetings, and recently, leading our latest project,
+                “ForceFollower”, a cross-platform mobile application that tracks
+                a user’s location as a foreground process and sends it to any
+                API via configuration in settings. Currently, I am set to
+                graduate Spring of 2023 with my Bachelors of Science in Computer
+                Science with the concentration of Systems Programming from the
+                Texas A&M University Corpus Christi College of Engineering.
+              </Spoiler>
             </Text>
           </Paper>
 
@@ -539,15 +543,6 @@ function About() {
               }}
             >
               <Carousel.Slide>
-                <iframe
-                  src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Fdelmarcollegefoundation%2Fvideos%2F365027391973315%2F&show_text=false&width=560&t=0"
-                  className={cx(classes.item)}
-                  scrolling="no"
-                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                  allowFullScreen={true}
-                ></iframe>
-              </Carousel.Slide>
-              <Carousel.Slide>
                 <Image className={cx(classes.item)} src={hof} />
               </Carousel.Slide>
 
@@ -557,6 +552,15 @@ function About() {
 
               <Carousel.Slide>
                 <Image className={cx(classes.item)} src={mall} />
+              </Carousel.Slide>
+              <Carousel.Slide>
+                <iframe
+                  src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Fdelmarcollegefoundation%2Fvideos%2F365027391973315%2F&show_text=false&width=560&t=0"
+                  className={cx(classes.item)}
+                  scrolling="no"
+                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                  allowFullScreen={true}
+                ></iframe>
               </Carousel.Slide>
             </Carousel>
           </Paper>

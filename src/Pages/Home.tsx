@@ -134,8 +134,10 @@ function Home() {
   ];
 
   skills.forEach((skill) => {
+    let posOffest = 100;
     let randomTop = getRandomNumber(0, winHeight);
     let randomLeft = getRandomNumber(0, winWidth);
+    console.log(randomLeft);
     let speed = Math.random() + 1;
     let offset;
     speed > 1.5 ? (offset = 0.75) : (offset = 0);
@@ -291,16 +293,16 @@ function Home() {
 
 export default Home;
 
-function getRandomNumber(min: number, max: number) {
+function getRandomNumber(min: number, max: number):number {
   var pos = Math.floor(Math.random() * (max - min + 1)) + min;
   //To make sure the skills are not too close to the edge of the screen
-  if (pos > max) {
-    getRandomNumber(min, max);
+  if (pos > max-100) {
+    return getRandomNumber(min, max);
   } else if (pos < min) {
-    getRandomNumber(min, max);
+    return getRandomNumber(min, max);
   }
   //To make sure the skills are not too close to the the typewriter text
   else if (pos < max / 2 + 50 && pos > max / 2 - 50) {
-    getRandomNumber(min, max);
+    return getRandomNumber(min, max);
   } else return pos;
 }
