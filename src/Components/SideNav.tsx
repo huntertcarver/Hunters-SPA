@@ -84,7 +84,7 @@ const useStyles = createStyles((theme, _params, getRef) => {
 const data = [
   { link: '/', label: 'Home', icon: IconHome },
   { link: '/about', label: 'About', icon: IconQuestionMark },
-  { link: '/cv', label: 'CV', icon: IconList },
+  { link: '/test', label: 'Test', icon: IconList },
 ];
 
 export default function NavbarSimple() {

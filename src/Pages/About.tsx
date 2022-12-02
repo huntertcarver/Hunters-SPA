@@ -25,7 +25,7 @@ import {
   IconCode,
   IconDeviceTvOld,
   IconListCheck,
-  IconCertificate
+  IconCertificate,
 } from "@tabler/icons";
 import UserInfoIcons from "../Components/UserInfo";
 import pfp from "../Images/pfp.jpg";
@@ -38,7 +38,7 @@ import { QuoteCard } from "../Components/QuoteCard";
 import Ripple from "../Components/Ripple";
 import ParticlesComponent from "../Components/ParticlesComponent";
 import Resume from "../Files/Resume.pdf";
-import { pdfjs } from 'react-pdf';
+import { pdfjs } from "react-pdf";
 import { Document, Page } from "react-pdf/dist/esm/entry.webpack5";
 import { useElementSize } from "@mantine/hooks";
 
@@ -90,7 +90,6 @@ const useStyles = createStyles((theme, _params, getRef) => ({
     height: "100%",
   },
   resume: {
-
     border: `solid 1px ${
       theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.colors.gray[5]
     }`,
@@ -123,7 +122,6 @@ const useStyles = createStyles((theme, _params, getRef) => ({
     backgroundColor: theme.colorScheme === "dark" ? "#000000" : "#ffffff",
     margin: theme.spacing.xl,
 
-
     "&:hover": {
       boxShadow: theme.shadows.md,
       transform: "scale(1.02)",
@@ -135,7 +133,7 @@ const PRIMARY_COL_HEIGHT = 300;
 
 function About() {
   const { colorScheme } = useMantineColorScheme();
-  const { classes, cx } = useStyles();  
+  const { classes, cx } = useStyles();
   const { ref, width } = useElementSize();
   const theme = useMantineTheme();
   const SECONDARY_COL_HEIGHT = PRIMARY_COL_HEIGHT / 2 - theme.spacing.md / 2;
@@ -168,20 +166,46 @@ function About() {
             </div>
             <Divider my="sm" />
             <Text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
+              Hey! Thank you for taking the time to look at my website! I am a
+              highly ambitious computer science student attending Texas A&M
+              University Corpus Christi. I have humble beginnings as I started
+              at my local community college, Del Mar College, where I received
+              my Associate in Science for Computer Programming. During my tenure
+              at Del Mar, I was a part of their student government, presided
+              over the local chapter of Phi Mu Alpha, and founded a new computer
+              science club called the Del Mar Computer Science club. In Spring
+              of 2021 I was inducted into the Del Mar College Hall of Fame.
+              After graduation I was contacted by Del Mar Staff to participate
+              in their newest ad campaign, I had no idea how big of a role I was
+              going to play. This led to my face and voice being associated with
+              Del Mar all over the city of Corpus Christi whether it be on TV,
+              the radio, billboards, and even at our local mall. Fall of 2021 I
+              started attending Texas A&M University Corpus Christi as a
+              full-time student. That semester I also started my internship at
+              Lone Star UAS, as a Software Engineer. This internship has
+              massively bootstrapped my career as I have learned an ample amount
+              of industry experience with current software engineering tools
+              such as .Net, ASP.Net Core MVC, APIs, .Net MAUI, and much more.
+              Not only has this internship allowed me to develop better
+              technical skills but also soft skills as I am constantly
+              pair-programming, cooperating with other software engineers,
+              participating in team meetings, and recently, leading our latest
+              project, “ForceFollower”, a cross-platform mobile application that
+              tracks a user’s location as a foreground process and sends it to
+              any API via configuration in settings. Currently, I am set to
+              graduate Spring of 2023 with my Bachelors of Science in Computer
+              Science with the concentration of Systems Programming from the
+              Texas A&M University Corpus Christi College of Engineering.
             </Text>
           </Paper>
 
-          <QuoteCard quote="He has the initiative to read technical books, watch training videos, create sample projects, and make probing inquiries for tasks assigned to him. 
-          Such qualities are rare for entry level engineers that I have met." citation="Angelo Diamante,
+          <QuoteCard
+            quote="He has the initiative to read technical books, watch training videos, create sample projects, and make probing inquiries for tasks assigned to him. 
+          Such qualities are rare for entry level engineers that I have met."
+            citation="Angelo Diamante,
           Software Development Engineer 3,
-          Core10" />
+          Core10"
+          />
           <QuoteCard quote="Testing my quote card" citation="quoteman" />
           <QuoteCard quote="Testing my quote card" citation="quoteman" />
 
@@ -193,12 +217,20 @@ function About() {
             className={cx(classes.card)}
             style={{ boxShadow: theme.shadows.xl }}
           >
-            <div style={{ height: 1.25 * width }} className={cx(classes.resume)}>
+            <div
+              style={{ height: 1.25 * width }}
+              className={cx(classes.resume)}
+            >
               <Document file={Resume} className={cx(classes.item)}>
                 <Page pageNumber={1} renderMode="svg" width={width} />
               </Document>
             </div>
-            <a href={Resume} download="Resume" target="_blank" style={{textDecoration: 'none'}}>
+            <a
+              href={Resume}
+              download="Resume"
+              target="_blank"
+              style={{ textDecoration: "none" }}
+            >
               <Button
                 size="xl"
                 variant="outline"
@@ -249,21 +281,26 @@ function About() {
                 title="Lone Star UAS"
               >
                 <Text color="dimmed" size="sm">
-                  Just freshly transferred to Texas A&M University - Corpus Christi, I landed a job as a
-                  Software Engineering Intern at Lone Star UAS.
+                  Just freshly transferred to Texas A&M University - Corpus
+                  Christi, I landed a job as a Software Engineering Intern at
+                  Lone Star UAS.
                 </Text>
                 <Text size="xs" mt={4}>
                   Fall 2021
                 </Text>
               </Timeline.Item>
-              
+
               <Timeline.Item
                 bullet={<IconCode size={12} />}
                 title="MOM Logger Sharp & MOM Log Replayer Sharp"
               >
                 <Text color="dimmed" size="sm">
-                  The logger was C# project that I created for Lone Star UAS. In this program, it subscribed to all topics published to the Message Oriented Middleware MQTT broker.
-                  It then stored the messages in files on the local machine. The log replayer was a C# program that parsed the files created by the logger and published them to the Message Oriented Middleware MQTT broker.
+                  The logger was C# project that I created for Lone Star UAS. In
+                  this program, it subscribed to all topics published to the
+                  Message Oriented Middleware MQTT broker. It then stored the
+                  messages in files on the local machine. The log replayer was a
+                  C# program that parsed the files created by the logger and
+                  published them to the Message Oriented Middleware MQTT broker.
                 </Text>
                 <Text size="xs" mt={4}>
                   Fall 2021
@@ -275,21 +312,34 @@ function About() {
                 title="Lone Star Web & API"
               >
                 <Text color="dimmed" size="sm">
-                  Throughout my time at Lone Star I have made many additions to the organizations internal web application, API, and database. I have added new features, fixed bugs, and improved the overall performance of the application.
-                  These include database calls, internal API calls, upgrades to the internal RESTful API, stored procedures, data visualization, authentication and authorization, and UI changes.
+                  Throughout my time at Lone Star I have made many additions to
+                  the organizations internal web application, API, and database.
+                  I have added new features, fixed bugs, and improved the
+                  overall performance of the application. These include database
+                  calls, internal API calls, upgrades to the internal RESTful
+                  API, stored procedures, data visualization, authentication and
+                  authorization, and UI changes.
                 </Text>
                 <Text size="xs" mt={4}>
                   Spring 2021
                 </Text>
               </Timeline.Item>
-              
+
               <Timeline.Item
                 bullet={<IconCode size={12} />}
                 title="Force Follower"
               >
                 <Text color="dimmed" size="sm">
-                  Force Follower is a .NET MAUI project that I created and led for Lone Star UAS. The upper management of the organization wanted a way to track the location of their employees on a mission in real time and I was tasked with creating a solution.
-                  Even though I have never used .NET MAUI before I chose MAUI so that the project could be easily cross platform and I was able to create a working prototype in a matter of days. After the MVP was created and approved, I refactored the project to be more maintainable, added new features, and fixed bugs and created a production ready application.
+                  Force Follower is a .NET MAUI project that I created and led
+                  for Lone Star UAS. The upper management of the organization
+                  wanted a way to track the location of their employees on a
+                  mission in real time and I was tasked with creating a
+                  solution. Even though I have never used .NET MAUI before I
+                  chose MAUI so that the project could be easily cross platform
+                  and I was able to create a working prototype in a matter of
+                  days. After the MVP was created and approved, I refactored the
+                  project to be more maintainable, added new features, and fixed
+                  bugs and created a production ready application.
                 </Text>
                 <Text size="xs" mt={4}>
                   Fall 2022
@@ -314,7 +364,10 @@ function About() {
                 </Text>
               </Timeline.Item>
 
-              <Timeline.Item title="Graduation" bullet={<IconCertificate size={12} />}>
+              <Timeline.Item
+                title="Graduation"
+                bullet={<IconCertificate size={12} />}
+              >
                 <Text color="dimmed" size="sm">
                   I am on course to graduate from Texas A&M University - Corpus
                   Christi in the spring of 2023 with a Bachelor of Science in
@@ -440,7 +493,10 @@ function About() {
                 </Text>
               </Timeline.Item>
 
-              <Timeline.Item bullet={<IconCertificate size={12} />} title="Graduation">
+              <Timeline.Item
+                bullet={<IconCertificate size={12} />}
+                title="Graduation"
+              >
                 <Text color="dimmed" size="sm">
                   In the summer 2021 semester I graduated with my Associate of
                   Science degree in Computer Programming.

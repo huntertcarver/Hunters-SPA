@@ -16,6 +16,7 @@ import {
   IconBrandDiscord,
 } from "@tabler/icons";
 import LightDarkButton from "./LightDarkButton";
+import FullscreenButtonm from "./FullscreenButton";
 import { Link, useLocation } from "react-router-dom";
 import NavbarSimple from "./SideNav";
 
@@ -174,6 +175,9 @@ export default function HeaderMiddle({ links }: HeaderMiddleProps) {
               <ActionIcon size="lg">
                 <IconBrandDiscord size={18} stroke={1.5} />
               </ActionIcon>
+            </Group>
+            <Group spacing={0} position="right">
+              <FullscreenButtonm /> 
             </Group>
             <Group spacing={0} position="right">
               <LightDarkButton />
