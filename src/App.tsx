@@ -1,9 +1,7 @@
 import {
-  Button,
   ColorScheme,
   ColorSchemeProvider,
   MantineProvider,
-  Text,
 } from "@mantine/core";
 import { useHotkeys, useLocalStorage } from "@mantine/hooks";
 import RoutingContainer from "./RoutingContainer";

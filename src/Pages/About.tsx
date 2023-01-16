@@ -2,13 +2,10 @@ import {
   Paper,
   Timeline,
   Text,
-  useMantineColorScheme,
   useMantineTheme,
   createStyles,
   Container,
   SimpleGrid,
-  Grid,
-  Skeleton,
   Title,
   Divider,
   Image,
@@ -36,7 +33,6 @@ import mall from "../Images/mall.jpg";
 import LSUAS from "../Images/LSUAS.jpg";
 import TAMUCC from "../Images/TAMUCC.jpg";
 import { QuoteCard } from "../Components/QuoteCard";
-import Ripple from "../Components/Ripple";
 import ParticlesComponent from "../Components/ParticlesComponent";
 import Resume from "../Files/Resume.pdf";
 import { pdfjs } from "react-pdf";
@@ -130,14 +126,10 @@ const useStyles = createStyles((theme, _params, getRef) => ({
   },
 }));
 
-const PRIMARY_COL_HEIGHT = 300;
-
 function About() {
-  const { colorScheme } = useMantineColorScheme();
   const { classes, cx } = useStyles();
   const { ref, width } = useElementSize();
   const theme = useMantineTheme();
-  const SECONDARY_COL_HEIGHT = PRIMARY_COL_HEIGHT / 2 - theme.spacing.md / 2;
 
   return (
     <Container my="md" size="lg">
@@ -227,7 +219,7 @@ function About() {
               style={{ height: 1.25 * width }}
               className={cx(classes.resume)}
             >
-              <Document file={Resume} className={cx(classes.item)}>
+              <Document file={Resume} className={cx(classes.item)} options={{}}>
                 <Page pageNumber={1} renderMode="svg" width={width} />
               </Document>
             </div>
@@ -235,7 +227,7 @@ function About() {
               href={Resume}
               download="Resume"
               target="_blank"
-              style={{ textDecoration: "none" }}
+              style={{ textDecoration: "none" }} rel="noreferrer"
             >
               <Button
                 size="xl"
@@ -558,8 +550,8 @@ function About() {
               <Carousel.Slide>
                 <iframe
                   src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Fdelmarcollegefoundation%2Fvideos%2F365027391973315%2F&show_text=false&width=560&t=0"
+                  title="Del Mar College Ad"
                   className={cx(classes.item)}
-                  scrolling="no"
                   allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
                   allowFullScreen={true}
                 ></iframe>

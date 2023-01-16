@@ -1,5 +1,5 @@
 {
-  "React": {"skillLevel":60, "definition":"Although I have not used React in any commercial projects, I have used it in a few personal projects including this website and have a good understanding of the major concepts and how to use it. I am currently learning React more in depth with Coursera's Front-End Software Engineer certification by Meta."},
+  "React": {"skillLevel":70, "definition":"Although I have not used React in any commercial projects, I have used it in a few personal projects including this website and have a good understanding of the major concepts and how to use it. I am currently learning React more in depth with Coursera's Front-End Software Engineer certification by Meta."},
   ".NET": {"skillLevel":85, "definition":".NET is by far one of my favorite development platforms and it is one of the main technologies I have used in my professional career. With the 1 year of experience I have in .NET, I have used it in a variety of projects including web applications, desktop applications, mobile applications and web services."},
   "MAUI": {"skillLevel":70, "definition":"If you know me, I am always about learning the latest and greatest tools to help me be more productive. I have been learning MAUI for the past half-year including while it was in preview and even though it had some expected flaws for being so fresh off the press, I have had a great time developing with the platform. MAUI enabled me to lead the mobile application (with desktop capabilities) project, Force Follower, at Lone Star UAS."},
   "ASP.NET Core MVC": {"skillLevel":70, "definition":"This is the first framework I learned within .NET and it has been a great tool to build web applications. I have contributed a good amount to LoneStarWeb, Lone Star UAS's internal web application built on ASP.NET Core MVC."},
@@ -42,7 +42,7 @@
   "CLI": {"skillLevel":60, "definition":"I'd say I know may way around the CLI pretty well."},
   "TypeScript": {"skillLevel":60, "definition":"My use of typescript has been minimal but I do enjoy the type safety it provides and its smooth transition from JavaScript."},
   "Postman": {"skillLevel":35, "definition":"I have used postman a handful of times to test API calls and it has been a resourceful tool."},
-  "APIS": {"skillLevel":60, "definition":"I know the ins and outs of APIs weather it be building them or consuming them. I am familiar with RESTful APIs."},
+  "APIS": {"skillLevel":60, "definition":"I know the ins and outs of APIs whether it's building them or consuming them. I am familiar with RESTful APIs."},
   "MQTT": {"skillLevel":50, "definition":"MQTT was a fun protocol to learn and I have used it in a few projects. This protocol is great as a bridge between components in a system and is easy to pick up."},
   "ActiveMQ": {"skillLevel":50, "definition":"ActiveMQ is the broker I would use as the MQTT message broker for my projects."},
   "CRUD": {"skillLevel":75, "definition":"I am familiar with the CRUD operations and I have used them countless times."}

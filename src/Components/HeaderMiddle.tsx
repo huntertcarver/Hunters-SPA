@@ -106,7 +106,7 @@ export default function HeaderMiddle({ links }: HeaderMiddleProps) {
       toggle();
       document.body.style.overflow = opened ? "scroll" : "hidden";
     }
-  }, [location]);
+  }, [location, opened, toggle]);
 
   const items = links.map((link) => (
     <Link

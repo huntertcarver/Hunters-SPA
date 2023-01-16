@@ -12,7 +12,6 @@ import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import { Link } from "react-router-dom";
 import Typewriter from "typewriter-effect";
 import json from "../Data/skills.json";
-import ParticlesComponent from "../Components/ParticlesComponent";
 import Ripple from "../Components/Ripple";
 
 const useStyles = createStyles((theme) => ({
@@ -123,6 +122,7 @@ function Home() {
   );
 
   var skills = Array.from(skillMap.keys());
+  //console.log(skills);
 
   var badges: JSX.Element[] = [];
   let text = [
@@ -134,7 +134,6 @@ function Home() {
   ];
 
   skills.forEach((skill) => {
-    let posOffest = 100;
     let randomTop = getRandomNumber(0, winHeight);
     let randomLeft = getRandomNumber(0, winWidth);
     let speed = Math.random() + 1;
