@@ -227,7 +227,8 @@ function About() {
               href={Resume}
               download="Resume"
               target="_blank"
-              style={{ textDecoration: "none" }} rel="noreferrer"
+              style={{ textDecoration: "none" }}
+              rel="noreferrer"
             >
               <Button
                 size="xl"
@@ -350,12 +351,12 @@ function About() {
               >
                 <Text color="dimmed" size="sm">
                   The upper level computer science courses I've taken at A&M
-                  Corpus Christi include: Software Engineering, Numerical
-                  Methods, Image Processing, Theory of Programming Languages,
-                  Intro to Database Systems, Operating Systems, Computer
-                  Networks, Software Project Management, Survey of Programming
-                  Languages, Cyber Security, Cryptography, and Skills for
-                  Computing Professionals.
+                  Corpus Christi include: Software Engineering, Introduction
+                  into AI, Algorithms, Numerical Methods, Image Processing,
+                  Theory of Programming Languages, Intro to Database Systems,
+                  Operating Systems, Computer Networks, Software Project
+                  Management, Survey of Programming Languages, Cyber Security,
+                  Cryptography, and Skills for Computing Professionals.
                 </Text>
                 <Text size="xs" mt={4}>
                   2021-2023
