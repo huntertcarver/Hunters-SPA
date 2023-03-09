@@ -56,7 +56,10 @@ function SkillArticle() {
 
   let skillMapString = JSON.stringify(json);
   let skillMap = new Map<string,SkillMapObj>(Object.entries(JSON.parse(skillMapString)));
-  let skillObj = skillMap.get(params.skill as string);
+  let skill = params.skill as string;
+  //Problem with getting C# to work
+  skill == 'C' ? skill = 'C#': skill = skill;
+  let skillObj = skillMap.get(skill);
 
   skillObj == undefined ? skillObj = {skillLevel: 0, definition: "This skill is not in the database."} : skillObj = skillObj;
 
@@ -84,7 +87,7 @@ function SkillArticle() {
           gradient={colorScheme === "dark" ? { from: "red", to: "gold", deg: 45 } : { from: "blue", to: "green", deg: 45 }}
           sx={{ fontFamily: "buffalo", display: "inline", mt: "md" }}
           >
-            {params.skill}
+            {skill}
           </Title>
         </div>
       </Paper>

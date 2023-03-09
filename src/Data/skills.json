@@ -1,12 +1,12 @@
 {
-  "React": {"skillLevel":70, "definition":"Although I have not used React in any commercial projects, I have used it in a few personal projects including this website and have a good understanding of the major concepts and how to use it. I am currently learning React more in depth with Coursera's Front-End Software Engineer certification by Meta."},
+  "React": {"skillLevel":75, "definition":"I originally learned React in depth with Coursera's Front-End Software Engineer certification by Meta and I have used it in multiple personal projects, this website included, and a commercial project that is also the capstone project for my B.S. of Computer Science."},
   ".NET": {"skillLevel":85, "definition":".NET is by far one of my favorite development platforms and it is one of the main technologies I have used in my professional career. With the 1 year of experience I have in .NET, I have used it in a variety of projects including web applications, desktop applications, mobile applications and web services."},
   "MAUI": {"skillLevel":70, "definition":"If you know me, I am always about learning the latest and greatest tools to help me be more productive. I have been learning MAUI for the past half-year including while it was in preview and even though it had some expected flaws for being so fresh off the press, I have had a great time developing with the platform. MAUI enabled me to lead the mobile application (with desktop capabilities) project, Force Follower, at Lone Star UAS."},
   "ASP.NET Core MVC": {"skillLevel":70, "definition":"This is the first framework I learned within .NET and it has been a great tool to build web applications. I have contributed a good amount to LoneStarWeb, Lone Star UAS's internal web application built on ASP.NET Core MVC."},
   "C++": {"skillLevel":60, "definition":"C++ was my first ever programming language and it will always have a special place in my heart because of that. I have multiple years of classroom and theoretical experience but no work experience with this language yet."},
   "C#": {"skillLevel":80, "definition":"I picked up C# when learning ASP.NET Core MVC and it quickly grew on me with it's similarity to C++. C# is the language I have used the most in my professional career because of .NET."},
   "Python": {"skillLevel":20, "definition":"I have used python here and there to make small scripts and microservices but I generally do not use it unless needed."},
-  "JavaScript": {"skillLevel":60, "definition":"JavaScript is definitely one of my top used languages as it is used in almost every web application I have worked on. I have used JavaScript in both front-end and back-end development and coming from a C++ background, this language was easy to pick up."},
+  "JavaScript": {"skillLevel":70, "definition":"JavaScript is definitely one of my top used languages as it is used in almost every web application I have worked on. I have used JavaScript in both front-end and back-end development and coming from a C++ background, this language was easy to pick up."},
   "CSS": {"skillLevel":30, "definition":"CSS is a skill that I have not necessarily needed to learn in depth, as I have used frameworks such as Bootstrap and Mantine to help me with styling. I do however plan to delve in deeper later on into CSS along with Tailwind to create my own component libraries."},
   "HTML": {"skillLevel":70, "definition":"This is one is an obvious skill, every web developer must know HTML and typically learns it early on."},
   "JSX": {"skillLevel":50, "definition":"I have obtained all my JSX experience from React and I have a good understanding of how to use it."},
@@ -29,7 +29,7 @@
   "MUI": {"skillLevel":40, "definition":"I've used MUI for a few projects and I like the design of the library."},
   "MATLAB": {"skillLevel":40, "definition":"MATLAB has been mostly used for my college classes but I have used it for a few projects including an image processing project using custom kernels."},
   "Version Control": {"skillLevel":65, "definition":"Version Control is one of those skills that is a must for any developer and I have used it in all my projects. Once you learn version control, you learn you cannot live without it."},
-  "Java": {"skillLevel":60, "definition":"The only Java experience I have is from the academic setting but picking up Java hasn't been too difficult since it's similarity to C#."},
+  "Java": {"skillLevel":60, "definition":"The only Java experience I have is from the academic setting but picking up Java hasn't been too difficult since it's similarity to C#. One Java project that stands out is my final project for my Object Oriented Programming class where I created a Java Blockchain."},
   "JQuery": {"skillLevel":70, "definition":"JQuery has definitely been one of my favorite JavaScript libraries to use because of it's capabilities."},
   "AJAX": {"skillLevel":30, "definition":"I enjoy using AJAX for the ease of making API calls and web requests."},
   "Entity Framework Core": {"skillLevel":50, "definition":"Entity Framework has definitely been a tool I have used quite often for database connections and migrations."},
@@ -40,10 +40,11 @@
   "NuGet": {"skillLevel":70, "definition":"NuGet is just one of the many package managers I have used."},
   "Datatables": {"skillLevel":60, "definition":"Datatables is a goto for when I need to display data in a table format. this library is very easy to use and I have used it in multiple projects."},
   "CLI": {"skillLevel":60, "definition":"I'd say I know may way around the CLI pretty well."},
-  "TypeScript": {"skillLevel":60, "definition":"My use of typescript has been minimal but I do enjoy the type safety it provides and its smooth transition from JavaScript."},
-  "Postman": {"skillLevel":35, "definition":"I have used postman a handful of times to test API calls and it has been a resourceful tool."},
+  "TypeScript": {"skillLevel":60, "definition":"I have used TypeScript in a few projects and I do enjoy the type safety it provides and its smooth transition from JavaScript."},
+  "Postman": {"skillLevel":40, "definition":"I have used postman a handful of times to test API calls and it has been a resourceful tool."},
   "APIS": {"skillLevel":60, "definition":"I know the ins and outs of APIs whether it's building them or consuming them. I am familiar with RESTful APIs."},
   "MQTT": {"skillLevel":50, "definition":"MQTT was a fun protocol to learn and I have used it in a few projects. This protocol is great as a bridge between components in a system and is easy to pick up."},
   "ActiveMQ": {"skillLevel":50, "definition":"ActiveMQ is the broker I would use as the MQTT message broker for my projects."},
-  "CRUD": {"skillLevel":75, "definition":"I am familiar with the CRUD operations and I have used them countless times."}
+  "CRUD": {"skillLevel":75, "definition":"I am familiar with the CRUD operations and I have used them countless times."},
+  "NextJS": {"skillLevel":50, "definition":"I am using NextJS in my capstone project and I enjoy the ease of use it provides and its multiple features such as great SEO and server side component rendering."}
 }

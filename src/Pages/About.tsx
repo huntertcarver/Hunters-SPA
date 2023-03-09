@@ -260,7 +260,7 @@ function About() {
             >
               Texas A&M University - Corpus Christi
             </Title>
-            <Timeline active={5} bulletSize={24} lineWidth={2}>
+            <Timeline active={6} bulletSize={24} lineWidth={2}>
               <Timeline.Item
                 bullet={<IconArrowBigRight size={12} />}
                 title="Start"
@@ -300,6 +300,7 @@ function About() {
                   messages in files on the local machine. The log replayer was a
                   C# program that parsed the files created by the logger and
                   published them to the Message Oriented Middleware MQTT broker.
+                  Both programs utilizes multi-threading.
                 </Text>
                 <Text size="xs" mt={4}>
                   Fall 2021
@@ -346,17 +347,38 @@ function About() {
               </Timeline.Item>
 
               <Timeline.Item
+                bullet={<IconCode size={12} />}
+                title="UAS Status Page"
+              >
+                <Text color="dimmed" size="sm">
+                  This was a project idea of mine that I thought LSUASC might
+                  get some use out of while running a mission. I proposed the
+                  project, and it was approved. This page could be displayed on
+                  a screen in the Mission Control Center to visualize all Lone
+                  Star UAS aircrafts critical data and post alerts if a specific
+                  filter is hit. There is a Global filter set to target all
+                  aircraft’s critical data and individual filter sets to target
+                  specific aircraft’s data. Threshold settings are able to be
+                  saved to a cookie for persistence.
+                </Text>
+                <Text size="xs" mt={4}>
+                  Fall 2022
+                </Text>
+              </Timeline.Item>
+
+              <Timeline.Item
                 bullet={<IconBooks size={12} />}
                 title="Upper level courses"
               >
                 <Text color="dimmed" size="sm">
-                  The upper level computer science courses I've taken at A&M
-                  Corpus Christi include: Software Engineering, Introduction
+                  The upper-level computer science courses I've taken at Texas
+                  A&M Corpus Christi include: Software Engineering, Introduction
                   into AI, Algorithms, Numerical Methods, Image Processing,
                   Theory of Programming Languages, Intro to Database Systems,
                   Operating Systems, Computer Networks, Software Project
                   Management, Survey of Programming Languages, Cyber Security,
-                  Cryptography, and Skills for Computing Professionals.
+                  Cryptography, Technical and professional writing for Computer
+                  Science, and Skills for Computing Professionals 1 and 2.
                 </Text>
                 <Text size="xs" mt={4}>
                   2021-2023
@@ -368,9 +390,10 @@ function About() {
                 bullet={<IconCertificate size={12} />}
               >
                 <Text color="dimmed" size="sm">
-                  I am on course to graduate from Texas A&M University - Corpus
-                  Christi in the spring of 2023 with a Bachelor of Science in
-                  Computer Science with a concentration in Systems Programming.
+                  I am on course to graduate from the Texas A&M University -
+                  Corpus Christi college of Engineering in the spring of 2023
+                  with a Bachelor of Science in Computer Science with a
+                  concentration in Systems Programming.
                 </Text>
                 <Text size="xs" mt={4}>
                   Spring 2023
