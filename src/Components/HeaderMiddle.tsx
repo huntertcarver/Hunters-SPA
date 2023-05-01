@@ -100,13 +100,17 @@ export default function HeaderMiddle({ links }: HeaderMiddleProps) {
   const [active, setActive] = useState(links[0].link);
   const { classes, cx } = useStyles();
   const location = useLocation();
+  
+  //For exiting the menu when a link is clicked
   useEffect(() => {
+    //sets the active link to the current pathname
     setActive(location.pathname);
     if (opened) {
       toggle();
       document.body.style.overflow = opened ? "scroll" : "hidden";
     }
-  }, [location, opened, toggle]);
+    //Leave out opened and toggle from the dependency array to prevent a loop
+  }, [location]);
 
   const items = links.map((link) => (
     <Link
