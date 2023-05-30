@@ -10,7 +10,6 @@ import {
 const useStyles = createStyles((theme) => ({
   card: {
     position: "relative",
-    cursor: "pointer",
     overflow: "hidden",
     transition: "transform 150ms ease, box-shadow 100ms ease",
     marginBottom: theme.spacing.xl,
