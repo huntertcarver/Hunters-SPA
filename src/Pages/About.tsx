@@ -12,6 +12,7 @@ import {
   Button,
   Badge,
   Spoiler,
+  Modal
 } from "@mantine/core";
 import { Carousel } from "@mantine/carousel";
 import {
@@ -36,12 +37,14 @@ import Grad1 from "../Images/Grad1.jpg";
 import Grad2 from "../Images/Grad2.jpg";
 import Grad3 from "../Images/Grad3.jpg";
 import Grad4 from "../Images/Grad4.jpg";
+import DellMclaren from "../Images/DellMclaren.jpg";
 import { QuoteCard } from "../Components/QuoteCard";
 import ParticlesComponent from "../Components/ParticlesComponent";
 import Resume from "../Files/Resume.pdf";
 import { pdfjs } from "react-pdf";
 import { Document, Page } from "react-pdf/dist/esm/entry.webpack5";
 import { useElementSize } from "@mantine/hooks";
+import { useState } from "react";
 
 //Required for react-pdf to work in production
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
@@ -133,12 +136,21 @@ function About() {
   const { classes, cx } = useStyles();
   const { ref, width } = useElementSize();
   const theme = useMantineTheme();
+  const [opened, setOpened] = useState(false);
+  const [image, setImage] = useState(<Image className={cx(classes.item)} src={DellMclaren}/>);
 
   return (
     <Container my="md" size="lg">
       <ParticlesComponent />
+      <Modal
+        opened={opened}
+        onClose={() => setOpened(false)}
+        size="50%"
+      >
+        {image}
+      </Modal>
       <SimpleGrid
-        cols={2}
+        cols={3}
         spacing="md"
         breakpoints={[{ maxWidth: "sm", cols: 1 }]}
         style={{ minHeight: "100vh" }}
@@ -192,9 +204,13 @@ function About() {
                 meetings, and recently, leading our latest project,
                 “ForceFollower”, a cross-platform mobile application that tracks
                 a user’s location as a foreground process and sends it to any
-                API via configuration in settings. Currently, I am set to start
-                as a Software Engineer for Dell Technologies and my Masters in
-                Computer Science from Georgia Tech both in August of 2023.
+                API via configuration in settings. Currently, I am a Full-time
+                Software Engineer at Dell Technologies on the Customer Data 
+                Marketplace team. We are a multi-national team with members across 
+                3 different time-zones. I am primarily a back-end engineer working
+                with .Net Core Web API and C# on our internal API microservices. 
+                I am also working with React, Typescript, Next.JS and Mantine for 
+                any personal projects I am working on.
               </Spoiler>
             </Text>
           </Paper>
@@ -245,7 +261,7 @@ function About() {
             </a>
           </Paper>
         </div>
-
+        
         <div>
           <Paper
             withBorder
@@ -264,58 +280,67 @@ function About() {
             >
               Dell Technologies
             </Title>
-            <Timeline active={-1} bulletSize={24} lineWidth={2}>
+            <Title order={4}
+              variant="gradient"
+              className={cx(classes.title)}
+              gradient={{
+                from: theme.colorScheme === "dark" ? theme.colors.red[6] : theme.colors.blue[5],
+                to: theme.colorScheme === "dark" ? theme.colors.orange[6] : theme.colors.green[5],
+              }}>
+                Software Engineer 1
+            </Title>
+            <Timeline active={2} bulletSize={24} lineWidth={2}>
               <Timeline.Item
                 bullet={<IconArrowBigRight size={12} />}
                 title="Start"
               >
                 <Text color="dimmed" size="sm">
-                  I am set to start as a Software Engineer for Dell Technologies
-                  in August of 2023.
+                  I started on the Customer Data Marketplace team as primarily
+                  a back-end Software Engineer. I was able to quickly learn our
+                  tech stack and start contributing to the team.
                 </Text>
                 <Text size="xs" mt={4}>
                   August 2023
                 </Text>
               </Timeline.Item>
+              <Timeline.Item
+                bullet={<IconCode size={12} />}
+                title="Remediate Vulnerabilities"
+              >
+                <Text color="dimmed" size="sm">
+                  I was tasked with remediating vulnerabilities in our
+                  application. I was able to remediate over 100 vulnerabilities
+                  bringing our reported vulnerabilities down to 0.
+                </Text>
+                <Text size="xs" mt={4}>
+                  September 2023
+                </Text>
+              </Timeline.Item>
+              <Timeline.Item
+                bullet={<IconCode size={12} />}
+                title="Code Coverage"
+              >
+                <Text color="dimmed" size="sm">
+                  I was tasked with increasing the code coverage of our primary repository
+                  from 66% to 90%. I was able to achieve this by writing 100+ unit tests.
+                </Text>
+                <Text size="xs" mt={4}>
+                  October-November 2023
+                </Text>
+              </Timeline.Item>
             </Timeline>
           </Paper>
-
-          {/* <Paper
+          <Paper
             withBorder
             p="md"
             radius="md"
             className={cx(classes.card)}
             style={{ boxShadow: theme.shadows.xl }}
           >
-            <Title
-              className={cx(classes.title)}
-              variant="gradient"
-              gradient={{
-                from: theme.colorScheme === "dark" ? "lightblue" : "blue",
-                to: theme.colorScheme === "dark" ? "white" : "black",
-              }}
-            >
-              Georgia Tech
-            </Title>
-            <Timeline active={-1} bulletSize={24} lineWidth={2}>
-              <Timeline.Item
-                bullet={<IconArrowBigRight size={12} />}
-                title="Start"
-              >
-                <Text color="dimmed" size="sm">
-                  I am set to start graduate school at Georgia Tech in August of
-                  2023. I will be pursuing my Masters in Computer Science with a
-                  specialization in Machine Learning. The first two courses I
-                  plan on taking are Machine Learning and Machine Learning for
-                  Trading.
-                </Text>
-                <Text size="xs" mt={4}>
-                  August 2023
-                </Text>
-              </Timeline.Item>
-            </Timeline>
-          </Paper> */}
-
+            <Image className={cx(classes.item)} src={DellMclaren}
+              onClick={() => {setOpened(true); setImage(<Image className={cx(classes.item)} src={DellMclaren}/>)}} />
+          </Paper>
+          
           <Paper
             withBorder
             p="md"
@@ -331,38 +356,18 @@ function About() {
                 to: theme.colorScheme === "dark" ? "white" : "black",
               }}
             >
-              Texas A&M University - Corpus Christi
+              Lone Star UAS
             </Title>
-            <Timeline active={7} bulletSize={24} lineWidth={2}>
-              <Timeline.Item
-                bullet={<IconArrowBigRight size={12} />}
-                title="Start"
-              >
-                <Text color="dimmed" size="sm">
-                  I transferred from Del Mar College to Texas A&M University -
-                  Corpus Christi in the spring of 2021 to get an early start on
-                  my upper level computer science courses.
-                </Text>
-                <Text size="xs" mt={4}>
-                  Spring 2021
-                </Text>
-              </Timeline.Item>
-
-              <Timeline.Item
-                bullet={<IconArrowBigRight size={12} />}
-                title="Lone Star UAS"
-              >
-                <Text color="dimmed" size="sm">
-                  Just freshly transferred to Texas A&M University - Corpus
-                  Christi, I landed a job as a Software Engineering Intern at
-                  Lone Star UAS.
-                </Text>
-                <Text size="xs" mt={4}>
-                  Fall 2021
-                </Text>
-              </Timeline.Item>
-
-              <Timeline.Item
+            <Title order={4}
+              variant="gradient"
+              className={cx(classes.title)}
+              gradient={{
+                from: theme.colorScheme === "dark" ? theme.colors.red[6] : theme.colors.blue[5],
+                to: theme.colorScheme === "dark" ? theme.colors.orange[6] : theme.colors.green[5],
+              }}>
+                Software Engineer (Intern)
+            </Title>
+            <Timeline active={3} bulletSize={24} lineWidth={2}><Timeline.Item
                 bullet={<IconCode size={12} />}
                 title="MOM Logger Sharp & MOM Log Replayer Sharp"
               >
@@ -438,6 +443,102 @@ function About() {
                   Fall 2022
                 </Text>
               </Timeline.Item>
+            </Timeline>
+          </Paper>
+          <Paper
+            withBorder
+            p="md"
+            radius="md"
+            className={cx(classes.card)}
+            style={{ boxShadow: theme.shadows.xl }}
+          >
+            <Image className={cx(classes.item)} src={LSUAS} 
+              onClick={() => {setOpened(true); setImage(<Image className={cx(classes.item)} src={LSUAS}/>)}} />
+          </Paper>
+        </div>
+
+        <div>
+          {/* <Paper
+            withBorder
+            p="md"
+            radius="md"
+            className={cx(classes.card)}
+            style={{ boxShadow: theme.shadows.xl }}
+          >
+            <Title
+              className={cx(classes.title)}
+              variant="gradient"
+              gradient={{
+                from: theme.colorScheme === "dark" ? "lightblue" : "blue",
+                to: theme.colorScheme === "dark" ? "white" : "black",
+              }}
+            >
+              Georgia Tech
+            </Title>
+            <Timeline active={-1} bulletSize={24} lineWidth={2}>
+              <Timeline.Item
+                bullet={<IconArrowBigRight size={12} />}
+                title="Start"
+              >
+                <Text color="dimmed" size="sm">
+                  I am set to start graduate school at Georgia Tech in August of
+                  2023. I will be pursuing my Masters in Computer Science with a
+                  specialization in Machine Learning. The first two courses I
+                  plan on taking are Machine Learning and Machine Learning for
+                  Trading.
+                </Text>
+                <Text size="xs" mt={4}>
+                  August 2023
+                </Text>
+              </Timeline.Item>
+            </Timeline>
+          </Paper> */}
+
+          <Paper
+            withBorder
+            p="md"
+            radius="md"
+            className={cx(classes.card)}
+            style={{ boxShadow: theme.shadows.xl }}
+          >
+            <Title
+              className={cx(classes.title)}
+              variant="gradient"
+              gradient={{
+                from: theme.colorScheme === "dark" ? "lightblue" : "blue",
+                to: theme.colorScheme === "dark" ? "white" : "black",
+              }}
+            >
+              Texas A&M University - Corpus Christi
+            </Title>
+            <Timeline active={3} bulletSize={24} lineWidth={2}>
+              <Timeline.Item
+                bullet={<IconArrowBigRight size={12} />}
+                title="Start"
+              >
+                <Text color="dimmed" size="sm">
+                  I transferred from Del Mar College to Texas A&M University -
+                  Corpus Christi in the spring of 2021 to get an early start on
+                  my upper level computer science courses.
+                </Text>
+                <Text size="xs" mt={4}>
+                  Spring 2021
+                </Text>
+              </Timeline.Item>
+
+              <Timeline.Item
+                bullet={<IconArrowBigRight size={12} />}
+                title="Lone Star UAS"
+              >
+                <Text color="dimmed" size="sm">
+                  Just freshly transferred to Texas A&M University - Corpus
+                  Christi, I landed a job as a Software Engineering Intern at
+                  Lone Star UAS.
+                </Text>
+                <Text size="xs" mt={4}>
+                  Fall 2021
+                </Text>
+              </Timeline.Item>
 
               <Timeline.Item
                 bullet={<IconBooks size={12} />}
@@ -495,27 +596,28 @@ function About() {
               }}
             >
               <Carousel.Slide>
-                <Image className={cx(classes.item)} src={Grad2} />
+                <Image className={cx(classes.item)} src={Grad2} 
+                  onClick={() => {setOpened(true); setImage(<Image className={cx(classes.item)} src={Grad2}/>)}} />
               </Carousel.Slide>
 
               <Carousel.Slide>
-                <Image className={cx(classes.item)} src={Grad4} />
+                <Image className={cx(classes.item)} src={Grad4}
+                  onClick={() => {setOpened(true); setImage(<Image className={cx(classes.item)} src={Grad4}/>)}} />
               </Carousel.Slide>
 
               <Carousel.Slide>
-                <Image className={cx(classes.item)} src={Grad1} />
+                <Image className={cx(classes.item)} src={Grad1}
+                  onClick={() => {setOpened(true); setImage(<Image className={cx(classes.item)} src={Grad1}/>)}} />
               </Carousel.Slide>
 
               <Carousel.Slide>
-                <Image className={cx(classes.item)} src={Grad3} />
+                <Image className={cx(classes.item)} src={Grad3}
+                  onClick={() => {setOpened(true); setImage(<Image className={cx(classes.item)} src={Grad3}/>)}} />
               </Carousel.Slide>
 
               <Carousel.Slide>
-                <Image className={cx(classes.item)} src={LSUAS} />
-              </Carousel.Slide>
-
-              <Carousel.Slide>
-                <Image className={cx(classes.item)} src={TAMUCC} />
+                <Image className={cx(classes.item)} src={TAMUCC}
+                  onClick={() => {setOpened(true); setImage(<Image className={cx(classes.item)} src={TAMUCC}/>)}} />
               </Carousel.Slide>
             </Carousel>
           </Paper>
@@ -654,15 +756,18 @@ function About() {
               }}
             >
               <Carousel.Slide>
-                <Image className={cx(classes.item)} src={hof} />
+                <Image className={cx(classes.item)} src={hof}
+                  onClick={() => {setOpened(true); setImage(<Image className={cx(classes.item)} src={hof}/>)}} />
               </Carousel.Slide>
 
               <Carousel.Slide>
-                <Image className={cx(classes.item)} src={hofclose} />
+                <Image className={cx(classes.item)} src={hofclose}
+                  onClick={() => {setOpened(true); setImage(<Image className={cx(classes.item)} src={hofclose}/>)}} />
               </Carousel.Slide>
 
               <Carousel.Slide>
-                <Image className={cx(classes.item)} src={mall} />
+                <Image className={cx(classes.item)} src={mall}
+                  onClick={() => {setOpened(true); setImage(<Image className={cx(classes.item)} src={mall}/>)}} />
               </Carousel.Slide>
               <Carousel.Slide>
                 <iframe
