@@ -280,7 +280,7 @@ function About() {
             </Timeline>
           </Paper>
 
-          <Paper
+          {/* <Paper
             withBorder
             p="md"
             radius="md"
@@ -314,7 +314,7 @@ function About() {
                 </Text>
               </Timeline.Item>
             </Timeline>
-          </Paper>
+          </Paper> */}
 
           <Paper
             withBorder
