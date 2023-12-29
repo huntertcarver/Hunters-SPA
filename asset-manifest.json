@@ -1,27 +1,28 @@
 {
   "files": {
     "main.css": "/static/css/main.e6c13ad2.css",
-    "main.js": "/static/js/main.5db26784.js",
+    "main.js": "/static/js/main.e1e4e6cd.js",
     "static/js/787.28cb0dcd.chunk.js": "/static/js/787.28cb0dcd.chunk.js",
     "static/media/hof.jpg": "/static/media/hof.a8cda4233a91ca57bc3d.jpg",
     "static/media/hofclose.jpg": "/static/media/hofclose.df42c792b5ebbc586eaf.jpg",
     "static/media/Grad3.jpg": "/static/media/Grad3.cdd4849278e28c4788b2.jpg",
     "static/media/pdf.worker.js": "/static/media/pdf.worker.cd140179d9c826e0fc19.js",
+    "static/media/DellMclaren.jpg": "/static/media/DellMclaren.fd03dd9f41d9cfdab330.jpg",
     "static/media/Grad4.jpg": "/static/media/Grad4.a0ca5e3ef754cdaedd89.jpg",
     "static/media/Grad2.jpg": "/static/media/Grad2.26a0c656433a9f69ebf5.jpg",
     "static/media/mall.jpg": "/static/media/mall.c99b26243497581da9ec.jpg",
     "static/media/TAMUCC.jpg": "/static/media/TAMUCC.b3d3e742870867622ef8.jpg",
     "static/media/LSUAS.jpg": "/static/media/LSUAS.730dee2cf269ba0c3bc8.jpg",
-    "static/media/Resume.pdf": "/static/media/Resume.8ddb8bccade0b7ae7fa0.pdf",
+    "static/media/Resume.pdf": "/static/media/Resume.249725dd204afa8fb708.pdf",
     "static/media/Grad1.jpg": "/static/media/Grad1.f395642d0b363f539dc5.jpg",
     "static/media/pfp.jpg": "/static/media/pfp.37461dd17ee7798d957d.jpg",
     "index.html": "/index.html",
     "main.e6c13ad2.css.map": "/static/css/main.e6c13ad2.css.map",
-    "main.5db26784.js.map": "/static/js/main.5db26784.js.map",
+    "main.e1e4e6cd.js.map": "/static/js/main.e1e4e6cd.js.map",
     "787.28cb0dcd.chunk.js.map": "/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.5db26784.js"
+    "static/js/main.e1e4e6cd.js"
   ]
 }
