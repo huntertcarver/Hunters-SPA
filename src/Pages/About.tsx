@@ -43,7 +43,7 @@ import ParticlesComponent from "../Components/ParticlesComponent";
 import Resume from "../Files/Resume.pdf";
 import { pdfjs } from "react-pdf";
 import { Document, Page } from "react-pdf/dist/esm/entry.webpack5";
-import { useElementSize } from "@mantine/hooks";
+import { useElementSize, useViewportSize } from "@mantine/hooks";
 import { useState } from "react";
 
 //Required for react-pdf to work in production
@@ -135,6 +135,7 @@ const useStyles = createStyles((theme, _params, getRef) => ({
 function About() {
   const { classes, cx } = useStyles();
   const { ref, width } = useElementSize();
+  const { height: viewportHeight, width: viewportWidth } = useViewportSize();
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
   const [image, setImage] = useState(<Image className={cx(classes.item)} src={DellMclaren}/>);
@@ -142,13 +143,15 @@ function About() {
   return (
     <Container my="md" size="lg">
       <ParticlesComponent />
-      <Modal
-        opened={opened}
-        onClose={() => setOpened(false)}
-        size="50%"
-      >
-        {image}
-      </Modal>
+      {viewportWidth > 765 && (
+        <Modal
+          opened={opened}
+          onClose={() => setOpened(false)}
+          size="50%"
+        >
+          {image}
+        </Modal>
+      )}
       <SimpleGrid
         cols={3}
         spacing="md"
