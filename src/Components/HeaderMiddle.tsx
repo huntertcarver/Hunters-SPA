@@ -14,7 +14,7 @@ import {
   IconBrandGithub,
   IconBrandGmail,
   IconBrandTwitter,
-} from "@tabler/icons";
+} from "@tabler/icons-react";
 import LightDarkButton from "./LightDarkButton";
 import FullscreenButtonm from "./FullscreenButton";
 import { Link, useLocation } from "react-router-dom";

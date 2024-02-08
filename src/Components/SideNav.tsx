@@ -10,11 +10,12 @@ import {
 import {
   IconHome,
   IconQuestionMark,
+  IconCode,
   IconBrandLinkedin,
   IconBrandGithub,
   IconBrandGmail,
   IconBrandTwitter,
-} from "@tabler/icons";
+} from "@tabler/icons-react";
 import { Link, useLocation } from "react-router-dom";
 import { useViewportSize } from "@mantine/hooks";
 
@@ -106,6 +107,7 @@ const useStyles = createStyles((theme, _params, getRef) => {
 const data = [
   { link: "/", label: "Home", icon: IconHome },
   { link: "/about", label: "About", icon: IconQuestionMark },
+  { link: "/projects", label: "Projects", icon: IconCode },
 ];
 
 export default function NavbarSimple() {

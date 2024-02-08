@@ -25,7 +25,7 @@ import {
   IconDeviceTvOld,
   IconListCheck,
   IconCertificate,
-} from "@tabler/icons";
+} from "@tabler/icons-react";
 import UserInfoIcons from "../Components/UserInfo";
 import pfp from "../Images/pfp.jpg";
 import hof from "../Images/hof.jpg";

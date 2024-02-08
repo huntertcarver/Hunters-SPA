@@ -1,6 +1,6 @@
 import { useFullscreen } from "@mantine/hooks";
 import { ActionIcon, Button } from "@mantine/core";
-import { IconArrowsMaximize, IconArrowsMinimize } from "@tabler/icons";
+import { IconArrowsMaximize, IconArrowsMinimize } from "@tabler/icons-react";
 
 export default function FullscreenButtonm() {
   const { toggle, fullscreen } = useFullscreen();
