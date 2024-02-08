@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "/static/css/main.e6c13ad2.css",
-    "main.js": "/static/js/main.8006870e.js",
-    "static/js/787.28cb0dcd.chunk.js": "/static/js/787.28cb0dcd.chunk.js",
+    "main.js": "/static/js/main.f6f6004a.js",
+    "static/js/592.7f72a991.chunk.js": "/static/js/592.7f72a991.chunk.js",
     "static/media/hof.jpg": "/static/media/hof.a8cda4233a91ca57bc3d.jpg",
     "static/media/hofclose.jpg": "/static/media/hofclose.df42c792b5ebbc586eaf.jpg",
     "static/media/Grad3.jpg": "/static/media/Grad3.cdd4849278e28c4788b2.jpg",
-    "static/media/pdf.worker.js": "/static/media/pdf.worker.cd140179d9c826e0fc19.js",
+    "static/media/pdf.worker.js": "/static/media/pdf.worker.d328b232df2c5dcaef31.js",
     "static/media/DellMclaren.jpg": "/static/media/DellMclaren.fd03dd9f41d9cfdab330.jpg",
     "static/media/Grad4.jpg": "/static/media/Grad4.a0ca5e3ef754cdaedd89.jpg",
     "static/media/Grad2.jpg": "/static/media/Grad2.26a0c656433a9f69ebf5.jpg",
@@ -18,11 +18,11 @@
     "static/media/pfp.jpg": "/static/media/pfp.37461dd17ee7798d957d.jpg",
     "index.html": "/index.html",
     "main.e6c13ad2.css.map": "/static/css/main.e6c13ad2.css.map",
-    "main.8006870e.js.map": "/static/js/main.8006870e.js.map",
-    "787.28cb0dcd.chunk.js.map": "/static/js/787.28cb0dcd.chunk.js.map"
+    "main.f6f6004a.js.map": "/static/js/main.f6f6004a.js.map",
+    "592.7f72a991.chunk.js.map": "/static/js/592.7f72a991.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.8006870e.js"
+    "static/js/main.f6f6004a.js"
   ]
 }
