@@ -57,6 +57,7 @@ const useStyles = createStyles((theme, _params, getRef) => ({
         width: '100%',
         height: '100%',
         outline: 'none',
+        border: 'none',
     },
   }));
 
