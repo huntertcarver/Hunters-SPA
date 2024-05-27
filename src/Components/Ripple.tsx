@@ -2,9 +2,9 @@
 import * as THREE from "three";
 import { Canvas, useFrame, useLoader } from "react-three-fiber";
 import circle from "../Images/circle.png";
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useMemo, useRef } from "react";
 import { BufferAttribute } from "three";
-import { useHover, useMouse } from "@mantine/hooks";
+import { useMouse } from "@mantine/hooks";
 
 //Contains the actual animation
 function Points() {
@@ -91,15 +91,6 @@ function Points() {
     </points>
   );
 }
-
-  type Coords = {
-    x: number
-    y: number
-  }
-  
-  type Props = {
-    state: Coords
-  }
 
 //Wraps the canvas component
 function AnimationCanvas() {

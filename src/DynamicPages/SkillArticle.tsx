@@ -3,7 +3,6 @@ import UserInfoIcons from "../Components/UserInfo";
 import pfp from "../Images/pfp.jpg";
 import { QuoteCard } from "../Components/QuoteCard";
 import { useParams } from "react-router-dom";
-import { stringify } from "querystring";
 import json from "../Data/skills.json";
 
 const useStyles = createStyles((theme) => ({
@@ -42,7 +41,7 @@ const useStyles = createStyles((theme) => ({
 
 function SkillArticle() {
   const { colorScheme } = useMantineColorScheme();
-  const { classes, cx } = useStyles();
+  const { classes } = useStyles();
   const params = useParams<ParamsObj>();
 
   type ParamsObj = {
@@ -58,10 +57,10 @@ function SkillArticle() {
   let skillMap = new Map<string,SkillMapObj>(Object.entries(JSON.parse(skillMapString)));
   let skill = params.skill as string;
   //Problem with getting C# to work
-  skill == 'C' ? skill = 'C#': skill = skill;
+  skill = (skill === 'C') ? 'C#' : skill;
   let skillObj = skillMap.get(skill);
 
-  skillObj == undefined ? skillObj = {skillLevel: 0, definition: "This skill is not in the database."} : skillObj = skillObj;
+  skillObj = (skillObj === undefined) ? {skillLevel: 0, definition: "This skill is not in the database."} : skillObj;
 
   var skillLevelWord = "";
   if (skillObj.skillLevel < 30) {

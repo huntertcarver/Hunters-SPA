@@ -135,7 +135,7 @@ const useStyles = createStyles((theme, _params, getRef) => ({
 function About() {
   const { classes, cx } = useStyles();
   const { ref, width } = useElementSize();
-  const { height: viewportHeight, width: viewportWidth } = useViewportSize();
+  const { width: viewportWidth } = useViewportSize();
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
   const [image, setImage] = useState(<Image className={cx(classes.item)} src={DellMclaren}/>);

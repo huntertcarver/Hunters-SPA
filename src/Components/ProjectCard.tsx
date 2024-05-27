@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
-import ParticlesComponent from '../Components/ParticlesComponent';
-import { Container, Paper, Tabs, Title, createStyles, useMantineTheme } from '@mantine/core';
-import { IconFileText, IconDeviceTv } from '@tabler/icons-react';
+import { Paper, Tabs, Title, createStyles, useMantineTheme } from '@mantine/core';
+import { IconDeviceTv } from '@tabler/icons-react';
 
 const useStyles = createStyles((theme, _params, getRef) => ({
     title: {
@@ -65,7 +64,6 @@ function ProjectCard({ projectTitle }: { projectTitle: string }) {
     const { classes, cx } = useStyles();
     const theme = useMantineTheme();
     const videoTabRef = useRef<HTMLButtonElement>(null);
-    const descriptionTabRef = useRef<HTMLButtonElement>(null);
 
     return (
         <Paper

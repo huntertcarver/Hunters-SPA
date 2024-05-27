@@ -4,7 +4,6 @@ import HeaderMiddle from "./Components/HeaderMiddle";
 import SkillArticle from "./DynamicPages/SkillArticle";
 import About from "./Pages/About";
 import Home from "./Pages/Home";
-import Test from "./Pages/Test";
 import Projects from "./Pages/Projects";
 
 

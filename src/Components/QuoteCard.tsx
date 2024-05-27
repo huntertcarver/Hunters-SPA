@@ -53,12 +53,7 @@ export function QuoteCard({ citation, quote }: QuoteCardProps) {
   const { colorScheme } = useMantineColorScheme();
   const { classes } = useStyles();
   const theme = useMantineTheme();
-  var quoteColor = "";
-
-  function colorClick() {
-    quoteColor = colorScheme === "dark" ? "blue" : "lightblue";
-    setTimeout((quoteColor = ""), 1000);
-  }
+  var quoteColor = colorScheme === "dark" ? "blue" : "lightblue";
 
   return (
     <Paper
@@ -67,7 +62,7 @@ export function QuoteCard({ citation, quote }: QuoteCardProps) {
       className={classes.card}
       style={{ boxShadow: theme.shadows.xl }}
     >
-      <Blockquote color={quoteColor} onClick={colorClick} cite={citation}>
+      <Blockquote color={quoteColor} cite={citation}>
         <Text size="sm" mt="sm" color="dimmed">
           {quote}
         </Text>
