@@ -178,42 +178,7 @@ function About() {
             <Divider my="sm" />
             <Text>
               <Spoiler maxHeight={250} showLabel="Show more" hideLabel="Hide">
-                Hey! Thank you for taking the time to look at my website! I am a
-                highly ambitious Software Engineer who just graduated with my
-                Bachelors of Science in Computer Science with the concentration
-                of Systems Programming from the Texas A&M University Corpus
-                Christi College of Engineering. I have humble beginnings as I
-                started at my local community college, Del Mar College, where I
-                received my Associate in Science for Computer Programming.
-                During my tenure at Del Mar, I was a part of their student
-                government, presided over the local chapter of Phi Mu Alpha, and
-                founded a new computer science club called the Del Mar Computer
-                Science club. In Spring of 2021 I was inducted into the Del Mar
-                College Hall of Fame. After graduation I was contacted by Del
-                Mar Staff to participate in their newest ad campaign, I had no
-                idea how big of a role I was going to play. This led to my face
-                and voice being associated with Del Mar all over the city of
-                Corpus Christi whether it be on TV, the radio, billboards, and
-                even at our local mall. Fall of 2021 I started attending Texas
-                A&M University Corpus Christi as a full-time student. That
-                semester I also started my internship at Lone Star UAS, as a
-                Software Engineer. This internship has massively bootstrapped my
-                career as I have learned an ample amount of industry experience
-                with current software engineering tools such as React, NextJS,
-                .Net, ASP.Net Core MVC, APIs, .Net MAUI, and much more. Not only
-                has this internship allowed me to develop better technical
-                skills but also soft skills as I am constantly pair-programming,
-                cooperating with other software engineers, participating in team
-                meetings, and recently, leading our latest project,
-                “ForceFollower”, a cross-platform mobile application that tracks
-                a user’s location as a foreground process and sends it to any
-                API via configuration in settings. Currently, I am a Full-time
-                Software Engineer at Dell Technologies on the Customer Data 
-                Marketplace team. We are a multi-national team with members across 
-                3 different time-zones. I am primarily a back-end engineer working
-                with .Net Core Web API and C# on our internal API microservices. 
-                I am also working with React, Typescript, Next.JS and Mantine for 
-                any personal projects I am working on.
+Hello world! Thank you for taking a look at my website! I’m Hunter Carver, an ambitious Software Engineer who is a 0-1 developer with a drive for innovation. I am currently primarily a backend software engineer at Dell Technologies on the Customer Data Marketplace team. My role consists of maintaining our internal APIs by implementing new logic based on business requirements, identifying and remediating vulnerabilities, and performing high-priority dev support for our internal customers. In addition to the Customer Data Marketplace team, through the effort of seeking out additional work, I am also on Dell Digitals Customer Innovation Council. On the Customer Innovation Council, we seek to innovate any aspect of the customer data at Dell, whether it’s improving the architecture, how internal customers interact with the data, or implementing AI in our processes. Contrary to the present, I have humble beginnings as I started my SWE journey as a student at my local community college. Through hard work, dedication, and thinking outside of the box, I achieved a great many things at this college and eventually graduated and transferred to my local university. At Texas A&M University Corpus-Christi I was able to land an internship (More of a co-op) as a Software Engineer at one of the seven FAA-approved UAS test sites in the nation. We had close ties to NASA and other national and private aviation organizations and as one of the five Software Engineers in this organization, I was a critical asset to driving, maintaining, and innovating our mission-critical software. Working at Lone Star UAS for ~1.5-2 years gave me a great breadth of experience in nearly all domains of Software Engineering from front-end to back-end, database and stored procedures to the overall architecture and design of our systems, CI/CD to Auth, and nearly everything in between. Now in this new era of AI, my goal is to be on the forefront of innovation and to immerse myself in work that has a significant impact.
               </Spoiler>
             </Text>
           </Paper>
