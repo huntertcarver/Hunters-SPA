@@ -264,7 +264,7 @@ Hello world! Thank you for taking a look at my website! I’m Hunter Carver, an 
               }}>
                 Software Engineer 1
             </Title>
-            <Timeline active={2} bulletSize={24} lineWidth={2}>
+            <Timeline active={6} bulletSize={24} lineWidth={2}>
               <Timeline.Item
                 bullet={<IconArrowBigRight size={12} />}
                 title="Start"
@@ -288,7 +288,7 @@ Hello world! Thank you for taking a look at my website! I’m Hunter Carver, an 
                   bringing our reported vulnerabilities down to 0.
                 </Text>
                 <Text size="xs" mt={4}>
-                  September 2023
+                  2023
                 </Text>
               </Timeline.Item>
               <Timeline.Item
@@ -300,7 +300,53 @@ Hello world! Thank you for taking a look at my website! I’m Hunter Carver, an 
                   from 66% to 90%. I was able to achieve this by writing 100+ unit tests.
                 </Text>
                 <Text size="xs" mt={4}>
-                  October-November 2023
+                  2023
+                </Text>
+              </Timeline.Item>
+              <Timeline.Item
+                bullet={<IconCode size={12} />}
+                title="DevOps"
+              >
+                <Text color="dimmed" size="sm">
+                  Implemented multiple new DevOps jobs to our CI/CD pipeline with capabilities
+                 such as vulnerability detection, branch retrofit automation, and inclusive language detection
+                </Text>
+                <Text size="xs" mt={4}>
+                  2024
+                </Text>
+              </Timeline.Item>
+              <Timeline.Item
+                bullet={<IconCode size={12} />}
+                title="Repository Version Upgrades"
+              >
+                <Text color="dimmed" size="sm">
+                  Enhanced the performance, security, and maintainability of my team’s repositories by upgrad	ing from .NET 6 to .NET 8
+                </Text>
+                <Text size="xs" mt={4}>
+                  2024
+                </Text>
+              </Timeline.Item>
+              <Timeline.Item
+                bullet={<IconCode size={12} />}
+                title="Customer Innovation Council"
+              >
+                <Text color="dimmed" size="sm">
+                  Implemented the CI/CD pipeline for the AI application that the Customer Innovation Council is developing.
+                </Text>
+                <Text size="xs" mt={4}>
+                  2024
+                </Text>
+              </Timeline.Item>
+              <Timeline.Item
+                bullet={<IconCode size={12} />}
+                title="Malaysia E-Invoice"
+              >
+                <Text color="dimmed" size="sm">
+                  Added the required logic to some endpoints of our internal APIs to support the addition of Malaysia E-Invoice 
+                  capabilities.
+                </Text>
+                <Text size="xs" mt={4}>
+                  2024
                 </Text>
               </Timeline.Item>
             </Timeline>
