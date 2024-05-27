@@ -90,9 +90,9 @@ function ProjectCard({ projectTitle }: { projectTitle: string }) {
                     <Tabs.Tab value="Video" ref={videoTabRef} icon={<IconDeviceTv size={14} />}>
                         Video
                     </Tabs.Tab>
-                    <Tabs.Tab value="Description" ref={descriptionTabRef} icon={<IconFileText size={14} />}>
+                    {/* <Tabs.Tab value="Description" ref={descriptionTabRef} icon={<IconFileText size={14} />}>
                         Description
-                    </Tabs.Tab>
+                    </Tabs.Tab> */}
                 </Tabs.List>
             </Tabs>
             <div className={cx(classes.iframeWrapper)}>
