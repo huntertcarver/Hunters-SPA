@@ -219,6 +219,13 @@ function About() {
           </Paper>
 
           <QuoteCard
+            quote="I personally have been stunned at how quickly Hunter has picked up the purpose of our tools and articulates his work using the domain terminology."
+            citation="Charles Bouvette,
+          Director, Software Engineering,
+          Dell Technologies"
+          />
+
+          <QuoteCard
             quote="He has the initiative to read technical books, watch training videos, create sample projects, and make probing inquiries for tasks assigned to him. 
           Such qualities are rare for entry level engineers that I have met."
             citation="Angelo Diamante,
