@@ -6,9 +6,13 @@ import {
   useMantineColorScheme,
   useMantineTheme,
 } from "@mantine/core";
+import { getAccentGradientColors } from "../styles/uiTokens";
 
-const useStyles = createStyles((theme) => ({
-  card: {
+const useStyles = createStyles((theme) => {
+  const [accentFrom, accentTo] = getAccentGradientColors(theme);
+
+  return {
+    card: {
     position: "relative",
     overflow: "hidden",
     transition: "transform 150ms ease, box-shadow 100ms ease",
@@ -28,28 +32,19 @@ const useStyles = createStyles((theme) => ({
       bottom: 0,
       left: 0,
       width: 6,
-      backgroundImage:
-        theme.colorScheme === "dark"
-          ? theme.fn.linearGradient(
-              0,
-              theme.colors.red[6],
-              theme.colors.orange[6]
-            )
-          : theme.fn.linearGradient(
-              0,
-              theme.colors.blue[5],
-              theme.colors.green[5]
-            ),
+      backgroundImage: theme.fn.linearGradient(0, accentFrom, accentTo),
     },
   },
-}));
+  };
+});
 
 interface QuoteCardProps {
   citation: string;
   quote: string;
+  inCarousel?: boolean;
 }
 
-export function QuoteCard({ citation, quote }: QuoteCardProps) {
+export function QuoteCard({ citation, quote, inCarousel = false }: QuoteCardProps) {
   const { colorScheme } = useMantineColorScheme();
   const { classes } = useStyles();
   const theme = useMantineTheme();
@@ -60,7 +55,13 @@ export function QuoteCard({ citation, quote }: QuoteCardProps) {
       withBorder
       radius="md"
       className={classes.card}
-      style={{ boxShadow: theme.shadows.xl }}
+      style={{
+        boxShadow: theme.shadows.xl,
+        marginBottom: inCarousel ? 0 : undefined,
+        width: inCarousel ? "95%" : undefined,
+        marginLeft: inCarousel ? "auto" : undefined,
+        marginRight: inCarousel ? "auto" : undefined,
+      }}
     >
       <Blockquote color={quoteColor} cite={citation}>
         <Text size="sm" mt="sm" color="dimmed">

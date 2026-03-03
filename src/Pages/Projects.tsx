@@ -3,7 +3,7 @@ import ParticlesComponent from '../Components/ParticlesComponent';
 import { Container } from '@mantine/core';
 import ProjectCard from '../Components/ProjectCard';
 
-function Project() {
+function Projects() {
 
     return (
         <Container my="md" size="lg">
@@ -15,4 +15,4 @@ function Project() {
     );
 }
 
-export default Project;
+export default Projects;

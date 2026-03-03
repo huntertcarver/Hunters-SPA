@@ -110,7 +110,7 @@ const data = [
   { link: "/projects", label: "Projects", icon: IconCode },
 ];
 
-export default function NavbarSimple() {
+export default function SideNav() {
   const { classes, cx } = useStyles();
   const [active, setActive] = useState(data[0].link);
   const { height, width } = useViewportSize();
@@ -126,8 +126,8 @@ export default function NavbarSimple() {
       })}
       to={item.link}
       key={item.label}
-      onClick={(event) => {
-        setActive(item.label);
+      onClick={() => {
+        setActive(item.link);
       }}
     >
       <item.icon className={classes.linkIcon} stroke={1.5} />

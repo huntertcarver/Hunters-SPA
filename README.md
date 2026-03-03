@@ -1,50 +1,73 @@
-# Getting Started with Create React App
+# Hunters SPA
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Personal portfolio SPA built with React, TypeScript, Mantine, and GitHub Pages deployment.
 
-## Available Scripts
+## Tech Stack
 
-In the project directory, you can run:
+- React 18 + TypeScript
+- Create React App (`react-scripts`)
+- Mantine UI
+- React Router (HashRouter for GitHub Pages compatibility)
+- Jest + React Testing Library
 
-### `npm start`
+## Prerequisites
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Node.js 18+ (Node 20 recommended)
+- npm (this repo is standardized on npm)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Setup
 
-### `npm test`
+Install dependencies:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+npm install --legacy-peer-deps
+```
 
-### `npm run build`
+The `--legacy-peer-deps` flag is currently required due existing peer dependency constraints in the dependency tree.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Run Locally
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+npm start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+App runs at `http://localhost:3000`.
 
-### `npm run deploy -- -m "Deploy React app to GitHub Pages"`
+## Scripts
 
-Builds optimized production build
+- `npm start`: Run development server.
+- `npm run build`: Build production bundle to `build/`.
+- `npm run deploy`: Deploy `build/` to GitHub Pages.
+- `npm test`: Run tests in watch mode.
+- `npm run test:ci`: Run tests once for CI usage.
+- `npm run lint`: Lint TypeScript/TSX sources.
+- `npm run typecheck`: Run TypeScript compiler checks.
+- `npm run format`: Apply Prettier formatting.
+- `npm run format:check`: Verify formatting.
+- `npm run check`: Run lint + typecheck + CI tests.
 
-### `npm run eject`
+## CI
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+GitHub Actions workflow is configured at `.github/workflows/ci.yml` and runs:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- dependency install
+- `npm run check`
+- `npm run build`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Project Structure
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- `src/Components`: reusable UI components
+- `src/Pages`: top-level routed pages
+- `src/DynamicPages`: dynamic route views
+- `src/Data`: static content/data modules
+- `src/styles`: shared styling tokens/helpers
 
-## Learn More
+## Deployment
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+This project uses `gh-pages` and `homepage` in `package.json`.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Deploy with:
+
+```bash
+npm run deploy
+```

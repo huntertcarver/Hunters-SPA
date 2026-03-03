@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { Paper, Tabs, Title, createStyles, useMantineTheme } from '@mantine/core';
 import { IconDeviceTv } from '@tabler/icons-react';
+import { getAccentGradientColors, getSurfaceButtonColor } from "../styles/uiTokens";
 
 const useStyles = createStyles((theme, _params, getRef) => ({
     title: {
@@ -33,7 +34,7 @@ const useStyles = createStyles((theme, _params, getRef) => ({
       },
     },
     button: {
-      backgroundColor: theme.colorScheme === "dark" ? "#000000" : "#ffffff",
+      backgroundColor: getSurfaceButtonColor(theme),
       margin: theme.spacing.xl,
   
       "&:hover": {
@@ -63,6 +64,7 @@ const useStyles = createStyles((theme, _params, getRef) => ({
 function ProjectCard({ projectTitle }: { projectTitle: string }) {
     const { classes, cx } = useStyles();
     const theme = useMantineTheme();
+    const [accentFrom, accentTo] = getAccentGradientColors(theme);
     const videoTabRef = useRef<HTMLButtonElement>(null);
 
     return (
@@ -80,8 +82,8 @@ function ProjectCard({ projectTitle }: { projectTitle: string }) {
                     variant="gradient"
                     className={cx(classes.title)}
                     gradient={{
-                        from: theme.colorScheme === "dark" ? theme.colors.red[6] : theme.colors.blue[5],
-                        to: theme.colorScheme === "dark" ? theme.colors.orange[6] : theme.colors.green[5],
+                        from: accentFrom,
+                        to: accentTo,
                     }}>
                         {projectTitle}
                     </Title>

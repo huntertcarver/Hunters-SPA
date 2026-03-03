@@ -9,8 +9,6 @@ export default function ParticlesComponent() {
     const [speed, setSpeed] = useState(2);
     const theme = useMantineTheme();
     const particlesInit = useCallback(async (engine: Engine) => {
-        console.log(engine);
-
         // you can initialize the tsParticles instance (engine) here, adding custom shapes or presets
         // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
         // starting from v2 you can add only the features you need reducing the bundle size
@@ -40,6 +38,15 @@ export default function ParticlesComponent() {
     //   }, []);
 
     const particlesOptions: RecursivePartial<IOptions> = {
+            background: {
+                color: {
+                    value: theme.colorScheme === "dark" ? theme.colors.dark[8] : theme.white,
+                },
+            },
+            fullScreen: {
+                enable: true,
+                zIndex: 0,
+            },
             fpsLimit: 120,
             interactivity: {
                 events: {

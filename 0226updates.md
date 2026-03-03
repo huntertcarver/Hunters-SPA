@@ -110,12 +110,12 @@ Designed and built the Java CryptoSDK from proof-of-concept through production-r
 - Served as L1/L2 on-call across multiple rotations, resolving 27+ PagerDuty incidents and 10+ additional production issues across KeyMaker, CryptoServ-Batch, CipherServX, and CipherServHSM.
 - Handled critical incidents including CipherServX PROD 4XX error spikes (884K+ errors), Supergraph mutual TLS connection resets, CryptoServ-Batch SSL failures (173K failures from a single bad client IP), and recurring QR Offline events escalated to engineering.
 - Led response on three critical security escalations: identified secret material exposure in production CAL logs during `ROTATE_SECRET` events, coordinated remediation for a vulnerable Node `keymakerclientapi` library affecting 188 applications, and resolved the SLF4J/Logback dependency lock-in issue.
-- Conducted 74 developer support sessions in a single sprint covering application context creation, production connection troubleshooting, key promotion, and GCP migration architecture guidance.
+- Conducted 7 developer support sessions in a single sprint covering application context creation, production connection troubleshooting, key promotion, and GCP migration architecture guidance.
 - Provided ongoing L2 support via `#help-keymaker` Slack channel and investigated/resolved multiple manager-assigned live issues.
 
 #### Vault Infrastructure & DevOps
 
-- Provisioned 8+ HashiCorp Vault AppRoles across QA, Dev, and Production environments for teams including MCP Server (Looker & Superset), Harness (Cloud Platforms, Cloud Security, Product Security), and various requesting teams. All provisioning via Terraform PRs with same-day or next-day turnaround.
+- Provisioned HashiCorp Vault AppRoles across QA, Dev, and Production environments for teams including MCP Server (Looker & Superset), Harness (Cloud Platforms, Cloud Security, Product Security), and various requesting teams. All provisioning via Terraform PRs with same-day or next-day turnaround.
 - Configured Harness CI/CD pipelines: implemented service account injection with GCP impersonation for Crypto_TerraForm IaC provisioning, set up OIDC connectors for KeyRing/KEK deployment pipelines, and created a GCP Secret Manager sample application to unblock France BNPL Cloud Modernization.
 - Tuned DataDog monitors and alerts for Cyber 5 (Black Friday/Cyber Monday) readiness and managed KeyMaker library dependency version issues when the Raptor team removed upstream POM properties.
 

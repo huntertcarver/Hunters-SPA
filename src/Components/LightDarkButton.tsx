@@ -1,5 +1,5 @@
 import { ActionIcon, useMantineColorScheme } from "@mantine/core";
-import { SunIcon, MoonIcon } from "@modulz/radix-icons";
+import { IconMoon, IconSun } from "@tabler/icons-react";
 
 function LightDarkButton() {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
@@ -14,9 +14,9 @@ function LightDarkButton() {
         title="Toggle color scheme"
       >
         {dark ? (
-          <SunIcon style={{ width: 18, height: 18 }} />
+          <IconSun style={{ width: 18, height: 18 }} />
         ) : (
-          <MoonIcon style={{ width: 18, height: 18 }} />
+          <IconMoon style={{ width: 18, height: 18 }} />
         )}
       </ActionIcon>
     </div>

@@ -3,7 +3,7 @@ import UserInfoIcons from "../Components/UserInfo";
 import pfp from "../Images/pfp.jpg";
 import { QuoteCard } from "../Components/QuoteCard";
 import { useParams } from "react-router-dom";
-import json from "../Data/skills.json";
+import { getSkillByName, normalizeSkillParam } from "../Data/skills";
 
 const useStyles = createStyles((theme) => ({
   title: {
@@ -48,19 +48,8 @@ function SkillArticle() {
     skill: string;
   }
 
-  interface SkillMapObj{
-    skillLevel: number;
-    definition: string;
-  }
-
-  let skillMapString = JSON.stringify(json);
-  let skillMap = new Map<string,SkillMapObj>(Object.entries(JSON.parse(skillMapString)));
-  let skill = params.skill as string;
-  //Problem with getting C# to work
-  skill = (skill === 'C') ? 'C#' : skill;
-  let skillObj = skillMap.get(skill);
-
-  skillObj = (skillObj === undefined) ? {skillLevel: 0, definition: "This skill is not in the database."} : skillObj;
+  const skill = normalizeSkillParam(params.skill);
+  const skillObj = getSkillByName(skill);
 
   var skillLevelWord = "";
   if (skillObj.skillLevel < 30) {
