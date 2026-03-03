@@ -16,9 +16,9 @@ import {
   IconBrandTwitter,
 } from "@tabler/icons-react";
 import LightDarkButton from "./LightDarkButton";
-import FullscreenButtonm from "./FullscreenButton";
+import FullscreenButton from "./FullscreenButton";
 import { Link, useLocation } from "react-router-dom";
-import NavbarSimple from "./SideNav";
+import SideNav from "./SideNav";
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -96,21 +96,27 @@ interface HeaderMiddleProps {
 }
 
 export default function HeaderMiddle({ links }: HeaderMiddleProps) {
-  const [opened, { toggle }] = useDisclosure(false);
+  const [opened, { close, toggle }] = useDisclosure(false);
   const [active, setActive] = useState(links[0].link);
   const { classes, cx } = useStyles();
   const location = useLocation();
   
-  //For exiting the menu when a link is clicked
+  // Keep active link in sync and close mobile nav on route changes.
   useEffect(() => {
-    //sets the active link to the current pathname
     setActive(location.pathname);
     if (opened) {
-      toggle();
-      document.body.style.overflow = opened ? "scroll" : "hidden";
+      close();
     }
-    //Leave out opened and toggle from the dependency array to prevent a loop
-  }, [location]);
+  }, [close, location, opened]);
+
+  // Lock body scrolling only while the mobile nav is open.
+  useEffect(() => {
+    document.body.style.overflow = opened ? "hidden" : "";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [opened]);
 
   const items = links.map((link) => (
     <Link
@@ -122,23 +128,19 @@ export default function HeaderMiddle({ links }: HeaderMiddleProps) {
       onClick={() => {
         setActive(link.link);
       }}
-      onLoad={() => {
-        alert("loaded");
-      }}
     >
       {link.label}
     </Link>
   ));
 
   return (
-    <div>
+    <div style={{ position: "relative", zIndex: 2 }}>
       <Header height={56} mb={0}>
         <Container className={classes.inner} size="xl">
           <Burger
             opened={opened}
             onClick={() => {
               toggle();
-              document.body.style.overflow = opened ? "scroll" : "hidden";
             }}
             size="sm"
             className={classes.burger}
@@ -194,7 +196,7 @@ export default function HeaderMiddle({ links }: HeaderMiddleProps) {
               </a>
             </Group>
             <Group spacing={0} position="right">
-              <FullscreenButtonm />
+              <FullscreenButton />
             </Group>
             <Group spacing={0} position="right">
               <LightDarkButton />
@@ -203,7 +205,7 @@ export default function HeaderMiddle({ links }: HeaderMiddleProps) {
         </Container>
       </Header>
       <Group style={{ display: opened ? "block" : "none" }}>
-        <NavbarSimple />
+        <SideNav />
       </Group>
     </div>
   );

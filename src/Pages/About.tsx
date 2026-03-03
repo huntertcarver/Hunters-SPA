@@ -11,8 +11,7 @@ import {
   Image,
   Button,
   Badge,
-  Spoiler,
-  Modal
+  Spoiler
 } from "@mantine/core";
 import { Carousel } from "@mantine/carousel";
 import {
@@ -38,8 +37,12 @@ import Grad2 from "../Images/Grad2.jpg";
 import Grad3 from "../Images/Grad3.jpg";
 import Grad4 from "../Images/Grad4.jpg";
 import DellMclaren from "../Images/DellMclaren.jpg";
+import PayPal1 from "../Images/PayPal1.jpeg";
+import PayPal2 from "../Images/PayPal2.jpeg";
+import PayPal3 from "../Images/PayPal3.jpeg";
 import { QuoteCard } from "../Components/QuoteCard";
 import ParticlesComponent from "../Components/ParticlesComponent";
+import ImagePreviewModal from "../Components/ImagePreviewModal";
 import Resume from "../Files/Resume.pdf";
 import { pdfjs } from "react-pdf";
 import { Document, Page } from "react-pdf/dist/esm/entry.webpack5";
@@ -138,19 +141,23 @@ function About() {
   const { width: viewportWidth } = useViewportSize();
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
-  const [image, setImage] = useState(<Image className={cx(classes.item)} src={DellMclaren}/>);
+  const [selectedImageSrc, setSelectedImageSrc] = useState(DellMclaren);
+
+  const openImagePreview = (imageSrc: string) => {
+    setSelectedImageSrc(imageSrc);
+    setOpened(true);
+  };
 
   return (
     <Container my="md" size="lg">
       <ParticlesComponent />
       {viewportWidth > 765 && (
-        <Modal
+        <ImagePreviewModal
           opened={opened}
+          imageSrc={selectedImageSrc}
+          imageClassName={cx(classes.item)}
           onClose={() => setOpened(false)}
-          size="50%"
-        >
-          {image}
-        </Modal>
+        />
       )}
       <SimpleGrid
         cols={3}
@@ -183,24 +190,93 @@ Hello world! Thank you for taking a look at my website! I’m Hunter Carver, an 
             </Text>
           </Paper>
 
-          <QuoteCard
-            quote="I personally have been stunned at how quickly Hunter has picked up the purpose of our tools and articulates his work using the domain terminology."
-            citation="Charles Bouvette,
+          <Carousel
+            withIndicators
+            loop
+            align="center"
+            classNames={{
+              root: classes.carousel,
+              controls: classes.carouselControls,
+              indicator: classes.carouselIndicator,
+            }}
+          >
+            <Carousel.Slide className={cx(classes.centerItem)}>
+              <QuoteCard
+                quote="Saving the company approximately $800,000 annually is a remarkable achievement, and it&apos;s great to see us utilize a system we already have in place. Reducing complexity is great for all of us."
+                citation="Sean Neal, Director of Cryptography, PayPal"
+                inCarousel
+              />
+            </Carousel.Slide>
+
+            <Carousel.Slide className={cx(classes.centerItem)}>
+              <QuoteCard
+                quote="Vault OKR: You've made excellent strides toward Vault expertise this year. Led the strategy to migrate keys and secrets from KeyMaker to Vault. Demonstrated good understanding of Vault's security model and best practices. HashiCorp Certified: Vault Associate is a big win to become an expert of Vault."
+                citation="Gaurav Singh, Sr. Staff Cybersecurity Engineer, PayPal"
+                inCarousel
+              />
+            </Carousel.Slide>
+
+            <Carousel.Slide className={cx(classes.centerItem)}>
+              <QuoteCard
+                quote="Thank you for being such an exceptional buddy and making my onboarding experience comfortable. Your proactive support and Day One resources were incredibly helpful, and I still rely on them. I am also very grateful for the dedicated session you held to walk me through KeyMaker and the Cloud Modernization plans for GCP and Vault."
+                citation="Mukal Tope, Staff Cybersecurity Engineer, PayPal"
+                inCarousel
+              />
+            </Carousel.Slide>
+
+            <Carousel.Slide className={cx(classes.centerItem)}>
+              <QuoteCard
+                quote="HashiCorp Certified: Vault Associate is a big win. You demonstrated the ability to work on production-grade solutions aligned with best security practice."
+                citation="Gaurav Singh, Sr. Staff Cybersecurity Engineer, PayPal"
+                inCarousel
+              />
+            </Carousel.Slide>
+
+            <Carousel.Slide className={cx(classes.centerItem)}>
+              <QuoteCard
+                quote="I've seen Hunter make a strong impact by establishing a visible presence across the organization. His self-motivation, eagerness to learn, and strong ownership demonstrate his drive toward becoming a high-impact emerging leader."
+                citation="Pugal, Staff Cybersecurity Engineer, PayPal"
+                inCarousel
+              />
+            </Carousel.Slide>
+
+            <Carousel.Slide className={cx(classes.centerItem)}>
+              <QuoteCard
+                quote="I want to extend a heartfelt thank you for the incredible work you put into PayPal Impact Day. Your efforts made a meaningful difference for our people and our communities. You helped strengthen our culture and bring our customer obsession to life."
+                citation="Alex Chriss, CEO, PayPal"
+                inCarousel
+              />
+            </Carousel.Slide>
+
+            <Carousel.Slide className={cx(classes.centerItem)}>
+              <QuoteCard
+                quote="I personally have been stunned at how quickly Hunter has picked up the purpose of our tools and articulates his work using the domain terminology."
+                citation="Charles Bouvette,
           Director, Software Engineering,
           Dell Technologies"
-          />
+                inCarousel
+              />
+            </Carousel.Slide>
 
-          <QuoteCard
-            quote="He has the initiative to read technical books, watch training videos, create sample projects, and make probing inquiries for tasks assigned to him. 
+            <Carousel.Slide className={cx(classes.centerItem)}>
+              <QuoteCard
+                quote="He has the initiative to read technical books, watch training videos, create sample projects, and make probing inquiries for tasks assigned to him. 
           Such qualities are rare for entry level engineers that I have met."
-            citation="Angelo Diamante,
+                citation="Angelo Diamante,
           Software Development Engineer 3,
           Core10"
-          />
-          <QuoteCard
-            quote="Hunter would be an asset to any employer and I recommend him for any endeavor he chooses to pursue."
-            citation="Ryan Kelley, Software Engineer 2, Lone Star UAS"
-          />
+                inCarousel
+              />
+            </Carousel.Slide>
+
+            <Carousel.Slide className={cx(classes.centerItem)}>
+              <QuoteCard
+                quote="Hunter would be an asset to any employer and I recommend him for any endeavor he chooses to pursue."
+                citation="Ryan Kelley, Software Engineer 2, Lone Star UAS"
+                inCarousel
+              />
+            </Carousel.Slide>
+          </Carousel>
 
           <Paper
             ref={ref}
@@ -253,6 +329,267 @@ Hello world! Thank you for taking a look at my website! I’m Hunter Carver, an 
                 to: theme.colorScheme === "dark" ? "white" : "black",
               }}
             >
+              PayPal
+            </Title>
+            <Title
+              order={4}
+              variant="gradient"
+              className={cx(classes.title)}
+              gradient={{
+                from:
+                  theme.colorScheme === "dark"
+                    ? theme.colors.red[6]
+                    : theme.colors.blue[5],
+                to:
+                  theme.colorScheme === "dark"
+                    ? theme.colors.orange[6]
+                    : theme.colors.green[5],
+              }}
+            >
+              Software Engineer 2
+            </Title>
+            <Spoiler maxHeight={260} showLabel="Show more" hideLabel="Hide">
+              <Timeline active={12} bulletSize={24} lineWidth={2}>
+              <Timeline.Item
+                bullet={<IconArrowBigRight size={12} />}
+                title="Start"
+              >
+                <Text color="dimmed" size="sm">
+                  I joined PayPal&apos;s Secret Management team as a
+                  Software Engineer 2, focusing on our enterprise-wide key management system and
+                  internal cryptography libraries.
+                </Text>
+                <Text size="xs" mt={4}>
+                  September 2024
+                </Text>
+              </Timeline.Item>
+
+              <Timeline.Item
+                bullet={<IconPrompt size={12} />}
+                title="L1/L2 Support & Incident Response"
+              >
+                <Text color="dimmed" size="sm">
+                  I provided L1 rotational on-call support for critical
+                  incidents on PayPal&apos;s legacy key management and class 2
+                  encryption systems, while also supporting developers at L2
+                  with legacy KMS integrations.
+                </Text>
+                <Text size="xs" mt={4}>
+                  Ongoing
+                </Text>
+              </Timeline.Item>
+
+              <Timeline.Item
+                bullet={<IconCode size={12} />}
+                title="Fortanix Migration Impact"
+              >
+                <Text color="dimmed" size="sm">
+                  I drove the Fortanix HSM -&gt; GCP CMEK migration to
+                  completion across 22K+ disks and 400+ teams, helping save the
+                  company around $800K annually.
+                </Text>
+                <Text size="xs" mt={4}>
+                  2025
+                </Text>
+              </Timeline.Item>
+
+              <Timeline.Item
+                bullet={<IconBooks size={12} />}
+                title="Vault Design Forum"
+              >
+                <Text color="dimmed" size="sm">
+                I drove weekly design forums within the Secret Management team and critical architects in the organization
+                to solve some of the most complex issues with the KeyMaker to Vault migration
+                such as enterprise-wide key sharing and key drift, and translating outcomes into actionable deliverables.
+                </Text>
+                <Text size="xs" mt={4}>
+                  2025
+                </Text>
+              </Timeline.Item>
+
+              <Timeline.Item
+                bullet={<IconCode size={12} />}
+                title="Vault Migration Scripts"
+              >
+                <Text color="dimmed" size="sm">
+                  I designed and implemented the scripts necessary to migrate applications and their associated keys
+                  from our on-premise key management system, KeyMaker, to HashiCorp Vault. These consisted of an application
+                  registration script that programmatically wrote Terraform code and created a PR based on the application, and
+                  a key migration script that migrated the keys from KeyMaker to Vault.
+                </Text>
+                <Text size="xs" mt={4}>
+                  2025
+                </Text>
+              </Timeline.Item>
+
+              <Timeline.Item
+                bullet={<IconTrophy size={12} />}
+                title="Team Building"
+              >
+                <Text color="dimmed" size="sm">
+                  I have assisted in the growth of the Secret Management team by conducting numerous
+                  full-time and contract position interviews, as well as onboarding new employees and contractors.
+                </Text>
+                <Text size="xs" mt={4}>
+                  2025
+                </Text>
+              </Timeline.Item>
+
+              <Timeline.Item
+                bullet={<IconCode size={12} />}
+                title="Raptor 5 Library Upgrades"
+              >
+                <Text color="dimmed" size="sm">
+                  I released the latest major version of our five internal Java
+                  encryption and key management libraries, including fixes for
+                  100+ broken legacy tests, builds, and pipeline jobs.
+                </Text>
+                <Text size="xs" mt={4}>
+                  2025 - 2026
+                </Text>
+              </Timeline.Item>
+
+              <Timeline.Item
+                bullet={<IconTrophy size={12} />}
+                title="Cryptography 2026 OKRs | Cloud Modernization Lead"
+              >
+                <Text color="dimmed" size="sm">
+                  I continue to drive weekly organization-wide multi-team design forums for PayPal&apos;s
+                  GCP cryptography migration, partnering with senior technical
+                  leaders to architect enterprise-wide solutions and translate
+                  these discussions into actionable deliverables that I and other engineers implement.
+                </Text>
+                <Text size="xs" mt={4}>
+                  2025 - 2026
+                </Text>
+              </Timeline.Item>
+
+              <Timeline.Item
+                bullet={<IconCode size={12} />}
+                title="Enterprise-Wide Class 2 Data Encryption Solution"
+              >
+                <Text color="dimmed" size="sm">
+                  I implemented the enterprise-wide class 2
+                  envelope-encryption solution, the "CryptoSDK", with GCP Tink and
+                  Caffeine caching, and I completed 100k-envelope load testing
+                  which resulted in (~0.1ms) warm-cache latency.
+                </Text>
+                <Text size="xs" mt={4}>
+                  2025 - 2026
+                </Text>
+              </Timeline.Item>
+
+              <Timeline.Item
+                bullet={<IconDeviceTvOld size={12} />}
+                title="Cloud Playbacks Forum"
+              >
+                <Text color="dimmed" size="sm">
+                  I presented the enterprise-wide class 2 data encryption solution, the "CryptoSDK", to the company-wide audience of
+                  50+ key managers, directors, distinguished engineers, and SVPs in the Cloud Playbacks forum.
+                </Text>
+                <Text size="xs" mt={4}>
+                  2025 - 2026
+                </Text>
+              </Timeline.Item>
+
+              <Timeline.Item
+                bullet={<IconCode size={12} />}
+                title="Pub/Sub-driven Key Provisioning Cloud Function"
+              >
+                <Text color="dimmed" size="sm">
+                  Implemented a Pub/Sub-driven Cloud Function for automated key provisioning based on a schema-driven message structure.
+                </Text>
+                <Text size="xs" mt={4}>
+                  2026
+                </Text>
+              </Timeline.Item>
+
+              <Timeline.Item
+                bullet={<IconCode size={12} />}
+                title="Data Interoperability"
+              >
+                <Text color="dimmed" size="sm">
+                  Implemented a solution to enable data interoperability between cloud applications consuming the CryptoSDK and on-premise applications using the on-premise key management system class 2 encryption service
+                   via public key cryptography re-encryption.
+                </Text>
+                <Text size="xs" mt={4}>
+                  2026
+                </Text>
+              </Timeline.Item>
+
+              <Timeline.Item
+                bullet={<IconPrompt size={12} />}
+                title="Team Management"
+              >
+                <Text color="dimmed" size="sm">
+                  We have recently onboarded a number of Deloitte contractors and I am going through the process
+                  of ramping them up on our various Cryptographic Cloud Modernization initiatives and allocating them where needed.
+                </Text>
+                <Text size="xs" mt={4}>
+                  2026
+                </Text>
+              </Timeline.Item>
+              </Timeline>
+            </Spoiler>
+          </Paper>
+
+          <Paper
+            withBorder
+            p="md"
+            radius="md"
+            className={cx(classes.card)}
+            style={{ boxShadow: theme.shadows.xl }}
+          >
+            <Carousel
+              withIndicators
+              loop
+              classNames={{
+                root: classes.carousel,
+                controls: classes.carouselControls,
+                indicator: classes.carouselIndicator,
+              }}
+            >
+              <Carousel.Slide>
+                <Image
+                  className={cx(classes.item)}
+                  src={PayPal1}
+                  onClick={() => openImagePreview(PayPal1)}
+                />
+              </Carousel.Slide>
+
+              <Carousel.Slide>
+                <Image
+                  className={cx(classes.item)}
+                  src={PayPal2}
+                  onClick={() => openImagePreview(PayPal2)}
+                />
+              </Carousel.Slide>
+
+              <Carousel.Slide>
+                <Image
+                  className={cx(classes.item)}
+                  src={PayPal3}
+                  onClick={() => openImagePreview(PayPal3)}
+                />
+              </Carousel.Slide>
+            </Carousel>
+          </Paper>
+
+          <Paper
+            withBorder
+            p="md"
+            radius="md"
+            className={cx(classes.card)}
+            style={{ boxShadow: theme.shadows.xl }}
+          >
+            <Title
+              className={cx(classes.title)}
+              variant="gradient"
+              gradient={{
+                from: theme.colorScheme === "dark" ? "lightblue" : "blue",
+                to: theme.colorScheme === "dark" ? "white" : "black",
+              }}
+            >
               Dell Technologies
             </Title>
             <Title order={4}
@@ -264,7 +601,8 @@ Hello world! Thank you for taking a look at my website! I’m Hunter Carver, an 
               }}>
                 Software Engineer 1
             </Title>
-            <Timeline active={6} bulletSize={24} lineWidth={2}>
+            <Spoiler maxHeight={260} showLabel="Show more" hideLabel="Hide">
+              <Timeline active={6} bulletSize={24} lineWidth={2}>
               <Timeline.Item
                 bullet={<IconArrowBigRight size={12} />}
                 title="Start"
@@ -349,7 +687,8 @@ Hello world! Thank you for taking a look at my website! I’m Hunter Carver, an 
                   2024
                 </Text>
               </Timeline.Item>
-            </Timeline>
+              </Timeline>
+            </Spoiler>
           </Paper>
           <Paper
             withBorder
@@ -359,7 +698,7 @@ Hello world! Thank you for taking a look at my website! I’m Hunter Carver, an 
             style={{ boxShadow: theme.shadows.xl }}
           >
             <Image className={cx(classes.item)} src={DellMclaren}
-              onClick={() => {setOpened(true); setImage(<Image className={cx(classes.item)} src={DellMclaren}/>)}} />
+              onClick={() => openImagePreview(DellMclaren)} />
           </Paper>
           
           <Paper
@@ -388,7 +727,8 @@ Hello world! Thank you for taking a look at my website! I’m Hunter Carver, an 
               }}>
                 Software Engineer (Intern)
             </Title>
-            <Timeline active={3} bulletSize={24} lineWidth={2}><Timeline.Item
+            <Spoiler maxHeight={260} showLabel="Show more" hideLabel="Hide">
+              <Timeline active={3} bulletSize={24} lineWidth={2}><Timeline.Item
                 bullet={<IconCode size={12} />}
                 title="MOM Logger Sharp & MOM Log Replayer Sharp"
               >
@@ -464,7 +804,8 @@ Hello world! Thank you for taking a look at my website! I’m Hunter Carver, an 
                   Fall 2022
                 </Text>
               </Timeline.Item>
-            </Timeline>
+              </Timeline>
+            </Spoiler>
           </Paper>
           <Paper
             withBorder
@@ -474,7 +815,7 @@ Hello world! Thank you for taking a look at my website! I’m Hunter Carver, an 
             style={{ boxShadow: theme.shadows.xl }}
           >
             <Image className={cx(classes.item)} src={LSUAS} 
-              onClick={() => {setOpened(true); setImage(<Image className={cx(classes.item)} src={LSUAS}/>)}} />
+              onClick={() => openImagePreview(LSUAS)} />
           </Paper>
         </div>
 
@@ -532,7 +873,8 @@ Hello world! Thank you for taking a look at my website! I’m Hunter Carver, an 
             >
               Texas A&M University - Corpus Christi
             </Title>
-            <Timeline active={3} bulletSize={24} lineWidth={2}>
+            <Spoiler maxHeight={260} showLabel="Show more" hideLabel="Hide">
+              <Timeline active={3} bulletSize={24} lineWidth={2}>
               <Timeline.Item
                 bullet={<IconArrowBigRight size={12} />}
                 title="Start"
@@ -598,7 +940,8 @@ Hello world! Thank you for taking a look at my website! I’m Hunter Carver, an 
                   Spring 2023
                 </Text>
               </Timeline.Item>
-            </Timeline>
+              </Timeline>
+            </Spoiler>
           </Paper>
           <Paper
             withBorder
@@ -618,27 +961,27 @@ Hello world! Thank you for taking a look at my website! I’m Hunter Carver, an 
             >
               <Carousel.Slide>
                 <Image className={cx(classes.item)} src={Grad2} 
-                  onClick={() => {setOpened(true); setImage(<Image className={cx(classes.item)} src={Grad2}/>)}} />
+                  onClick={() => openImagePreview(Grad2)} />
               </Carousel.Slide>
 
               <Carousel.Slide>
                 <Image className={cx(classes.item)} src={Grad4}
-                  onClick={() => {setOpened(true); setImage(<Image className={cx(classes.item)} src={Grad4}/>)}} />
+                  onClick={() => openImagePreview(Grad4)} />
               </Carousel.Slide>
 
               <Carousel.Slide>
                 <Image className={cx(classes.item)} src={Grad1}
-                  onClick={() => {setOpened(true); setImage(<Image className={cx(classes.item)} src={Grad1}/>)}} />
+                  onClick={() => openImagePreview(Grad1)} />
               </Carousel.Slide>
 
               <Carousel.Slide>
                 <Image className={cx(classes.item)} src={Grad3}
-                  onClick={() => {setOpened(true); setImage(<Image className={cx(classes.item)} src={Grad3}/>)}} />
+                  onClick={() => openImagePreview(Grad3)} />
               </Carousel.Slide>
 
               <Carousel.Slide>
                 <Image className={cx(classes.item)} src={TAMUCC}
-                  onClick={() => {setOpened(true); setImage(<Image className={cx(classes.item)} src={TAMUCC}/>)}} />
+                  onClick={() => openImagePreview(TAMUCC)} />
               </Carousel.Slide>
             </Carousel>
           </Paper>
@@ -660,7 +1003,8 @@ Hello world! Thank you for taking a look at my website! I’m Hunter Carver, an 
             >
               Del Mar College
             </Title>
-            <Timeline active={6} bulletSize={24} lineWidth={2}>
+            <Spoiler maxHeight={260} showLabel="Show more" hideLabel="Hide">
+              <Timeline active={6} bulletSize={24} lineWidth={2}>
               <Timeline.Item
                 bullet={<IconArrowBigRight size={12} />}
                 title="Start"
@@ -758,7 +1102,8 @@ Hello world! Thank you for taking a look at my website! I’m Hunter Carver, an 
                   Fall 2021
                 </Text>
               </Timeline.Item>
-            </Timeline>
+              </Timeline>
+            </Spoiler>
           </Paper>
           <Paper
             withBorder
@@ -778,17 +1123,17 @@ Hello world! Thank you for taking a look at my website! I’m Hunter Carver, an 
             >
               <Carousel.Slide>
                 <Image className={cx(classes.item)} src={hof}
-                  onClick={() => {setOpened(true); setImage(<Image className={cx(classes.item)} src={hof}/>)}} />
+                  onClick={() => openImagePreview(hof)} />
               </Carousel.Slide>
 
               <Carousel.Slide>
                 <Image className={cx(classes.item)} src={hofclose}
-                  onClick={() => {setOpened(true); setImage(<Image className={cx(classes.item)} src={hofclose}/>)}} />
+                  onClick={() => openImagePreview(hofclose)} />
               </Carousel.Slide>
 
               <Carousel.Slide>
                 <Image className={cx(classes.item)} src={mall}
-                  onClick={() => {setOpened(true); setImage(<Image className={cx(classes.item)} src={mall}/>)}} />
+                  onClick={() => openImagePreview(mall)} />
               </Carousel.Slide>
               <Carousel.Slide>
                 <iframe

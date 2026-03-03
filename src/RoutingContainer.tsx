@@ -18,7 +18,6 @@ function RoutingContainer () {
             <Route path="/about" element={<About />} />
             <Route path="/skills/:skill" element={<SkillArticle />} />
             <Route path="/projects" element={<Projects />} />
-            <Route path="/skills/:skill" element={<SkillArticle />} />
         </Routes>
     </Paper>
   );

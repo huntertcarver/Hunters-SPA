@@ -5,16 +5,24 @@ import {
   Paper,
   Title,
   Text,
-  useMantineColorScheme,
   useMantineTheme,
 } from "@mantine/core";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import { Link } from "react-router-dom";
 import Typewriter from "typewriter-effect";
-import json from "../Data/skills.json";
 import Ripple from "../Components/Ripple";
+import ParticlesComponent from "../Components/ParticlesComponent";
+import { skillNames } from "../Data/skills";
+import {
+  getAccentGradientColors,
+  getHeroTitleGradient,
+  getSurfaceButtonColor,
+} from "../styles/uiTokens";
 
-const useStyles = createStyles((theme) => ({
+const useStyles = createStyles((theme) => {
+  const [accentFrom, accentTo] = getAccentGradientColors(theme);
+
+  return {
   title: {
     [theme.fn.smallerThan("md")]: {
       fontSize: 18,
@@ -31,7 +39,7 @@ const useStyles = createStyles((theme) => ({
     alignItems: "center",
   },
   button: {
-    backgroundColor: theme.colorScheme === "dark" ? "#000000" : "#ffffff",
+    backgroundColor: getSurfaceButtonColor(theme),
 
     "&:hover": {
       boxShadow: theme.shadows.md,
@@ -67,17 +75,7 @@ const useStyles = createStyles((theme) => ({
       left: 0,
       width: 6,
       backgroundImage:
-        theme.colorScheme === "dark"
-          ? theme.fn.linearGradient(
-              0,
-              theme.colors.red[6],
-              theme.colors.orange[6]
-            )
-          : theme.fn.linearGradient(
-              0,
-              theme.colors.blue[5],
-              theme.colors.green[5]
-            ),
+        theme.fn.linearGradient(0, accentFrom, accentTo),
     },
 
     "&::after": {
@@ -88,41 +86,19 @@ const useStyles = createStyles((theme) => ({
       right: 0,
       width: 6,
       backgroundImage:
-        theme.colorScheme === "dark"
-          ? theme.fn.linearGradient(
-              0,
-              theme.colors.red[6],
-              theme.colors.orange[6]
-            )
-          : theme.fn.linearGradient(
-              0,
-              theme.colors.blue[5],
-              theme.colors.green[5]
-            ),
+        theme.fn.linearGradient(0, accentFrom, accentTo),
     },
   },
-}));
+  };
+});
 
 function Home() {
-  const { colorScheme } = useMantineColorScheme();
   const { classes, cx } = useStyles();
   const theme = useMantineTheme();
 
   var winWidth = window.innerWidth;
   var winHeight = window.innerHeight;
-
-  interface SkillMapObj {
-    skillLevel: number;
-    definition: string;
-  }
-
-  let skillMapString = JSON.stringify(json);
-  let skillMap = new Map<string, SkillMapObj>(
-    Object.entries(JSON.parse(skillMapString))
-  );
-
-  var skills = Array.from(skillMap.keys());
-  //console.log(skills);
+  var skills = skillNames;
 
   var badges: JSX.Element[] = [];
   let text = [
@@ -176,13 +152,13 @@ function Home() {
 
   return (
     <div>
+      <ParticlesComponent />
       <Parallax
         pages={2}
         style={{
           top: "0",
           left: "0",
-          zIndex: -1,
-          backgroundColor: colorScheme === "dark" ? "black" : "white",
+          zIndex: 1,
         }}
       >
         <ParallaxLayer
@@ -193,10 +169,7 @@ function Home() {
           <Title
             className={classes.title}
             variant="gradient"
-            gradient={{
-              from: colorScheme === "dark" ? "lightblue" : "blue",
-              to: colorScheme === "dark" ? "white" : "black",
-            }}
+            gradient={getHeroTitleGradient(theme)}
           >
             <Typewriter
               options={{
@@ -261,10 +234,7 @@ function Home() {
                 <Title
                   className={cx(classes.title)}
                   variant="gradient"
-                  gradient={{
-                    from: colorScheme === "dark" ? "lightblue" : "blue",
-                    to: colorScheme === "dark" ? "white" : "black",
-                  }}
+                  gradient={getHeroTitleGradient(theme)}
                 >
                   Hello!
                 </Title>
