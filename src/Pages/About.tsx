@@ -1,30 +1,22 @@
 import {
   Paper,
-  Timeline,
   Text,
   useMantineTheme,
   createStyles,
   Container,
   SimpleGrid,
-  Title,
   Divider,
   Image,
   Button,
   Badge,
   Spoiler,
 } from "@mantine/core";
-import { Carousel } from "@mantine/carousel";
-import {
-  IconArrowBigRight,
-  IconPrompt,
-  IconMusic,
-  IconBooks,
-  IconTrophy,
-  IconCode,
-  IconDeviceTvOld,
-  IconListCheck,
-  IconCertificate,
-} from "@tabler/icons-react";
+import { IconListCheck } from "@tabler/icons-react";
+import AboutMediaCarousel, {
+  AboutCarouselMedia,
+} from "../Components/About/AboutMediaCarousel";
+import AboutQuotesCarousel from "../Components/About/AboutQuotesCarousel";
+import AboutTimelineCard from "../Components/About/AboutTimelineCard";
 import UserInfoIcons from "../Components/UserInfo";
 import pfp from "../Images/pfp.jpg";
 import hof from "../Images/hof.jpg";
@@ -40,15 +32,12 @@ import DellMclaren from "../Images/DellMclaren.jpg";
 import PayPal1 from "../Images/PayPal1.jpeg";
 import PayPal2 from "../Images/PayPal2.jpeg";
 import PayPal3 from "../Images/PayPal3.jpeg";
-import { QuoteCard } from "../Components/QuoteCard";
 import ParticlesComponent from "../Components/ParticlesComponent";
 import ImagePreviewModal from "../Components/ImagePreviewModal";
 import Resume from "../Files/Resume.pdf";
 import {
   aboutQuotes,
   timelineSections,
-  TimelineEntry,
-  TimelineIconKey,
   TimelineSection,
 } from "../Data/aboutContent";
 import { profileConfig } from "../Data/siteConfig";
@@ -60,7 +49,7 @@ import { useState } from "react";
 //Required for react-pdf to work in production
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
-const useStyles = createStyles((theme, _params, getRef) => ({
+const useStyles = createStyles((theme) => ({
   title: {
     [theme.fn.smallerThan("md")]: {
       fontSize: 18,
@@ -69,15 +58,6 @@ const useStyles = createStyles((theme, _params, getRef) => ({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: theme.spacing.md,
-  },
-  centerItem: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  page: {
-    display: "flex",
-    justifyContent: "center",
   },
   card: {
     position: "relative",
@@ -90,11 +70,6 @@ const useStyles = createStyles((theme, _params, getRef) => ({
     "&:hover": {
       transform: "scale(1.02)",
     },
-  },
-  avatar: {
-    border: `2px solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white
-    }`,
   },
   item: {
     border: "none",
@@ -109,29 +84,6 @@ const useStyles = createStyles((theme, _params, getRef) => ({
     }`,
   },
 
-  carousel: {
-    "&:hover": {
-      [`& .${getRef("carouselControls")}`]: {
-        opacity: 1,
-      },
-    },
-  },
-
-  carouselControls: {
-    ref: getRef("carouselControls"),
-    transition: "opacity 150ms ease",
-    opacity: 0,
-  },
-
-  carouselIndicator: {
-    width: 4,
-    height: 4,
-    transition: "width 250ms ease",
-
-    "&[data-active]": {
-      width: 16,
-    },
-  },
   button: {
     backgroundColor: theme.colorScheme === "dark" ? "#000000" : "#ffffff",
     margin: theme.spacing.xl,
@@ -143,17 +95,6 @@ const useStyles = createStyles((theme, _params, getRef) => ({
   },
 }));
 
-const timelineIconMap: Record<TimelineIconKey, typeof IconCode> = {
-  start: IconArrowBigRight,
-  prompt: IconPrompt,
-  books: IconBooks,
-  trophy: IconTrophy,
-  code: IconCode,
-  video: IconDeviceTvOld,
-  certificate: IconCertificate,
-  music: IconMusic,
-};
-
 const getTimelineSection = (company: string): TimelineSection => {
   const section = timelineSections.find(
     (timelineSection) => timelineSection.company === company
@@ -164,31 +105,6 @@ const getTimelineSection = (company: string): TimelineSection => {
   }
 
   return section;
-};
-
-const renderTimelineItem = (entry: TimelineEntry) => {
-  const Icon = timelineIconMap[entry.icon];
-
-  return (
-    <Timeline.Item
-      key={`${entry.title}-${entry.date}`}
-      bullet={<Icon size={12} />}
-      title={entry.title}
-    >
-      <Text color="dimmed" size="sm">
-        {entry.description}
-      </Text>
-      <Text size="xs" mt={4}>
-        {entry.date}
-      </Text>
-    </Timeline.Item>
-  );
-};
-
-type CarouselMedia = {
-  src: string;
-  type?: "image" | "iframe";
-  title?: string;
 };
 
 function About() {
@@ -204,97 +120,24 @@ function About() {
     setOpened(true);
   };
 
-  const renderTimelineCard = (
-    section: TimelineSection,
-    spoilerMaxHeight = 260
-  ) => (
-    <Paper
-      withBorder
-      p="md"
-      radius="md"
-      className={cx(classes.card)}
-      style={{ boxShadow: theme.shadows.xl }}
-    >
-      <Title
-        className={cx(classes.title)}
-        variant="gradient"
-        gradient={{
-          from: theme.colorScheme === "dark" ? "lightblue" : "blue",
-          to: theme.colorScheme === "dark" ? "white" : "black",
-        }}
-      >
-        {section.company}
-      </Title>
-      {section.role ? (
-        <Title
-          order={4}
-          variant="gradient"
-          className={cx(classes.title)}
-          gradient={{
-            from:
-              theme.colorScheme === "dark"
-                ? theme.colors.red[6]
-                : theme.colors.blue[5],
-            to:
-              theme.colorScheme === "dark"
-                ? theme.colors.orange[6]
-                : theme.colors.green[5],
-          }}
-        >
-          {section.role}
-        </Title>
-      ) : null}
-      <Spoiler maxHeight={spoilerMaxHeight} showLabel="Show more" hideLabel="Hide">
-        <Timeline
-          active={section.active}
-          bulletSize={24}
-          lineWidth={2}
-        >
-          {section.entries.map(renderTimelineItem)}
-        </Timeline>
-      </Spoiler>
-    </Paper>
-  );
-
-  const renderMediaCarousel = (media: CarouselMedia[]) => (
-    <Paper
-      withBorder
-      p="md"
-      radius="md"
-      className={cx(classes.card)}
-      style={{ boxShadow: theme.shadows.xl }}
-    >
-      <Carousel
-        withIndicators
-        loop
-        classNames={{
-          root: classes.carousel,
-          controls: classes.carouselControls,
-          indicator: classes.carouselIndicator,
-        }}
-      >
-        {media.map((item) => (
-          <Carousel.Slide key={item.src}>
-            {item.type === "iframe" ? (
-              <iframe
-                src={item.src}
-                title={item.title ?? "Embedded media"}
-                className={cx(classes.item)}
-                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                allowFullScreen
-              />
-            ) : (
-              <Image
-                className={cx(classes.item)}
-                src={item.src}
-                onClick={() => openImagePreview(item.src)}
-              />
-            )}
-          </Carousel.Slide>
-        ))}
-      </Carousel>
-    </Paper>
-  );
+  const paypalMedia: AboutCarouselMedia[] = [{ src: PayPal1 }, { src: PayPal2 }, { src: PayPal3 }];
+  const educationMedia: AboutCarouselMedia[] = [
+    { src: Grad2 },
+    { src: Grad4 },
+    { src: Grad1 },
+    { src: Grad3 },
+    { src: TAMUCC },
+  ];
+  const delMarMedia: AboutCarouselMedia[] = [
+    { src: hof },
+    { src: hofclose },
+    { src: mall },
+    {
+      src: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Fdelmarcollegefoundation%2Fvideos%2F365027391973315%2F&show_text=false&width=560&t=0",
+      type: "iframe",
+      title: "Del Mar College Ad",
+    },
+  ];
 
   return (
     <Container my="md" size="lg">
@@ -338,29 +181,7 @@ Hello world! Thank you for taking a look at my website! I’m Hunter Carver, an 
             </Text>
           </Paper>
 
-          <Carousel
-            withIndicators
-            loop
-            align="center"
-            classNames={{
-              root: classes.carousel,
-              controls: classes.carouselControls,
-              indicator: classes.carouselIndicator,
-            }}
-          >
-            {aboutQuotes.map((quote) => (
-              <Carousel.Slide
-                className={cx(classes.centerItem)}
-                key={`${quote.citation}-${quote.quote.slice(0, 20)}`}
-              >
-                <QuoteCard
-                  quote={quote.quote}
-                  citation={quote.citation}
-                  inCarousel
-                />
-              </Carousel.Slide>
-            ))}
-          </Carousel>
+          <AboutQuotesCarousel quotes={aboutQuotes} />
 
           <Paper
             ref={ref}
@@ -398,15 +219,9 @@ Hello world! Thank you for taking a look at my website! I’m Hunter Carver, an 
         </div>
 
         <div>
-          {renderTimelineCard(getTimelineSection("PayPal"))}
-          {renderMediaCarousel([{
-            src: PayPal1,
-          }, {
-            src: PayPal2,
-          }, {
-            src: PayPal3,
-          }])}
-          {renderTimelineCard(getTimelineSection("Dell Technologies"))}
+          <AboutTimelineCard section={getTimelineSection("PayPal")} />
+          <AboutMediaCarousel media={paypalMedia} onImageClick={openImagePreview} />
+          <AboutTimelineCard section={getTimelineSection("Dell Technologies")} />
           <Paper
             withBorder
             p="md"
@@ -420,7 +235,7 @@ Hello world! Thank you for taking a look at my website! I’m Hunter Carver, an 
               onClick={() => openImagePreview(DellMclaren)}
             />
           </Paper>
-          {renderTimelineCard(getTimelineSection("Lone Star UAS"))}
+          <AboutTimelineCard section={getTimelineSection("Lone Star UAS")} />
           <Paper
             withBorder
             p="md"
@@ -437,26 +252,10 @@ Hello world! Thank you for taking a look at my website! I’m Hunter Carver, an 
         </div>
 
         <div>
-          {renderTimelineCard(getTimelineSection("Texas A&M University - Corpus Christi"))}
-          {renderMediaCarousel([
-            { src: Grad2 },
-            { src: Grad4 },
-            { src: Grad1 },
-            { src: Grad3 },
-            { src: TAMUCC },
-          ])}
-
-          {renderTimelineCard(getTimelineSection("Del Mar College"))}
-          {renderMediaCarousel([
-            { src: hof },
-            { src: hofclose },
-            { src: mall },
-            {
-              src: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Fdelmarcollegefoundation%2Fvideos%2F365027391973315%2F&show_text=false&width=560&t=0",
-              type: "iframe",
-              title: "Del Mar College Ad",
-            },
-          ])}
+          <AboutTimelineCard section={getTimelineSection("Texas A&M University - Corpus Christi")} />
+          <AboutMediaCarousel media={educationMedia} onImageClick={openImagePreview} />
+          <AboutTimelineCard section={getTimelineSection("Del Mar College")} />
+          <AboutMediaCarousel media={delMarMedia} onImageClick={openImagePreview} />
         </div>
       </SimpleGrid>
     </Container>
