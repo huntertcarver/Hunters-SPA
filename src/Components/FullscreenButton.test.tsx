@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { MantineProvider } from "@mantine/core";
 import { useFullscreen } from "@mantine/hooks";
 import FullscreenButton from "./FullscreenButton";
@@ -11,6 +11,11 @@ jest.mock("@mantine/hooks", () => ({
 const mockedUseFullscreen = useFullscreen as jest.MockedFunction<typeof useFullscreen>;
 
 beforeEach(() => {
+  Object.defineProperty(document.documentElement, "requestFullscreen", {
+    configurable: true,
+    value: jest.fn(),
+  });
+
   mockedUseFullscreen.mockReturnValue({
     ref: jest.fn(),
     toggle: jest.fn(),
@@ -55,4 +60,28 @@ test("calls toggle when fullscreen is supported", () => {
 
   fireEvent.click(screen.getByLabelText("Toggle Fullscreen"));
   expect(toggle).toHaveBeenCalledTimes(1);
+});
+
+test("shows failure state when fullscreen request throws", async () => {
+  const toggle = jest.fn().mockRejectedValue(new Error("fullscreen failed"));
+  mockedUseFullscreen.mockReturnValue({
+    ref: jest.fn(),
+    toggle,
+    fullscreen: false,
+  });
+
+  Object.defineProperty(document, "fullscreenEnabled", {
+    configurable: true,
+    value: true,
+  });
+
+  renderButton();
+
+  fireEvent.click(screen.getByLabelText("Toggle Fullscreen"));
+
+  await waitFor(() => {
+    expect(
+      screen.getByLabelText("Fullscreen request failed on this browser/device")
+    ).toBeInTheDocument();
+  });
 });
