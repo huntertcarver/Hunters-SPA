@@ -1,9 +1,19 @@
-import { createStyles, Paper, Title, useMantineColorScheme, Divider, Progress, Group, Text } from "@mantine/core";
+import {
+  createStyles,
+  Paper,
+  Title,
+  useMantineColorScheme,
+  Divider,
+  Progress,
+  Group,
+  Text,
+} from "@mantine/core";
 import UserInfoIcons from "../Components/UserInfo";
 import pfp from "../Images/pfp.jpg";
 import { QuoteCard } from "../Components/QuoteCard";
 import { useParams } from "react-router-dom";
 import { getSkillByName, normalizeSkillParam } from "../Data/skills";
+import { profileConfig } from "../Data/siteConfig";
 
 const useStyles = createStyles((theme) => ({
   title: {
@@ -42,11 +52,9 @@ const useStyles = createStyles((theme) => ({
 function SkillArticle() {
   const { colorScheme } = useMantineColorScheme();
   const { classes } = useStyles();
-  const params = useParams<ParamsObj>();
-
-  type ParamsObj = {
+  const params = useParams<{
     skill: string;
-  }
+  }>();
 
   const skill = normalizeSkillParam(params.skill);
   const skillObj = getSkillByName(skill);
@@ -64,7 +72,13 @@ function SkillArticle() {
     <div style={{minHeight: "100vh"}}>
       <Paper p="xl" className={classes.paper}>
         <div className={classes.user}>
-          <UserInfoIcons avatar={pfp} name="Hunter Carver" title="Software Engineer" phone="361-946-7678" email="hunter@1968bird.com" /> 
+          <UserInfoIcons
+            avatar={pfp}
+            name={profileConfig.name}
+            title={profileConfig.role}
+            phone={profileConfig.phone}
+            email={profileConfig.email}
+          />
         </div>
         <br />
         <Divider size={2} variant="dashed" className={classes.line} />

@@ -44,6 +44,7 @@ import { QuoteCard } from "../Components/QuoteCard";
 import ParticlesComponent from "../Components/ParticlesComponent";
 import ImagePreviewModal from "../Components/ImagePreviewModal";
 import Resume from "../Files/Resume.pdf";
+import { profileConfig } from "../Data/siteConfig";
 import { pdfjs } from "react-pdf";
 import { Document, Page } from "react-pdf/dist/esm/entry.webpack5";
 import { useElementSize, useViewportSize } from "@mantine/hooks";
@@ -176,10 +177,10 @@ function About() {
             <div className={cx(classes.title)}>
               <UserInfoIcons
                 avatar={pfp}
-                name="Hunter Carver"
-                title="Software Engineer"
-                phone="361-946-7678"
-                email="hunter@1968bird.com"
+                name={profileConfig.name}
+                title={profileConfig.role}
+                phone={profileConfig.phone}
+                email={profileConfig.email}
               />
             </div>
             <Divider my="sm" />
