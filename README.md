@@ -20,10 +20,8 @@ Personal portfolio SPA built with React, TypeScript, Mantine, and GitHub Pages d
 Install dependencies:
 
 ```bash
-npm install --legacy-peer-deps
+npm install
 ```
-
-The `--legacy-peer-deps` flag is currently required due existing peer dependency constraints in the dependency tree.
 
 ## Run Locally
 
@@ -45,14 +43,6 @@ App runs at `http://localhost:3000`.
 - `npm run format`: Apply Prettier formatting.
 - `npm run format:check`: Verify formatting.
 - `npm run check`: Run lint + typecheck + CI tests.
-
-## CI
-
-GitHub Actions workflow is configured at `.github/workflows/ci.yml` and runs:
-
-- dependency install
-- `npm run check`
-- `npm run build`
 
 ## Project Structure
 

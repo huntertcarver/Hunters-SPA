@@ -1,4 +1,3 @@
-//https://www.youtube.com/watch?v=wRmeFtRkF-8&list=PLkQj0oVF_lCyCnVRYZMvjhoMSHSre6Dge&index=1
 import * as THREE from "three";
 import { Canvas, useFrame, useLoader } from "react-three-fiber";
 import circle from "../Images/circle.png";
@@ -6,15 +5,13 @@ import { useCallback, useMemo, useRef } from "react";
 import { BufferAttribute } from "three";
 import { useMouse } from "@mantine/hooks";
 
-//Contains the actual animation
 function Points() {
-  //Images cannot be loaded directly so we must use a texture loader
   const texture = useLoader(THREE.TextureLoader, circle);
   const bufferRef = useRef<BufferAttribute>(null);
   const tRef = useRef(0);
   const { x, y } = useMouse();
-  const h = window.screen.availHeight;
-  const w = window.screen.availWidth;
+  const viewportHeight = window.screen.availHeight;
+  const viewportWidth = window.screen.availWidth;
 
   const frequency = 0.002;
   const amplitude = 3;
@@ -28,18 +25,19 @@ function Points() {
   const count = 300;
   const sep = 3;
 
-  let positions = useMemo(() => {
-    let positions = [];
+  const positions = useMemo(() => {
+    const points: number[] = [];
+
     for (let xi = 0; xi < count; xi++) {
       for (let zi = 0; zi < count; zi++) {
-        let x1 = sep * (xi - count / 2);
-        let z1 = sep * (zi - count / 2);
-        let y1 = graph(x1, z1, 0);
-        positions.push(x1, y1, z1);
+        const x1 = sep * (xi - count / 2);
+        const z1 = sep * (zi - count / 2);
+        const y1 = graph(x1, z1, 0);
+        points.push(x1, y1, z1);
       }
     }
 
-    return new Float32Array(positions);
+    return new Float32Array(points);
   }, [count, sep, graph]);
 
   useFrame(() => {
@@ -50,8 +48,8 @@ function Points() {
       let i = 0;
       for (let xi = 0; xi < count; xi++) {
         for (let zi = 0; zi < count; zi++) {
-          let x1 = sep * (xi - count / 2) - (x - w / 2) / 6;
-          let z1 = sep * (zi - count / 2) - (y - h / 2) / 6;
+          const x1 = sep * (xi - count / 2) - (x - viewportWidth / 2) / 6;
+          const z1 = sep * (zi - count / 2) - (y - viewportHeight / 2) / 6;
 
           positions[i + 1] = graph(x1, z1, tRef.current);
           i += 3;
@@ -63,7 +61,6 @@ function Points() {
   });
 
   return (
-    //points class from three.js
     <points>
       <bufferGeometry attach="geometry">
         <bufferAttribute
@@ -88,14 +85,9 @@ function Points() {
   );
 }
 
-//Wraps the canvas component
 function AnimationCanvas() {
-
   return (
-    <Canvas
-      //Set up scene here
-      camera={{ position: [0, 100, 0], fov: 75 }}
-    >
+    <Canvas camera={{ position: [0, 100, 0], fov: 75 }}>
       <Points />
     </Canvas>
   );
