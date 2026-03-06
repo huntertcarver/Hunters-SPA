@@ -15,6 +15,10 @@ beforeEach(() => {
     configurable: true,
     value: jest.fn(),
   });
+  Object.defineProperty(document, "fullscreenEnabled", {
+    configurable: true,
+    value: undefined,
+  });
 
   mockedUseFullscreen.mockReturnValue({
     ref: jest.fn(),
@@ -54,6 +58,20 @@ test("calls toggle when fullscreen is supported", () => {
   Object.defineProperty(document, "fullscreenEnabled", {
     configurable: true,
     value: true,
+  });
+
+  renderButton();
+
+  fireEvent.click(screen.getByLabelText("Toggle Fullscreen"));
+  expect(toggle).toHaveBeenCalledTimes(1);
+});
+
+test("treats requestFullscreen as supported when fullscreenEnabled is unavailable", () => {
+  const toggle = jest.fn();
+  mockedUseFullscreen.mockReturnValue({
+    ref: jest.fn(),
+    toggle,
+    fullscreen: false,
   });
 
   renderButton();
