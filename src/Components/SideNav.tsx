@@ -1,23 +1,20 @@
 import { useEffect, useState } from "react";
 import {
   createStyles,
-  Navbar,
   Group,
   Code,
   Title,
   ActionIcon,
+  Stack,
 } from "@mantine/core";
-import {
-  IconHome,
-  IconQuestionMark,
-  IconCode,
-  IconBrandLinkedin,
-  IconBrandGithub,
-  IconBrandGmail,
-  IconBrandTwitter,
-} from "@tabler/icons-react";
 import { Link, useLocation } from "react-router-dom";
-import { useViewportSize } from "@mantine/hooks";
+import {
+  NavLinkItem,
+  primaryNavLinks,
+  profileConfig,
+  socialLinks as defaultSocialLinks,
+  SocialLinkItem,
+} from "../Data/siteConfig";
 
 const useStyles = createStyles((theme, _params, getRef) => {
   const icon = getRef("icon");
@@ -46,7 +43,7 @@ const useStyles = createStyles((theme, _params, getRef) => {
     },
 
     social: {
-      width: 260,
+      width: "100%",
     },
 
     link: {
@@ -104,22 +101,26 @@ const useStyles = createStyles((theme, _params, getRef) => {
   };
 });
 
-const data = [
-  { link: "/", label: "Home", icon: IconHome },
-  { link: "/about", label: "About", icon: IconQuestionMark },
-  { link: "/projects", label: "Projects", icon: IconCode },
-];
+interface SideNavProps {
+  links?: NavLinkItem[];
+  socialLinks?: SocialLinkItem[];
+  onNavigate?: () => void;
+}
 
-export default function SideNav() {
+export default function SideNav({
+  links = primaryNavLinks,
+  socialLinks = defaultSocialLinks,
+  onNavigate,
+}: SideNavProps) {
   const { classes, cx } = useStyles();
-  const [active, setActive] = useState(data[0].link);
-  const { height, width } = useViewportSize();
+  const [active, setActive] = useState(links[0]?.link ?? "/");
   const location = useLocation();
+
   useEffect(() => {
     setActive(location.pathname);
-  }, [location]);
+  }, [location.pathname]);
 
-  const links = data.map((item) => (
+  const navLinks = links.map((item) => (
     <Link
       className={cx(classes.link, {
         [classes.linkActive]: active === item.link,
@@ -128,59 +129,41 @@ export default function SideNav() {
       key={item.label}
       onClick={() => {
         setActive(item.link);
+        onNavigate?.();
       }}
     >
-      <item.icon className={classes.linkIcon} stroke={1.5} />
+      {item.icon ? <item.icon className={classes.linkIcon} stroke={1.5} /> : null}
       <span>{item.label}</span>
     </Link>
   ));
 
   return (
-    <Navbar height={height - 70} width={{ sm: width }} p="md">
-      <Navbar.Section grow>
+    <Stack justify="space-between" sx={{ minHeight: "calc(100vh - 120px)" }}>
+      <div>
         <Group className={classes.header} position="apart">
-          <Title>Hunter Carver</Title>
+          <Title>{profileConfig.name}</Title>
           <Code sx={{ fontWeight: 700 }}>Navigation</Code>
         </Group>
-        {links}
-      </Navbar.Section>
+        {navLinks}
+      </div>
 
-      <Navbar.Section className={classes.footer}>
+      <div className={classes.footer}>
         <Group spacing={0} className={classes.social} position="right">
-          <a
-            href="https://www.linkedin.com/in/hunter-carver/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <ActionIcon size="lg">
-              <IconBrandLinkedin size={18} stroke={1.5} />
-            </ActionIcon>
-          </a>
-          <a
-            href="https://github.com/huntertcarver"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <ActionIcon size="lg">
-              <IconBrandGithub size={18} stroke={1.5} />
-            </ActionIcon>
-          </a>
-          <a
-            href="https://twitter.com/huntertcarver"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <ActionIcon size="lg">
-              <IconBrandTwitter size={18} stroke={1.5} />
-            </ActionIcon>
-          </a>
-          <a href="mailto:hunter@1968bird.com">
-            <ActionIcon size="lg">
-              <IconBrandGmail size={18} stroke={1.5} />
-            </ActionIcon>
-          </a>
+          {socialLinks.map(({ href, label, Icon }) => (
+            <a
+              href={href}
+              key={label}
+              target={href.startsWith("http") ? "_blank" : undefined}
+              rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+              aria-label={label}
+            >
+              <ActionIcon size="lg" aria-label={label}>
+                <Icon size={18} stroke={1.5} />
+              </ActionIcon>
+            </a>
+          ))}
         </Group>
-      </Navbar.Section>
-    </Navbar>
+      </div>
+    </Stack>
   );
 }

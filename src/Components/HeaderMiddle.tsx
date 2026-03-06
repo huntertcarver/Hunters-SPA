@@ -7,25 +7,24 @@ import {
   Container,
   Burger,
   Title,
+  Drawer,
 } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
-import {
-  IconBrandLinkedin,
-  IconBrandGithub,
-  IconBrandGmail,
-  IconBrandTwitter,
-} from "@tabler/icons-react";
 import LightDarkButton from "./LightDarkButton";
 import FullscreenButton from "./FullscreenButton";
 import { Link, useLocation } from "react-router-dom";
 import SideNav from "./SideNav";
+import { NavLinkItem, profileConfig, socialLinks } from "../Data/siteConfig";
+
+const HEADER_HEIGHT = 56;
+const HEADER_LAYER_Z_INDEX = 300;
+const MOBILE_DRAWER_Z_INDEX = 400;
 
 const useStyles = createStyles((theme) => ({
   inner: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    height: 56,
+    height: HEADER_HEIGHT,
   },
 
   links: {
@@ -92,67 +91,49 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface HeaderMiddleProps {
-  links: { link: string; label: string }[];
+  links: NavLinkItem[];
 }
 
 export default function HeaderMiddle({ links }: HeaderMiddleProps) {
-  const [opened, { close, toggle }] = useDisclosure(false);
-  const [active, setActive] = useState(links[0].link);
+  const [opened, setOpened] = useState(false);
   const { classes, cx } = useStyles();
   const location = useLocation();
-  
-  // Keep active link in sync and close mobile nav on route changes.
-  useEffect(() => {
-    setActive(location.pathname);
-    if (opened) {
-      close();
-    }
-  }, [close, location, opened]);
+  const close = () => setOpened(false);
+  const open = () => setOpened(true);
 
-  // Lock body scrolling only while the mobile nav is open.
   useEffect(() => {
-    document.body.style.overflow = opened ? "hidden" : "";
-
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [opened]);
+    setOpened(false);
+  }, [location.pathname]);
 
   const items = links.map((link) => (
     <Link
       to={link.link}
       key={link.label}
       className={cx(classes.link, {
-        [classes.linkActive]: active === link.link,
+        [classes.linkActive]: location.pathname === link.link,
       })}
-      onClick={() => {
-        setActive(link.link);
-      }}
     >
       {link.label}
     </Link>
   ));
 
   return (
-    <div style={{ position: "relative", zIndex: 2 }}>
-      <Header height={56} mb={0}>
+    <div style={{ position: "relative", zIndex: HEADER_LAYER_Z_INDEX }}>
+      <Header height={HEADER_HEIGHT} mb={0}>
         <Container className={classes.inner} size="xl">
           <Burger
             opened={opened}
-            onClick={() => {
-              toggle();
-            }}
+            onClick={open}
             size="sm"
             className={classes.burger}
+            aria-label={opened ? "Close navigation menu" : "Open navigation menu"}
           />
           <Group className={classes.links} spacing={5}>
             {items}
           </Group>
 
-          {/*Logo goes here
-          <MantineLogo size={28} />*/}
           <Title className={classes.title} size={16}>
-            Hunter Carver
+            {profileConfig.name}
           </Title>
 
           <Group>
@@ -162,38 +143,19 @@ export default function HeaderMiddle({ links }: HeaderMiddleProps) {
               position="right"
               noWrap
             >
-              <a
-                href="https://www.linkedin.com/in/hunter-carver/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <ActionIcon size="lg">
-                  <IconBrandLinkedin size={18} stroke={1.5} />
-                </ActionIcon>
-              </a>
-              <a
-                href="https://github.com/huntertcarver"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <ActionIcon size="lg">
-                  <IconBrandGithub size={18} stroke={1.5} />
-                </ActionIcon>
-              </a>
-              <a
-                href="https://twitter.com/huntertcarver"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <ActionIcon size="lg">
-                  <IconBrandTwitter size={18} stroke={1.5} />
-                </ActionIcon>
-              </a>
-              <a href="mailto:hunter@1968bird.com">
-                <ActionIcon size="lg">
-                  <IconBrandGmail size={18} stroke={1.5} />
-                </ActionIcon>
-              </a>
+              {socialLinks.map(({ href, label, Icon }) => (
+                <a
+                  href={href}
+                  key={label}
+                  target={href.startsWith("http") ? "_blank" : undefined}
+                  rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  aria-label={label}
+                >
+                  <ActionIcon size="lg" aria-label={label}>
+                    <Icon size={18} stroke={1.5} />
+                  </ActionIcon>
+                </a>
+              ))}
             </Group>
             <Group spacing={0} position="right">
               <FullscreenButton />
@@ -204,9 +166,18 @@ export default function HeaderMiddle({ links }: HeaderMiddleProps) {
           </Group>
         </Container>
       </Header>
-      <Group style={{ display: opened ? "block" : "none" }}>
-        <SideNav />
-      </Group>
+      <Drawer
+        opened={opened}
+        onClose={close}
+        padding="md"
+        size="100%"
+        withCloseButton
+        title="Navigation"
+        zIndex={MOBILE_DRAWER_Z_INDEX}
+        closeOnClickOutside={false}
+      >
+        <SideNav links={links} onNavigate={close} socialLinks={socialLinks} />
+      </Drawer>
     </div>
   );
 }

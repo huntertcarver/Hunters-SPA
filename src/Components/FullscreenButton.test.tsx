@@ -1,0 +1,87 @@
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { MantineProvider } from "@mantine/core";
+import { useFullscreen } from "@mantine/hooks";
+import FullscreenButton from "./FullscreenButton";
+
+jest.mock("@mantine/hooks", () => ({
+  ...jest.requireActual("@mantine/hooks"),
+  useFullscreen: jest.fn(),
+}));
+
+const mockedUseFullscreen = useFullscreen as jest.MockedFunction<typeof useFullscreen>;
+
+beforeEach(() => {
+  Object.defineProperty(document.documentElement, "requestFullscreen", {
+    configurable: true,
+    value: jest.fn(),
+  });
+
+  mockedUseFullscreen.mockReturnValue({
+    ref: jest.fn(),
+    toggle: jest.fn(),
+    fullscreen: false,
+  });
+});
+
+const renderButton = () =>
+  render(
+    <MantineProvider theme={{ colorScheme: "light" }}>
+      <FullscreenButton />
+    </MantineProvider>
+  );
+
+test("disables fullscreen button when API is unsupported", () => {
+  Object.defineProperty(document, "fullscreenEnabled", {
+    configurable: true,
+    value: false,
+  });
+
+  renderButton();
+
+  expect(
+    screen.getByLabelText("Fullscreen is not supported on this device/browser")
+  ).toBeDisabled();
+});
+
+test("calls toggle when fullscreen is supported", () => {
+  const toggle = jest.fn();
+  mockedUseFullscreen.mockReturnValue({
+    ref: jest.fn(),
+    toggle,
+    fullscreen: false,
+  });
+
+  Object.defineProperty(document, "fullscreenEnabled", {
+    configurable: true,
+    value: true,
+  });
+
+  renderButton();
+
+  fireEvent.click(screen.getByLabelText("Toggle Fullscreen"));
+  expect(toggle).toHaveBeenCalledTimes(1);
+});
+
+test("shows failure state when fullscreen request throws", async () => {
+  const toggle = jest.fn().mockRejectedValue(new Error("fullscreen failed"));
+  mockedUseFullscreen.mockReturnValue({
+    ref: jest.fn(),
+    toggle,
+    fullscreen: false,
+  });
+
+  Object.defineProperty(document, "fullscreenEnabled", {
+    configurable: true,
+    value: true,
+  });
+
+  renderButton();
+
+  fireEvent.click(screen.getByLabelText("Toggle Fullscreen"));
+
+  await waitFor(() => {
+    expect(
+      screen.getByLabelText("Fullscreen request failed on this browser/device")
+    ).toBeInTheDocument();
+  });
+});
