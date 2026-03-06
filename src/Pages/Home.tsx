@@ -13,7 +13,6 @@ import type { IParallax } from "@react-spring/parallax";
 import { Link } from "react-router-dom";
 import Typewriter from "typewriter-effect";
 import Ripple from "../Components/Ripple";
-import ParticlesComponent from "../Components/ParticlesComponent";
 import { skillNames } from "../Data/skills";
 import {
   getAccentGradientColors,
@@ -167,7 +166,6 @@ function Home() {
 
   return (
     <div style={{ minHeight: parallaxHeight }}>
-      <ParticlesComponent />
       <div style={{ position: "relative", height: parallaxHeight, overflow: "hidden" }}>
         <Parallax
           ref={parallaxRef}

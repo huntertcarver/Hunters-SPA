@@ -1,11 +1,9 @@
 import { Container } from "@mantine/core";
-import ParticlesComponent from "../Components/ParticlesComponent";
 import ProjectCard from "../Components/ProjectCard";
 
 function Projects() {
   return (
     <Container my="md" size="lg">
-      <ParticlesComponent />
       <div>
         <ProjectCard projectTitle="Review Master" />
       </div>

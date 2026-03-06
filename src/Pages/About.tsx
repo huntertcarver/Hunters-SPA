@@ -32,7 +32,6 @@ import DellMclaren from "../Images/DellMclaren.jpg";
 import PayPal1 from "../Images/PayPal1.jpeg";
 import PayPal2 from "../Images/PayPal2.jpeg";
 import PayPal3 from "../Images/PayPal3.jpeg";
-import ParticlesComponent from "../Components/ParticlesComponent";
 import ImagePreviewModal from "../Components/ImagePreviewModal";
 import Resume from "../Files/Resume.pdf";
 import {
@@ -141,7 +140,6 @@ function About() {
 
   return (
     <Container my="md" size="lg">
-      <ParticlesComponent />
       {viewportWidth > 765 && (
         <ImagePreviewModal
           opened={opened}

@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect } from "react";
 import { Paper } from "@mantine/core";
 import { Route, Routes, useLocation } from "react-router-dom";
 import HeaderMiddle from "./Components/HeaderMiddle";
+import ParticlesComponent from "./Components/ParticlesComponent";
 import SkillArticle from "./DynamicPages/SkillArticle";
 import { primaryNavLinks } from "./Data/siteConfig";
 import About from "./Pages/About";
@@ -45,16 +46,22 @@ function ScrollToTopOnRouteChange() {
 }
 
 function RoutingContainer() {
+  const location = useLocation();
+  const isHomeRoute = location.pathname === "/";
+
   return (
-    <Paper p="md" radius={0}>
+    <Paper p={0} radius={0} style={{ backgroundColor: "transparent" }}>
       <ScrollToTopOnRouteChange />
+      {!isHomeRoute && <ParticlesComponent />}
       <HeaderMiddle links={primaryNavLinks} />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/skills/:skill" element={<SkillArticle />} />
-        <Route path="/projects" element={<Projects />} />
-      </Routes>
+      <div style={{ position: "relative", zIndex: 1 }}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/skills/:skill" element={<SkillArticle />} />
+          <Route path="/projects" element={<Projects />} />
+        </Routes>
+      </div>
     </Paper>
   );
 }
