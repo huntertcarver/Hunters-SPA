@@ -34,3 +34,13 @@ test("closes mobile drawer after navigating from drawer link", () => {
 
   expect(screen.getByLabelText("Open navigation menu")).toBeInTheDocument();
 });
+
+test("keeps mobile drawer open when burger receives rapid repeated taps", () => {
+  renderHeader();
+
+  const burger = screen.getByLabelText("Open navigation menu");
+  fireEvent.click(burger);
+  fireEvent.click(burger);
+
+  expect(screen.getByRole("dialog")).toBeInTheDocument();
+});

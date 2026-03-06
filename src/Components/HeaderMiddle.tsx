@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   createStyles,
   Header,
@@ -9,19 +9,22 @@ import {
   Title,
   Drawer,
 } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
 import LightDarkButton from "./LightDarkButton";
 import FullscreenButton from "./FullscreenButton";
 import { Link, useLocation } from "react-router-dom";
 import SideNav from "./SideNav";
 import { NavLinkItem, profileConfig, socialLinks } from "../Data/siteConfig";
 
+const HEADER_HEIGHT = 56;
+const HEADER_LAYER_Z_INDEX = 300;
+const MOBILE_DRAWER_Z_INDEX = 400;
+
 const useStyles = createStyles((theme) => ({
   inner: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    height: 56,
+    height: HEADER_HEIGHT,
   },
 
   links: {
@@ -92,13 +95,15 @@ interface HeaderMiddleProps {
 }
 
 export default function HeaderMiddle({ links }: HeaderMiddleProps) {
-  const [opened, { close, toggle }] = useDisclosure(false);
+  const [opened, setOpened] = useState(false);
   const { classes, cx } = useStyles();
   const location = useLocation();
+  const close = () => setOpened(false);
+  const open = () => setOpened(true);
 
   useEffect(() => {
-    close();
-  }, [close, location.pathname]);
+    setOpened(false);
+  }, [location.pathname]);
 
   const items = links.map((link) => (
     <Link
@@ -113,12 +118,12 @@ export default function HeaderMiddle({ links }: HeaderMiddleProps) {
   ));
 
   return (
-    <div style={{ position: "relative", zIndex: 2 }}>
-      <Header height={56} mb={0}>
+    <div style={{ position: "relative", zIndex: HEADER_LAYER_Z_INDEX }}>
+      <Header height={HEADER_HEIGHT} mb={0}>
         <Container className={classes.inner} size="xl">
           <Burger
             opened={opened}
-            onClick={toggle}
+            onClick={open}
             size="sm"
             className={classes.burger}
             aria-label={opened ? "Close navigation menu" : "Open navigation menu"}
@@ -168,7 +173,8 @@ export default function HeaderMiddle({ links }: HeaderMiddleProps) {
         size="100%"
         withCloseButton
         title="Navigation"
-        zIndex={200}
+        zIndex={MOBILE_DRAWER_Z_INDEX}
+        closeOnClickOutside={false}
       >
         <SideNav links={links} onNavigate={close} socialLinks={socialLinks} />
       </Drawer>

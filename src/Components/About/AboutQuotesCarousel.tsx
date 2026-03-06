@@ -3,7 +3,7 @@ import { createStyles } from "@mantine/core";
 import { QuoteEntry } from "../../Data/aboutContent";
 import { QuoteCard } from "../QuoteCard";
 
-const useStyles = createStyles((theme, _params, getRef) => ({
+const useStyles = createStyles((_theme, _params, getRef) => ({
   centerItem: {
     display: "flex",
     justifyContent: "center",

@@ -1,3 +1,4 @@
+import { useLayoutEffect, useRef } from "react";
 import {
   Badge,
   Button,
@@ -8,6 +9,7 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
+import type { IParallax } from "@react-spring/parallax";
 import { Link } from "react-router-dom";
 import Typewriter from "typewriter-effect";
 import Ripple from "../Components/Ripple";
@@ -18,6 +20,8 @@ import {
   getHeroTitleGradient,
   getSurfaceButtonColor,
 } from "../styles/uiTokens";
+
+const HOME_VIEWPORT_OFFSET = 88;
 
 const useStyles = createStyles((theme) => {
   const [accentFrom, accentTo] = getAccentGradientColors(theme);
@@ -88,9 +92,33 @@ const useStyles = createStyles((theme) => {
 function Home() {
   const { classes, cx } = useStyles();
   const theme = useMantineTheme();
+  const parallaxRef = useRef<IParallax | null>(null);
+
+  useLayoutEffect(() => {
+    const resetHomeScrollState = () => {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      parallaxRef.current?.scrollTo(0);
+      const container = parallaxRef.current?.container?.current as
+        | HTMLDivElement
+        | undefined;
+      if (container) {
+        container.scrollTop = 0;
+      }
+    };
+
+    resetHomeScrollState();
+    const frame = window.requestAnimationFrame(resetHomeScrollState);
+    const timeout = window.setTimeout(resetHomeScrollState, 0);
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.clearTimeout(timeout);
+    };
+  }, []);
 
   const windowWidth = window.innerWidth;
   const windowHeight = window.innerHeight;
+  const parallaxHeight = Math.max(windowHeight - HOME_VIEWPORT_OFFSET, 1);
 
   const text = [
     `Hey I'm Hunter!`,
@@ -101,7 +129,7 @@ function Home() {
   ];
 
   const badges = skillNames.map((skill) => {
-    const randomTop = getRandomNumber(0, windowHeight);
+    const randomTop = getRandomNumber(0, parallaxHeight);
     const randomLeft = getRandomNumber(0, windowWidth);
     const speed = Math.random() + 1;
     const offset = speed > 1.5 ? 0.75 : 0;
@@ -138,118 +166,121 @@ function Home() {
   });
 
   return (
-    <div>
+    <div style={{ minHeight: parallaxHeight }}>
       <ParticlesComponent />
-      <Parallax
-        pages={2}
-        style={{
-          top: "0",
-          left: "0",
-          zIndex: 1,
-        }}
-      >
-        <ParallaxLayer
-          offset={0}
-          speed={2.5}
-          className={cx(classes.centerItem)}
-        >
-          <Title
-            className={classes.title}
-            variant="gradient"
-            gradient={getHeroTitleGradient(theme)}
-          >
-            <Typewriter
-              options={{
-                strings: text,
-                delay: 100,
-                deleteSpeed: 25,
-                autoStart: true,
-                loop: true,
-              }}
-            />
-          </Title>
-        </ParallaxLayer>
-
-        {badges}
-
-        <ParallaxLayer
-          offset={1}
-          speed={2}
+      <div style={{ position: "relative", height: parallaxHeight, overflow: "hidden" }}>
+        <Parallax
+          ref={parallaxRef}
+          pages={2}
           style={{
-            backgroundColor: theme.fn.variant({
-              variant: "light",
-              color: theme.primaryColor,
-            }).background,
+            top: "0",
+            left: "0",
+            zIndex: 1,
           }}
         >
-          <div
+          <ParallaxLayer
+            offset={0}
+            speed={2.5}
+            className={cx(classes.centerItem)}
+          >
+            <Title
+              className={classes.title}
+              variant="gradient"
+              gradient={getHeroTitleGradient(theme)}
+            >
+              <Typewriter
+                options={{
+                  strings: text,
+                  delay: 100,
+                  deleteSpeed: 25,
+                  autoStart: true,
+                  loop: true,
+                }}
+              />
+            </Title>
+          </ParallaxLayer>
+
+          {badges}
+
+          <ParallaxLayer
+            offset={1}
+            speed={2}
             style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              zIndex: 0,
-              height: "100%",
-              width: "100%",
+              backgroundColor: theme.fn.variant({
+                variant: "light",
+                color: theme.primaryColor,
+              }).background,
             }}
           >
-            <Ripple />
-          </div>
-        </ParallaxLayer>
+            <div
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                zIndex: 0,
+                height: "100%",
+                width: "100%",
+              }}
+            >
+              <Ripple />
+            </div>
+          </ParallaxLayer>
 
-        <ParallaxLayer
-          offset={1}
-          speed={0.5}
-          className={cx(classes.centerItem)}
-          style={{
-            color: theme.fn.variant({
-              variant: "light",
-              color: theme.primaryColor,
-            }).color,
-          }}
-        >
-          <Link
-            to="/about"
-            className={cx(classes.centerItem, classes.link)}
-            style={{ textDecoration: "none" }}
+          <ParallaxLayer
+            offset={1}
+            speed={0.5}
+            className={cx(classes.centerItem)}
+            style={{
+              color: theme.fn.variant({
+                variant: "light",
+                color: theme.primaryColor,
+              }).color,
+            }}
           >
-            <Paper withBorder radius="md" className={classes.card}>
-              <div
-                className={cx(classes.centerItem)}
-                style={{ justifyContent: "space-between" }}
-              >
-                <Title
-                  className={cx(classes.title)}
-                  variant="gradient"
-                  gradient={getHeroTitleGradient(theme)}
+            <Link
+              to="/about"
+              className={cx(classes.centerItem, classes.link)}
+              style={{ textDecoration: "none" }}
+            >
+              <Paper withBorder radius="md" className={classes.card}>
+                <div
+                  className={cx(classes.centerItem)}
+                  style={{ justifyContent: "space-between" }}
                 >
-                  Hello!
-                </Title>
-                <Button
-                  className={cx(classes.button)}
-                  compact
-                  size="xs"
-                  variant="outline"
+                  <Title
+                    className={cx(classes.title)}
+                    variant="gradient"
+                    gradient={getHeroTitleGradient(theme)}
+                  >
+                    Hello!
+                  </Title>
+                  <Button
+                    className={cx(classes.button)}
+                    compact
+                    size="xs"
+                    variant="outline"
+                  >
+                    <Badge>About me</Badge>
+                  </Button>
+                </div>
+                <Text
+                  size="sm"
+                  mt="sm"
+                  color="dimmed"
+                  className={cx(classes.centerItem)}
                 >
-                  <Badge>About me</Badge>
-                </Button>
-              </div>
-              <Text
-                size="sm"
-                mt="sm"
-                color="dimmed"
-                className={cx(classes.centerItem)}
-              >
-                Hey, welcome to my website! The purpose of this is to display my
-                front end and back end Software Engineering skills not only from
-                the information provided on this website but also from the code
-                that makes it up. This website was made on React, Typescript,
-                Mantine, and many TS/React libraries. I hope you enjoy your
-                stay!
-              </Text>
-            </Paper>
-          </Link>
-        </ParallaxLayer>
-      </Parallax>
+                  Hey, welcome to my website! The purpose of this is to display my
+                  front end and back end Software Engineering skills not only from
+                  the information provided on this website but also from the code
+                  that makes it up. This website was made on React, Typescript,
+                  Mantine, and many TS/React libraries. I hope you enjoy your
+                  stay!
+                </Text>
+              </Paper>
+            </Link>
+          </ParallaxLayer>
+        </Parallax>
+      </div>
     </div>
   );
 }
