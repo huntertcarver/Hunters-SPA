@@ -20,7 +20,7 @@ import {
   getSurfaceButtonColor,
 } from "../styles/uiTokens";
 
-const HOME_VIEWPORT_OFFSET = 88;
+const HOME_VIEWPORT_OFFSET = 56;
 
 const useStyles = createStyles((theme) => {
   const [accentFrom, accentTo] = getAccentGradientColors(theme);
