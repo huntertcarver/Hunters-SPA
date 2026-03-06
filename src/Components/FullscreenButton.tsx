@@ -10,19 +10,29 @@ const isFullscreenSupported = (): boolean => {
 
   const fullscreenDocument = document as Document & {
     webkitFullscreenEnabled?: boolean;
+    mozFullScreenEnabled?: boolean;
+    msFullscreenEnabled?: boolean;
   };
   const fullscreenElement = document.documentElement as HTMLElement & {
     webkitRequestFullscreen?: () => Promise<void>;
+    mozRequestFullScreen?: () => Promise<void>;
+    msRequestFullscreen?: () => Promise<void>;
   };
 
   const canRequestFullscreen = Boolean(
-    fullscreenElement.requestFullscreen || fullscreenElement.webkitRequestFullscreen
+    fullscreenElement.requestFullscreen ||
+      fullscreenElement.webkitRequestFullscreen ||
+      fullscreenElement.mozRequestFullScreen ||
+      fullscreenElement.msRequestFullscreen
   );
+  const fullscreenEnabled =
+    document.fullscreenEnabled ??
+    fullscreenDocument.webkitFullscreenEnabled ??
+    fullscreenDocument.mozFullScreenEnabled ??
+    fullscreenDocument.msFullscreenEnabled;
 
-  return (
-    canRequestFullscreen &&
-    Boolean(document.fullscreenEnabled || fullscreenDocument.webkitFullscreenEnabled)
-  );
+  // Some browsers expose the request API but omit the enabled flag entirely.
+  return canRequestFullscreen && fullscreenEnabled !== false;
 };
 
 export default function FullscreenButton() {
