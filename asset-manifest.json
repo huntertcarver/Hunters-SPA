@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.e6c13ad2.css",
-    "main.js": "/static/js/main.fc961e6c.js",
+    "main.js": "/static/js/main.b4058529.js",
     "static/media/hof.jpg": "/static/media/hof.a8cda4233a91ca57bc3d.jpg",
     "static/media/hofclose.jpg": "/static/media/hofclose.df42c792b5ebbc586eaf.jpg",
     "static/media/PayPal3.jpeg": "/static/media/PayPal3.77c1deb3f2598cee1cd6.jpeg",
@@ -20,10 +20,10 @@
     "static/media/Grad1.jpg": "/static/media/Grad1.2b1b21e4e113d9f81d03.jpg",
     "index.html": "/index.html",
     "main.e6c13ad2.css.map": "/static/css/main.e6c13ad2.css.map",
-    "main.fc961e6c.js.map": "/static/js/main.fc961e6c.js.map"
+    "main.b4058529.js.map": "/static/js/main.b4058529.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.fc961e6c.js"
+    "static/js/main.b4058529.js"
   ]
 }
