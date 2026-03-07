@@ -16,6 +16,7 @@ import Ripple from "../Components/Ripple";
 import { skillNames } from "../Data/skills";
 import {
   getAccentGradientColors,
+  getHomeSectionBackgroundColor,
   getHeroTitleGradient,
   getSurfaceButtonColor,
 } from "../styles/uiTokens";
@@ -92,6 +93,7 @@ function Home() {
   const { classes, cx } = useStyles();
   const theme = useMantineTheme();
   const parallaxRef = useRef<IParallax | null>(null);
+  const homeSectionBackgroundColor = getHomeSectionBackgroundColor(theme);
 
   useLayoutEffect(() => {
     const resetHomeScrollState = () => {
@@ -166,7 +168,15 @@ function Home() {
 
   return (
     <div style={{ minHeight: parallaxHeight }}>
-      <div style={{ position: "relative", height: parallaxHeight, overflow: "hidden" }}>
+      <div
+        data-testid="home-parallax-surface"
+        style={{
+          position: "relative",
+          height: parallaxHeight,
+          overflow: "hidden",
+          backgroundColor: homeSectionBackgroundColor,
+        }}
+      >
         <Parallax
           ref={parallaxRef}
           pages={2}
@@ -204,10 +214,7 @@ function Home() {
             offset={1}
             speed={2}
             style={{
-              backgroundColor: theme.fn.variant({
-                variant: "light",
-                color: theme.primaryColor,
-              }).background,
+              backgroundColor: homeSectionBackgroundColor,
             }}
           >
             <div
