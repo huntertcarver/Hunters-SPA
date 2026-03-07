@@ -13,10 +13,12 @@ export const getAccentGradientColors = (
     : [theme.colors.blue[5], theme.colors.green[5]];
 
 export const getHomeSectionBackgroundColor = (theme: MantineTheme): string =>
-  theme.fn.variant({
-    variant: "light",
-    color: theme.primaryColor,
-  }).background ?? theme.white;
+  theme.colorScheme === "dark"
+    ? theme.colors.dark[8]
+    : theme.fn.variant({
+        variant: "light",
+        color: theme.primaryColor,
+      }).background ?? theme.white;
 
 export const getSurfaceButtonColor = (theme: MantineTheme): string =>
   theme.colorScheme === "dark" ? "#000000" : "#ffffff";
