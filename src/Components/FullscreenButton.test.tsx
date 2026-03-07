@@ -34,7 +34,7 @@ const renderButton = () =>
     </MantineProvider>
   );
 
-test("disables fullscreen button when API is unsupported", () => {
+test("does not render fullscreen button when fullscreen is unsupported", () => {
   Object.defineProperty(document, "fullscreenEnabled", {
     configurable: true,
     value: false,
@@ -42,9 +42,7 @@ test("disables fullscreen button when API is unsupported", () => {
 
   renderButton();
 
-  expect(
-    screen.getByLabelText("Fullscreen is not supported on this device/browser")
-  ).toBeDisabled();
+  expect(screen.queryByLabelText("Toggle Fullscreen")).not.toBeInTheDocument();
 });
 
 test("calls toggle when fullscreen is supported", () => {
@@ -78,6 +76,17 @@ test("treats requestFullscreen as supported when fullscreenEnabled is unavailabl
 
   fireEvent.click(screen.getByLabelText("Toggle Fullscreen"));
   expect(toggle).toHaveBeenCalledTimes(1);
+});
+
+test("does not render fullscreen button when request API is unavailable", () => {
+  Object.defineProperty(document.documentElement, "requestFullscreen", {
+    configurable: true,
+    value: undefined,
+  });
+
+  renderButton();
+
+  expect(screen.queryByLabelText("Toggle Fullscreen")).not.toBeInTheDocument();
 });
 
 test("shows failure state when fullscreen request throws", async () => {
