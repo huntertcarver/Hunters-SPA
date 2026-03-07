@@ -34,7 +34,14 @@ const renderButton = () =>
     </MantineProvider>
   );
 
-test("does not render fullscreen button when fullscreen is unsupported", () => {
+test("renders fullscreen button when requestFullscreen exists even if fullscreenEnabled is false", () => {
+  const toggle = jest.fn();
+  mockedUseFullscreen.mockReturnValue({
+    ref: jest.fn(),
+    toggle,
+    fullscreen: false,
+  });
+
   Object.defineProperty(document, "fullscreenEnabled", {
     configurable: true,
     value: false,
@@ -42,7 +49,8 @@ test("does not render fullscreen button when fullscreen is unsupported", () => {
 
   renderButton();
 
-  expect(screen.queryByLabelText("Toggle Fullscreen")).not.toBeInTheDocument();
+  fireEvent.click(screen.getByLabelText("Toggle Fullscreen"));
+  expect(toggle).toHaveBeenCalledTimes(1);
 });
 
 test("calls toggle when fullscreen is supported", () => {
@@ -78,8 +86,43 @@ test("treats requestFullscreen as supported when fullscreenEnabled is unavailabl
   expect(toggle).toHaveBeenCalledTimes(1);
 });
 
+test("renders fullscreen button when only webkitRequestFullscreen exists", () => {
+  const toggle = jest.fn();
+  mockedUseFullscreen.mockReturnValue({
+    ref: jest.fn(),
+    toggle,
+    fullscreen: false,
+  });
+
+  Object.defineProperty(document.documentElement, "requestFullscreen", {
+    configurable: true,
+    value: undefined,
+  });
+  Object.defineProperty(document.documentElement, "webkitRequestFullscreen", {
+    configurable: true,
+    value: jest.fn(),
+  });
+
+  renderButton();
+
+  fireEvent.click(screen.getByLabelText("Toggle Fullscreen"));
+  expect(toggle).toHaveBeenCalledTimes(1);
+});
+
 test("does not render fullscreen button when request API is unavailable", () => {
   Object.defineProperty(document.documentElement, "requestFullscreen", {
+    configurable: true,
+    value: undefined,
+  });
+  Object.defineProperty(document.documentElement, "webkitRequestFullscreen", {
+    configurable: true,
+    value: undefined,
+  });
+  Object.defineProperty(document.documentElement, "mozRequestFullscreen", {
+    configurable: true,
+    value: undefined,
+  });
+  Object.defineProperty(document.documentElement, "msRequestFullscreen", {
     configurable: true,
     value: undefined,
   });
