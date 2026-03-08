@@ -1,19 +1,11 @@
 import { useLayoutEffect, useRef } from "react";
-import {
-  Badge,
-  Button,
-  createStyles,
-  Paper,
-  Title,
-  Text,
-  useMantineTheme,
-} from "@mantine/core";
+import { Badge, Button, createStyles, Paper, Title, Text, useMantineTheme } from "@mantine/core";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import type { IParallax } from "@react-spring/parallax";
 import { Link } from "react-router-dom";
 import Typewriter from "typewriter-effect";
 import Ripple from "../Components/Ripple";
-import { skillNames } from "../Data/skills";
+import { encodeSkillParam, skillNames } from "../Data/skills";
 import {
   getAccentGradientColors,
   getHomeSectionBackgroundColor,
@@ -99,9 +91,7 @@ function Home() {
     const resetHomeScrollState = () => {
       window.scrollTo({ top: 0, left: 0, behavior: "auto" });
       parallaxRef.current?.scrollTo(0);
-      const container = parallaxRef.current?.container?.current as
-        | HTMLDivElement
-        | undefined;
+      const container = parallaxRef.current?.container?.current as HTMLDivElement | undefined;
       if (container) {
         container.scrollTop = 0;
       }
@@ -152,13 +142,8 @@ function Home() {
           zIndex: speed * 100,
         }}
       >
-        <Button
-          className={cx(classes.button)}
-          compact
-          size="xs"
-          variant="outline"
-        >
-          <Link to={`/skills/${skill}`} style={{ textDecoration: "none" }}>
+        <Button className={cx(classes.button)} compact size="xs" variant="outline">
+          <Link to={`/skills/${encodeSkillParam(skill)}`} style={{ textDecoration: "none" }}>
             <Badge>{skill}</Badge>
           </Link>
         </Button>
@@ -186,11 +171,7 @@ function Home() {
             zIndex: 1,
           }}
         >
-          <ParallaxLayer
-            offset={0}
-            speed={2.5}
-            className={cx(classes.centerItem)}
-          >
+          <ParallaxLayer offset={0} speed={2.5} className={cx(classes.centerItem)}>
             <Title
               className={classes.title}
               variant="gradient"
@@ -248,10 +229,7 @@ function Home() {
               style={{ textDecoration: "none" }}
             >
               <Paper withBorder radius="md" className={classes.card}>
-                <div
-                  className={cx(classes.centerItem)}
-                  style={{ justifyContent: "space-between" }}
-                >
+                <div className={cx(classes.centerItem)} style={{ justifyContent: "space-between" }}>
                   <Title
                     className={cx(classes.title)}
                     variant="gradient"
@@ -259,27 +237,15 @@ function Home() {
                   >
                     Hello!
                   </Title>
-                  <Button
-                    className={cx(classes.button)}
-                    compact
-                    size="xs"
-                    variant="outline"
-                  >
+                  <Button className={cx(classes.button)} compact size="xs" variant="outline">
                     <Badge>About me</Badge>
                   </Button>
                 </div>
-                <Text
-                  size="sm"
-                  mt="sm"
-                  color="dimmed"
-                  className={cx(classes.centerItem)}
-                >
-                  Hey, welcome to my website! The purpose of this is to display my
-                  front end and back end Software Engineering skills not only from
-                  the information provided on this website but also from the code
-                  that makes it up. This website was made on React, Typescript,
-                  Mantine, and many TS/React libraries. I hope you enjoy your
-                  stay!
+                <Text size="sm" mt="sm" color="dimmed" className={cx(classes.centerItem)}>
+                  Hey, welcome to my website! I built out the core of this website when I was in
+                  college line-by-line, rare for today in the era of agentic coding! This website
+                  was made on React, Typescript, Mantine, and many TS/React libraries. I hope you
+                  enjoy your stay!
                 </Text>
               </Paper>
             </Link>
