@@ -22,22 +22,32 @@ const normalizeSkillData = (skill: RawSkillData): SkillData => ({
 });
 
 const normalizedSkills = Object.fromEntries(
-  Object.entries(skillsJson as Record<string, RawSkillData>).map(
-    ([skillName, skillData]) => [skillName, normalizeSkillData(skillData)]
-  )
+  Object.entries(skillsJson as Record<string, RawSkillData>).map(([skillName, skillData]) => [
+    skillName,
+    normalizeSkillData(skillData),
+  ])
 ) as Record<string, SkillData>;
 
 export const skillNames = Object.keys(normalizedSkills);
-export const skillsByName = new Map<string, SkillData>(
-  Object.entries(normalizedSkills)
-);
+export const skillsByName = new Map<string, SkillData>(Object.entries(normalizedSkills));
+
+export const encodeSkillParam = (skillName: string): string =>
+  skillName === "C#" ? "C" : encodeURIComponent(skillName);
 
 export const normalizeSkillParam = (rawSkill: string | undefined): string => {
   if (!rawSkill) {
     return "";
   }
 
-  return rawSkill === "C" ? "C#" : rawSkill;
+  let decodedSkill = rawSkill;
+
+  try {
+    decodedSkill = decodeURIComponent(rawSkill);
+  } catch {
+    decodedSkill = rawSkill;
+  }
+
+  return decodedSkill === "C" ? "C#" : decodedSkill;
 };
 
 export const getSkillByName = (skillName: string): SkillData =>

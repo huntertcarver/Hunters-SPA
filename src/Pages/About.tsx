@@ -12,9 +12,7 @@ import {
   Spoiler,
 } from "@mantine/core";
 import { IconListCheck } from "@tabler/icons-react";
-import AboutMediaCarousel, {
-  AboutCarouselMedia,
-} from "../Components/About/AboutMediaCarousel";
+import AboutMediaCarousel, { AboutCarouselMedia } from "../Components/About/AboutMediaCarousel";
 import AboutQuotesCarousel from "../Components/About/AboutQuotesCarousel";
 import AboutTimelineCard from "../Components/About/AboutTimelineCard";
 import UserInfoIcons from "../Components/UserInfo";
@@ -34,11 +32,7 @@ import PayPal2 from "../Images/PayPal2.jpeg";
 import PayPal3 from "../Images/PayPal3.jpeg";
 import ImagePreviewModal from "../Components/ImagePreviewModal";
 import Resume from "../Files/Resume.pdf";
-import {
-  aboutQuotes,
-  timelineSections,
-  TimelineSection,
-} from "../Data/aboutContent";
+import { aboutQuotes, timelineSections, TimelineSection } from "../Data/aboutContent";
 import { profileConfig } from "../Data/siteConfig";
 import { pdfjs } from "react-pdf";
 import { Document, Page } from "react-pdf/dist/esm/entry.webpack5";
@@ -95,9 +89,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const getTimelineSection = (company: string): TimelineSection => {
-  const section = timelineSections.find(
-    (timelineSection) => timelineSection.company === company
-  );
+  const section = timelineSections.find((timelineSection) => timelineSection.company === company);
 
   if (!section) {
     throw new Error(`Timeline section not found for company: ${company}`);
@@ -174,7 +166,16 @@ function About() {
             <Divider my="sm" />
             <Text>
               <Spoiler maxHeight={250} showLabel="Show more" hideLabel="Hide">
-Hello world! Thank you for taking a look at my website! I’m Hunter Carver, an ambitious Software Engineer who is a 0-1 developer with a drive for innovation. I am currently primarily a backend software engineer at Dell Technologies on the Customer Data Marketplace team. My role consists of maintaining our internal APIs by implementing new logic based on business requirements, identifying and remediating vulnerabilities, and performing high-priority dev support for our internal customers. In addition to the Customer Data Marketplace team, through the effort of seeking out additional work, I am also on Dell Digitals Customer Innovation Council. On the Customer Innovation Council, we seek to innovate any aspect of the customer data at Dell, whether it’s improving the architecture, how internal customers interact with the data, or implementing AI in our processes. Contrary to the present, I have humble beginnings as I started my SWE journey as a student at my local community college. Through hard work, dedication, and thinking outside of the box, I achieved a great many things at this college and eventually graduated and transferred to my local university. At Texas A&M University Corpus-Christi I was able to land an internship (More of a co-op) as a Software Engineer at one of the seven FAA-approved UAS test sites in the nation. We had close ties to NASA and other national and private aviation organizations and as one of the five Software Engineers in this organization, I was a critical asset to driving, maintaining, and innovating our mission-critical software. Working at Lone Star UAS for ~1.5-2 years gave me a great breadth of experience in nearly all domains of Software Engineering from front-end to back-end, database and stored procedures to the overall architecture and design of our systems, CI/CD to Auth, and nearly everything in between. Now in this new era of AI, my goal is to be on the forefront of innovation and to immerse myself in work that has a significant impact.
+                Hello world! Thank you for taking a look at my website! I’m Hunter Carver, an
+                ambitious Software Engineer who is a 0-1 developer with a drive for innovation and
+                excellence. I am an agentic-first developer, embracing the latest innovations in the
+                industry to supercharge my workflows. Coming with a solid core background of several
+                years of professional engineering experience building full-stack applications
+                end-to-end from the ground up, driving complex enterprise-wide migration
+                initiatives, designing, architecting, and implementing advanced enterprise-wide
+                cloud and cryptographic systems, and leading teams of several contractors for
+                implementation of various initiatives, I am perfectly positioned with the right core
+                foundations to lead in this agentic-first era.
               </Spoiler>
             </Text>
           </Paper>
@@ -189,10 +190,7 @@ Hello world! Thank you for taking a look at my website! I’m Hunter Carver, an 
             className={cx(classes.card)}
             style={{ boxShadow: theme.shadows.xl }}
           >
-            <div
-              style={{ height: 1.25 * width }}
-              className={cx(classes.resume)}
-            >
+            <div style={{ height: 1.25 * width }} className={cx(classes.resume)}>
               <Document file={Resume} className={cx(classes.item)} options={{}}>
                 <Page pageNumber={1} renderMode="svg" width={width} />
               </Document>
@@ -250,7 +248,9 @@ Hello world! Thank you for taking a look at my website! I’m Hunter Carver, an 
         </div>
 
         <div>
-          <AboutTimelineCard section={getTimelineSection("Texas A&M University - Corpus Christi")} />
+          <AboutTimelineCard
+            section={getTimelineSection("Texas A&M University - Corpus Christi")}
+          />
           <AboutMediaCarousel media={educationMedia} onImageClick={openImagePreview} />
           <AboutTimelineCard section={getTimelineSection("Del Mar College")} />
           <AboutMediaCarousel media={delMarMedia} onImageClick={openImagePreview} />
