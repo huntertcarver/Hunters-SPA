@@ -109,7 +109,14 @@ test("renders fullscreen button when only webkitRequestFullscreen exists", () =>
   expect(toggle).toHaveBeenCalledTimes(1);
 });
 
-test("does not render fullscreen button when request API is unavailable", () => {
+test("shows unavailable state when request API is unavailable", () => {
+  const toggle = jest.fn();
+  mockedUseFullscreen.mockReturnValue({
+    ref: jest.fn(),
+    toggle,
+    fullscreen: false,
+  });
+
   Object.defineProperty(document.documentElement, "requestFullscreen", {
     configurable: true,
     value: undefined,
@@ -129,7 +136,12 @@ test("does not render fullscreen button when request API is unavailable", () => 
 
   renderButton();
 
-  expect(screen.queryByLabelText("Toggle Fullscreen")).not.toBeInTheDocument();
+  fireEvent.click(screen.getByLabelText("Toggle Fullscreen"));
+
+  expect(
+    screen.getByLabelText("Fullscreen is unavailable in this browser/device context")
+  ).toBeInTheDocument();
+  expect(toggle).not.toHaveBeenCalled();
 });
 
 test("shows failure state when fullscreen request throws", async () => {

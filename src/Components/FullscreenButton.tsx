@@ -3,7 +3,7 @@ import { useFullscreen } from "@mantine/hooks";
 import { ActionIcon, Tooltip } from "@mantine/core";
 import { IconArrowsMaximize, IconArrowsMinimize } from "@tabler/icons-react";
 
-const isFullscreenSupported = (): boolean => {
+const hasFullscreenRequestApi = (): boolean => {
   if (typeof document === "undefined") {
     return false;
   }
@@ -25,23 +25,26 @@ const isFullscreenSupported = (): boolean => {
 
 export default function FullscreenButton() {
   const { toggle, fullscreen } = useFullscreen();
-  const [toggleFailed, setToggleFailed] = useState(false);
-  const supported = isFullscreenSupported();
-
-  // Hide the control on browsers like iPhone Safari that cannot fullscreen arbitrary elements.
-  if (!supported) {
-    return null;
-  }
-
-  const buttonColor = toggleFailed ? "orange" : fullscreen ? "red" : "blue";
-  const title = toggleFailed ? "Fullscreen request failed on this browser/device" : "Toggle Fullscreen";
+  const [status, setStatus] = useState<"idle" | "unavailable" | "failed">("idle");
+  const buttonColor = status === "idle" ? (fullscreen ? "red" : "blue") : "orange";
+  const title =
+    status === "unavailable"
+      ? "Fullscreen is unavailable in this browser/device context"
+      : status === "failed"
+      ? "Fullscreen request failed on this browser/device"
+      : "Toggle Fullscreen";
 
   const handleToggle = async () => {
+    if (!hasFullscreenRequestApi()) {
+      setStatus("unavailable");
+      return;
+    }
+
     try {
       await toggle();
-      setToggleFailed(false);
+      setStatus("idle");
     } catch {
-      setToggleFailed(true);
+      setStatus("failed");
     }
   };
 
