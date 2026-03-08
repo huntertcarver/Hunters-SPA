@@ -1,4 +1,4 @@
-import { Avatar, Text, createStyles } from "@mantine/core";
+import { Text, createStyles } from "@mantine/core";
 import { IconAt, IconPhoneCall } from "@tabler/icons-react";
 
 const useStyles = createStyles((theme) => ({
@@ -27,13 +27,21 @@ const useStyles = createStyles((theme) => ({
     },
   },
 
-  avatar: {
+  avatarFrame: {
     flexShrink: 0,
+    width: 118,
+    borderRadius: theme.radius.md,
+    overflow: "hidden",
 
     [theme.fn.smallerThan("sm")]: {
-      width: 80,
-      height: 80,
+      width: 108,
     },
+  },
+
+  avatarImage: {
+    display: "block",
+    width: "100%",
+    height: "auto",
   },
 
   details: {
@@ -88,7 +96,9 @@ export default function UserInfoIcons({ avatar, name, title, phone, email }: Use
   return (
     <div className={classes.root}>
       <div className={classes.profile}>
-        <Avatar src={avatar} size={94} radius="md" className={classes.avatar} />
+        <div className={classes.avatarFrame}>
+          <img src={avatar} alt={name} className={classes.avatarImage} />
+        </div>
         <div className={classes.details}>
           <Text size="xs" sx={{ textTransform: "uppercase" }} weight={700} color="dimmed">
             {title}
