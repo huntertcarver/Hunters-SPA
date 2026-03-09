@@ -41,5 +41,7 @@ test("maps /skills/C to C# skill data", () => {
 test("renders skills whose route params include encoded slashes", () => {
   renderAtRoute("/skills/Incident%20Response%20%2F%20L1%20On-call");
 
-  expect(screen.getByText("Incident Response / L1 On-call")).toBeInTheDocument();
+  expect(
+    screen.getByRole("heading", { name: "Incident Response / L1 On-call" })
+  ).toBeInTheDocument();
 });
