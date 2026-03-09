@@ -19,52 +19,34 @@ const useStyles = createStyles((theme) => ({
     alignItems: "center",
     gap: theme.spacing.md,
     minWidth: 0,
-
-    [theme.fn.smallerThan("sm")]: {
-      flexDirection: "column",
-      alignItems: "center",
-      gap: theme.spacing.sm,
-    },
   },
 
   avatarFrame: {
     flexShrink: 0,
-    width: 118,
+    width: 94,
+    height: 94,
     borderRadius: theme.radius.md,
     overflow: "hidden",
-
-    [theme.fn.smallerThan("sm")]: {
-      width: 108,
-    },
   },
 
   avatarImage: {
     display: "block",
     width: "100%",
-    height: "auto",
+    height: "100%",
+    objectFit: "cover",
   },
 
   details: {
     minWidth: 0,
     flex: 1,
-
-    [theme.fn.smallerThan("sm")]: {
-      width: "100%",
-      textAlign: "center",
-    },
   },
 
   metaRow: {
     display: "flex",
-    alignItems: "flex-start",
+    alignItems: "center",
     gap: theme.spacing.xs,
     minWidth: 0,
     marginTop: theme.spacing.xs,
-
-    [theme.fn.smallerThan("sm")]: {
-      width: "100%",
-      justifyContent: "center",
-    },
   },
 
   metaText: {
@@ -74,11 +56,6 @@ const useStyles = createStyles((theme) => ({
     overflowWrap: "break-word",
     wordBreak: "break-word",
     lineHeight: 1.4,
-
-    [theme.fn.smallerThan("sm")]: {
-      flex: "0 1 220px",
-      textAlign: "center",
-    },
   },
 }));
 
