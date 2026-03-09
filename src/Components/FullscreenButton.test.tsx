@@ -1,31 +1,32 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { act, render, screen, waitFor } from "@testing-library/react";
 import { MantineProvider } from "@mantine/core";
-import { useFullscreen } from "@mantine/hooks";
 import FullscreenButton from "./FullscreenButton";
 
-jest.mock("@mantine/hooks", () => ({
-  ...jest.requireActual("@mantine/hooks"),
-  useFullscreen: jest.fn(),
-}));
+type FullscreenDocument = Document & {
+  webkitExitFullscreen?: () => Promise<void> | void;
+  msExitFullscreen?: () => Promise<void> | void;
+  mozCancelFullScreen?: () => Promise<void> | void;
+  webkitFullscreenElement?: Element | null;
+  msFullscreenElement?: Element | null;
+  mozFullScreenElement?: Element | null;
+};
 
-const mockedUseFullscreen = useFullscreen as jest.MockedFunction<typeof useFullscreen>;
+type FullscreenElement = HTMLElement & {
+  webkitRequestFullscreen?: () => Promise<void> | void;
+  mozRequestFullscreen?: () => Promise<void> | void;
+  msRequestFullscreen?: () => Promise<void> | void;
+};
 
-beforeEach(() => {
-  Object.defineProperty(document.documentElement, "requestFullscreen", {
+const fullscreenDocument = document as FullscreenDocument;
+const fullscreenElement = document.documentElement as FullscreenElement;
+
+const defineProperty = <T,>(target: object, key: string, value: T) => {
+  Object.defineProperty(target, key, {
     configurable: true,
-    value: jest.fn(),
+    writable: true,
+    value,
   });
-  Object.defineProperty(document, "fullscreenEnabled", {
-    configurable: true,
-    value: undefined,
-  });
-
-  mockedUseFullscreen.mockReturnValue({
-    ref: jest.fn(),
-    toggle: jest.fn(),
-    fullscreen: false,
-  });
-});
+};
 
 const renderButton = () =>
   render(
@@ -34,132 +35,136 @@ const renderButton = () =>
     </MantineProvider>
   );
 
-test("renders fullscreen button when requestFullscreen exists even if fullscreenEnabled is false", () => {
-  const toggle = jest.fn();
-  mockedUseFullscreen.mockReturnValue({
-    ref: jest.fn(),
-    toggle,
-    fullscreen: false,
+const clickButton = async (label: string) => {
+  const button = screen.getByLabelText(label);
+
+  await act(async () => {
+    button.dispatchEvent(new MouseEvent("click", { bubbles: true }));
   });
+};
 
-  Object.defineProperty(document, "fullscreenEnabled", {
-    configurable: true,
-    value: false,
+const dispatchFullscreenChange = () => {
+  act(() => {
+    document.dispatchEvent(new Event("fullscreenchange"));
   });
+};
 
-  renderButton();
-
-  fireEvent.click(screen.getByLabelText("Toggle Fullscreen"));
-  expect(toggle).toHaveBeenCalledTimes(1);
+beforeEach(() => {
+  defineProperty(document, "fullscreenElement", null);
+  defineProperty(fullscreenDocument, "webkitFullscreenElement", null);
+  defineProperty(fullscreenDocument, "msFullscreenElement", null);
+  defineProperty(fullscreenDocument, "mozFullScreenElement", null);
+  defineProperty(document, "exitFullscreen", jest.fn().mockResolvedValue(undefined));
+  defineProperty(fullscreenDocument, "webkitExitFullscreen", undefined);
+  defineProperty(fullscreenDocument, "msExitFullscreen", undefined);
+  defineProperty(fullscreenDocument, "mozCancelFullScreen", undefined);
+  defineProperty(fullscreenElement, "requestFullscreen", jest.fn().mockResolvedValue(undefined));
+  defineProperty(fullscreenElement, "webkitRequestFullscreen", undefined);
+  defineProperty(fullscreenElement, "mozRequestFullscreen", undefined);
+  defineProperty(fullscreenElement, "msRequestFullscreen", undefined);
 });
 
-test("calls toggle when fullscreen is supported", () => {
-  const toggle = jest.fn();
-  mockedUseFullscreen.mockReturnValue({
-    ref: jest.fn(),
-    toggle,
-    fullscreen: false,
-  });
-
-  Object.defineProperty(document, "fullscreenEnabled", {
-    configurable: true,
-    value: true,
-  });
+test("enters fullscreen with the standard API", async () => {
+  const requestFullscreen = jest.fn().mockResolvedValue(undefined);
+  defineProperty(fullscreenElement, "requestFullscreen", requestFullscreen);
 
   renderButton();
 
-  fireEvent.click(screen.getByLabelText("Toggle Fullscreen"));
-  expect(toggle).toHaveBeenCalledTimes(1);
+  await clickButton("Enter fullscreen");
+
+  await waitFor(() => {
+    expect(requestFullscreen).toHaveBeenCalledTimes(1);
+  });
+
+  expect(screen.getByLabelText("Exit fullscreen")).toBeInTheDocument();
 });
 
-test("treats requestFullscreen as supported when fullscreenEnabled is unavailable", () => {
-  const toggle = jest.fn();
-  mockedUseFullscreen.mockReturnValue({
-    ref: jest.fn(),
-    toggle,
-    fullscreen: false,
-  });
+test("exits fullscreen on the second tap even if no fullscreenchange event arrives", async () => {
+  const requestFullscreen = jest.fn().mockResolvedValue(undefined);
+  const exitFullscreen = jest.fn().mockResolvedValue(undefined);
+
+  defineProperty(fullscreenElement, "requestFullscreen", requestFullscreen);
+  defineProperty(document, "exitFullscreen", exitFullscreen);
 
   renderButton();
 
-  fireEvent.click(screen.getByLabelText("Toggle Fullscreen"));
-  expect(toggle).toHaveBeenCalledTimes(1);
+  await clickButton("Enter fullscreen");
+
+  await waitFor(() => {
+    expect(screen.getByLabelText("Exit fullscreen")).toBeInTheDocument();
+  });
+
+  await clickButton("Exit fullscreen");
+
+  await waitFor(() => {
+    expect(exitFullscreen).toHaveBeenCalledTimes(1);
+  });
+
+  expect(screen.getByLabelText("Enter fullscreen")).toBeInTheDocument();
 });
 
-test("renders fullscreen button when only webkitRequestFullscreen exists", () => {
-  const toggle = jest.fn();
-  mockedUseFullscreen.mockReturnValue({
-    ref: jest.fn(),
-    toggle,
-    fullscreen: false,
-  });
+test("uses webkit exit APIs when mobile Safari reports prefixed fullscreen state", async () => {
+  const webkitExitFullscreen = jest.fn().mockResolvedValue(undefined);
 
-  Object.defineProperty(document.documentElement, "requestFullscreen", {
-    configurable: true,
-    value: undefined,
-  });
-  Object.defineProperty(document.documentElement, "webkitRequestFullscreen", {
-    configurable: true,
-    value: jest.fn(),
-  });
+  defineProperty(document, "fullscreenElement", null);
+  defineProperty(fullscreenDocument, "webkitFullscreenElement", document.documentElement);
+  defineProperty(document, "exitFullscreen", undefined);
+  defineProperty(fullscreenDocument, "webkitExitFullscreen", webkitExitFullscreen);
 
   renderButton();
 
-  fireEvent.click(screen.getByLabelText("Toggle Fullscreen"));
-  expect(toggle).toHaveBeenCalledTimes(1);
+  await clickButton("Exit fullscreen");
+
+  await waitFor(() => {
+    expect(webkitExitFullscreen).toHaveBeenCalledTimes(1);
+  });
 });
 
-test("shows unavailable state when request API is unavailable", () => {
-  const toggle = jest.fn();
-  mockedUseFullscreen.mockReturnValue({
-    ref: jest.fn(),
-    toggle,
-    fullscreen: false,
+test("syncs the button state from document fullscreenchange events", async () => {
+  renderButton();
+
+  defineProperty(document, "fullscreenElement", document.documentElement);
+  dispatchFullscreenChange();
+
+  await waitFor(() => {
+    expect(screen.getByLabelText("Exit fullscreen")).toBeInTheDocument();
   });
 
-  Object.defineProperty(document.documentElement, "requestFullscreen", {
-    configurable: true,
-    value: undefined,
+  defineProperty(document, "fullscreenElement", null);
+  dispatchFullscreenChange();
+
+  await waitFor(() => {
+    expect(screen.getByLabelText("Enter fullscreen")).toBeInTheDocument();
   });
-  Object.defineProperty(document.documentElement, "webkitRequestFullscreen", {
-    configurable: true,
-    value: undefined,
-  });
-  Object.defineProperty(document.documentElement, "mozRequestFullscreen", {
-    configurable: true,
-    value: undefined,
-  });
-  Object.defineProperty(document.documentElement, "msRequestFullscreen", {
-    configurable: true,
-    value: undefined,
-  });
+});
+
+test("shows unavailable state when request API is unavailable", async () => {
+  defineProperty(fullscreenElement, "requestFullscreen", undefined);
+  defineProperty(fullscreenElement, "webkitRequestFullscreen", undefined);
+  defineProperty(fullscreenElement, "mozRequestFullscreen", undefined);
+  defineProperty(fullscreenElement, "msRequestFullscreen", undefined);
 
   renderButton();
 
-  fireEvent.click(screen.getByLabelText("Toggle Fullscreen"));
+  await clickButton("Enter fullscreen");
 
-  expect(
-    screen.getByLabelText("Fullscreen is unavailable in this browser/device context")
-  ).toBeInTheDocument();
-  expect(toggle).not.toHaveBeenCalled();
+  await waitFor(() => {
+    expect(
+      screen.getByLabelText("Fullscreen is unavailable in this browser/device context")
+    ).toBeInTheDocument();
+  });
 });
 
 test("shows failure state when fullscreen request throws", async () => {
-  const toggle = jest.fn().mockRejectedValue(new Error("fullscreen failed"));
-  mockedUseFullscreen.mockReturnValue({
-    ref: jest.fn(),
-    toggle,
-    fullscreen: false,
-  });
-
-  Object.defineProperty(document, "fullscreenEnabled", {
-    configurable: true,
-    value: true,
-  });
+  defineProperty(
+    fullscreenElement,
+    "requestFullscreen",
+    jest.fn().mockRejectedValue(new Error("fullscreen failed"))
+  );
 
   renderButton();
 
-  fireEvent.click(screen.getByLabelText("Toggle Fullscreen"));
+  await clickButton("Enter fullscreen");
 
   await waitFor(() => {
     expect(
