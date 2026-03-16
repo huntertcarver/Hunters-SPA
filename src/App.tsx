@@ -6,11 +6,23 @@ import {
 import { useHotkeys, useLocalStorage } from "@mantine/hooks";
 import RoutingContainer from "./RoutingContainer";
 
+const getPreferredColorScheme = (): ColorScheme => {
+  if (
+    typeof window !== "undefined" &&
+    typeof window.matchMedia === "function" &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+  ) {
+    return "dark";
+  }
+
+  return "light";
+};
+
 function App() {
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
     key: "mantine-color-scheme",
-    defaultValue: "light",
-    getInitialValueInEffect: true,
+    defaultValue: getPreferredColorScheme(),
+    getInitialValueInEffect: false,
   });
 
   const toggleColorScheme = (value?: ColorScheme) =>
