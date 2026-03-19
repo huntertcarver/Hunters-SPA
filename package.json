@@ -1,7 +1,7 @@
 {
   "name": "my-app",
   "version": "0.1.0",
-  "homepage": "https://huntertcarver.me",
+  "homepage": "https://huntertcarver.com",
   "private": true,
   "dependencies": {
     "@mantine/carousel": "^5.6.1",

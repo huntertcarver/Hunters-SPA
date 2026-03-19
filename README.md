@@ -54,7 +54,9 @@ App runs at `http://localhost:3000`.
 
 ## Deployment
 
-This project uses `gh-pages` and `homepage` in `package.json`.
+This project uses `gh-pages`, a `public/CNAME` file, and the `homepage` value in `package.json`.
+
+The published production site is `https://huntertcarver.com`.
 
 Deploy with:
 
